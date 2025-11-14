@@ -46,23 +46,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="Components\RoundButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Auth\LoginView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Views\Auth\LoginView.Designer.cs">
+      <DependentUpon>LoginView.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
+    <EmbeddedResource Include="Views\Auth\LoginView.resx">
+      <DependentUpon>LoginView.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -75,6 +82,46 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\QLCafe.Application\QLCafe.Application.csproj">
+      <Project>{bae7d490-eb75-46fd-bb94-b2847e934a8d}</Project>
+      <Name>QLCafe.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QLCafe.Domain\QLCafe.Domain.csproj">
+      <Project>{8c229f03-439e-4822-a52c-035d5a7a3162}</Project>
+      <Name>QLCafe.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QLCafe.Shared\QLCafe.Shared.csproj">
+      <Project>{f703c6fd-106e-42c6-8cd0-6393bd937709}</Project>
+      <Name>QLCafe.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\" />
+    <Folder Include="Services\" />
+    <Folder Include="ViewModels\Auth\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Coffe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Coffe1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Coffe2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\block %281%291.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tick1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
