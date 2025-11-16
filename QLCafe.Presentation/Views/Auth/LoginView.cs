@@ -1,6 +1,8 @@
 ﻿using QLCafe.Application.DTOs.Auth;
 using QLCafe.Application.Interfaces;
 using QLCafe.Application.Services;
+using QLCafe.Domain.Enums;
+using QLCafe.Presentation.Views.Cashier;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,7 +23,7 @@ namespace QLCafe.Presentation.Views.Auth
         public LoginView()
         {
             InitializeComponent();
-            _authService = new AuthService(); // Tạm thời new trực tiếp
+            _authService = new AuthService(Program.ConnectionString);
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
@@ -31,6 +33,7 @@ namespace QLCafe.Presentation.Views.Auth
 
         private void LoginView_Load(object sender, EventArgs e)
         {
+            txtUsername.Focus();
         }
 
         private void label11_Click(object sender, EventArgs e)
@@ -74,9 +77,7 @@ namespace QLCafe.Presentation.Views.Auth
 
         private void HandleLogin()
         {
-            // Validation cơ bản
-            if (string.IsNullOrWhiteSpace(txtUsername.Text) ||
-                string.IsNullOrWhiteSpace(txtPassword.Text))
+            if (string.IsNullOrWhiteSpace(txtUsername.Text) || string.IsNullOrWhiteSpace(txtPassword.Text))
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin!", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -97,7 +98,7 @@ namespace QLCafe.Presentation.Views.Auth
                 MessageBox.Show($"Đăng nhập thành công!\nChào mừng {result.DisplayName}",
                     "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // TODO: Chuyển đến Main Form
+                // TODO: Chuyển đến form chính theo role
                 ShowMainForm(result);
             }
             else
@@ -109,16 +110,63 @@ namespace QLCafe.Presentation.Views.Auth
 
         private void ShowMainForm(LoginResponse userInfo)
         {
-            // Tạm thời tạo Main Form đơn giản
-            var mainForm = new Form
-            {
-                Text = $"QL Cafe - {userInfo.DisplayName} ({userInfo.Role})",
-                WindowState = FormWindowState.Maximized
-            };
-
+            // Ẩn form login
             this.Hide();
-            mainForm.ShowDialog();
-            this.Close();
+
+            // Kiểm tra role và mở form tương ứng
+            try
+            {
+                switch (userInfo.Role)
+                {
+                    case RoleType.Admin:
+                        // Mở form admin (sẽ làm sau)
+                        MessageBox.Show("Chức năng Admin đang phát triển", "Thông báo",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Show();
+                        break;
+
+                    case RoleType.Cashier:  // Sửa thành Cashier thay vì ThuNgan
+                                            // Mở form chính của thu ngân
+                        CashierMainView cashierForm = new CashierMainView(userInfo.DisplayName, "Ca sáng");
+                       
+                        cashierForm.Show();
+                        break;
+
+                    case RoleType.InventoryManager:  // Sửa thành InventoryManager thay vì ThuKho
+                                                     // Mở form thủ kho (sẽ làm sau)
+                        MessageBox.Show("Chức năng Thủ kho đang phát triển", "Thông báo",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Show();
+                        break;
+
+                    default:
+                        MessageBox.Show("Role không hợp lệ", "Lỗi",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        this.Show();
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi mở form: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Show();
+            }
+        }
+
+        private void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtPassword_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                HandleLogin();
+                e.Handled = true;
+            }
+
         }
     }
 }
