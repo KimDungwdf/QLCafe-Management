@@ -600,8 +600,6 @@ EXEC sp_Login @tenDangNhap = 'thukho1', @matKhau = '123'
 SELECT TenDangNhap, TenHienThi, MatKhau, IDVaiTro FROM TaiKhoan
 
 INSERT INTO Ban (TenBan, TrangThai) VALUES
-(N'Bàn 11', 0),
-(N'Bàn 12', 0),
-(N'Bàn 13', 0),
-(N'Bàn 14', 0)
+(N'Bàn 15', 1),
+(N'Bàn 16', 0)
 GO

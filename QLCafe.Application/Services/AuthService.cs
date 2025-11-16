@@ -1,28 +1,31 @@
 ﻿using QLCafe.Application.DTOs.Auth;
 using QLCafe.Application.Interfaces;
-using QLCafe.Domain.Entities;
-using QLCafe.Domain.Enums;
-using System.Collections.Generic;
-using System.Linq;
+using QLCafe.Infrastructure.Repositories;
 
 namespace QLCafe.Application.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly List<Account> _mockAccounts = new List<Account>
+        private readonly AuthRepository _authRepository;
+
+        public AuthService(string connectionString)
         {
-            new Account { Username = "admin", Password = "123", DisplayName = "Quản Trị Viên", Role = RoleType.Admin },
-            new Account { Username = "thungan1", Password = "123", DisplayName = "Thu Ngân 1", Role = RoleType.Cashier },
-            new Account { Username = "thukho1", Password = "123", DisplayName = "Thủ Kho 1", Role = RoleType.InventoryManager }
-        };
+            _authRepository = new AuthRepository(connectionString);
+        }
 
         public LoginResponse Login(LoginRequest request)
         {
+            // Validation cơ bản
             if (string.IsNullOrWhiteSpace(request.Username) || string.IsNullOrWhiteSpace(request.Password))
-                return new LoginResponse { IsSuccess = false, ErrorMessage = "Vui lòng nhập đầy đủ thông tin" };
+            {
+                return new LoginResponse
+                {
+                    IsSuccess = false,
+                    ErrorMessage = "Vui lòng nhập đầy đủ thông tin"
+                };
+            }
 
-            var account = _mockAccounts.FirstOrDefault(a =>
-                a.Username == request.Username && a.Password == request.Password);
+            var account = _authRepository.Authenticate(request.Username, request.Password);
 
             if (account != null)
             {
@@ -38,7 +41,7 @@ namespace QLCafe.Application.Services
             return new LoginResponse
             {
                 IsSuccess = false,
-                ErrorMessage = "Tên đăng nhập hoặc mật khẩu không đúng"
+                ErrorMessage = "Sai tên đăng nhập hoặc mật khẩu"
             };
         }
     }
