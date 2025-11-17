@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace QLCafe.Presentation.Views.AdminMainView
+namespace QLCafe.Presentation.Views.Admin
 {
-    public partial class AdminMainView : Form
+    public partial class SalesReportForm : Form
     {
-        public AdminMainView()
+        public SalesReportForm()
         {
             InitializeComponent();
         }

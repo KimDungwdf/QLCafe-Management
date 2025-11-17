@@ -3,6 +3,7 @@ using QLCafe.Application.Interfaces;
 using QLCafe.Application.Services;
 using QLCafe.Domain.Enums;
 using QLCafe.Presentation.Views.Cashier;
+using QLCafe.Presentation.Views.Admin;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -119,10 +120,9 @@ namespace QLCafe.Presentation.Views.Auth
                 switch (userInfo.Role)
                 {
                     case RoleType.Admin:
-                        // Mở form admin (sẽ làm sau)
-                        MessageBox.Show("Chức năng Admin đang phát triển", "Thông báo",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.Show();
+                        AdminMainView adminForm = new AdminMainView(userInfo.DisplayName, "Quản trị viên");
+
+                        adminForm.Show();
                         break;
 
                     case RoleType.Cashier:  // Sửa thành Cashier thay vì ThuNgan
@@ -133,7 +133,6 @@ namespace QLCafe.Presentation.Views.Auth
                         break;
 
                     case RoleType.InventoryManager:  // Sửa thành InventoryManager thay vì ThuKho
-                                                     // Mở form thủ kho (sẽ làm sau)
                         MessageBox.Show("Chức năng Thủ kho đang phát triển", "Thông báo",
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Show();
