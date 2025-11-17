@@ -541,6 +541,96 @@ BEGIN
 END
 GO
 
+-- Thêm cho admin
+-- 1. Lấy danh sách tất cả tài khoản (kèm tên vai trò)
+CREATE PROCEDURE sp_Admin_GetAllAccounts
+AS
+BEGIN
+    SELECT 
+        t.TenDangNhap,
+        t.TenHienThi,
+        t.MatKhau,
+        t.IDVaiTro,
+        v.TenVaiTro
+    FROM TaiKhoan t
+    JOIN VaiTro v ON t.IDVaiTro = v.IDVaiTro
+END
+GO
+
+-- 2. Thêm tài khoản mới
+CREATE PROCEDURE sp_Admin_InsertAccount
+    @TenDangNhap NVARCHAR(100),
+    @TenHienThi NVARCHAR(100),
+    @MatKhau NVARCHAR(100),
+    @IDVaiTro INT
+AS
+BEGIN
+    -- Kiểm tra trùng tên đăng nhập
+    IF EXISTS (SELECT 1 FROM TaiKhoan WHERE TenDangNhap = @TenDangNhap)
+    BEGIN
+        RETURN 0; -- Thất bại do trùng
+    END
+
+    INSERT INTO TaiKhoan (TenDangNhap, TenHienThi, MatKhau, IDVaiTro)
+    VALUES (@TenDangNhap, @TenHienThi, @MatKhau, @IDVaiTro)
+    
+    RETURN 1; -- Thành công
+END
+GO
+
+-- 3. Cập nhật tài khoản
+CREATE PROCEDURE sp_Admin_UpdateAccount
+    @TenDangNhap NVARCHAR(100), -- Khóa chính (không sửa)
+    @TenHienThi NVARCHAR(100),
+    @MatKhau NVARCHAR(100),
+    @IDVaiTro INT
+AS
+BEGIN
+    UPDATE TaiKhoan
+    SET 
+        TenHienThi = @TenHienThi,
+        MatKhau = @MatKhau,
+        IDVaiTro = @IDVaiTro
+    WHERE TenDangNhap = @TenDangNhap
+END
+GO
+
+-- 4. Xóa tài khoản
+CREATE PROCEDURE sp_Admin_DeleteAccount
+    @TenDangNhap NVARCHAR(100)
+AS
+BEGIN
+    DELETE FROM TaiKhoan WHERE TenDangNhap = @TenDangNhap
+END
+GO
+
+ALTER PROCEDURE sp_Admin_InsertAccount -- Dùng ALTER để sửa cái cũ
+    @TenDangNhap NVARCHAR(100),
+    @TenHienThi NVARCHAR(100),
+    @MatKhau NVARCHAR(100),
+    @IDVaiTro INT
+AS
+BEGIN
+    -- 1. Kiểm tra trùng tên đăng nhập
+    IF EXISTS (SELECT 1 FROM TaiKhoan WHERE TenDangNhap = @TenDangNhap)
+    BEGIN
+        RETURN 0; -- Lỗi: Trùng tên đăng nhập
+    END
+
+    -- 2. Kiểm tra vai trò có tồn tại không (Mới thêm)
+    IF NOT EXISTS (SELECT 1 FROM VaiTro WHERE IDVaiTro = @IDVaiTro)
+    BEGIN
+        RETURN -1; -- Lỗi: Vai trò không hợp lệ
+    END
+
+    -- 3. Thêm mới
+    INSERT INTO TaiKhoan (TenDangNhap, TenHienThi, MatKhau, IDVaiTro)
+    VALUES (@TenDangNhap, @TenHienThi, @MatKhau, @IDVaiTro)
+    
+    RETURN 1; -- Thành công
+END
+GO
+
 -- 5.8. SP Lấy Tồn kho (cho Thủ kho)
 CREATE PROCEDURE sp_GetInventoryList
 AS
