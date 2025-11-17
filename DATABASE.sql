@@ -603,3 +603,7 @@ INSERT INTO Ban (TenBan, TrangThai) VALUES
 (N'Bàn 15', 1),
 (N'Bàn 16', 0)
 GO
+
+ INSERT INTO SanPham (TenSanPham, IDDanhMuc, DonGia) VALUES
+ (N'Trà Đào', 2, 20000)
+ GO

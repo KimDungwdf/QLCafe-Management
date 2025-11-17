@@ -41,12 +41,16 @@ namespace QLCafe.Presentation.Views.Cashier
                         tableControl.Status = table.TrangThai == 0 ? "Trống" : "Có khách";
                         tableControl.OrderInfo = table.TrangThai == 0 ? "Nhấn để order" : "Đang phục vụ";
 
-                        // Xử lý khi click vào bàn
                         tableControl.TableClicked += (sender, e) =>
                         {
                             var clickedTable = (TableButtonControl)sender;
-                            MessageBox.Show($"Bạn đã chọn {clickedTable.TableName} (ID: {clickedTable.TableID})");
-                            // Sau này sẽ mở form order tại đây
+
+                            // MỞ ORDER FORM THẬT
+                            var orderForm = new OrderForm(clickedTable.TableID, clickedTable.TableName, "thungan1");
+                            orderForm.ShowDialog();
+
+                            // Reload lại danh sách bàn để cập nhật trạng thái
+                            LoadTablesFromDatabase();
                         };
 
                         flowLayoutTables.Controls.Add(tableControl);
