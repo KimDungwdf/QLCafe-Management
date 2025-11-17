@@ -30,20 +30,21 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panelLeft = new System.Windows.Forms.Panel();
+            this.bttSaleReport = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.bttUserAccount = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
             this.btnStock = new System.Windows.Forms.Button();
             this.btnTable = new System.Windows.Forms.Button();
             this.btnMenu = new System.Windows.Forms.Button();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.lblShift = new System.Windows.Forms.Label();
             this.lblUserName = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelRight = new System.Windows.Forms.Panel();
             this.panelContent = new System.Windows.Forms.Panel();
@@ -52,7 +53,6 @@
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.lblFunctionName = new System.Windows.Forms.Label();
-            this.bttSaleReport = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panelLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -88,6 +88,22 @@
             this.panelLeft.Name = "panelLeft";
             this.panelLeft.Size = new System.Drawing.Size(323, 802);
             this.panelLeft.TabIndex = 1;
+            // 
+            // bttSaleReport
+            // 
+            this.bttSaleReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(64)))), ((int)(((byte)(14)))));
+            this.bttSaleReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bttSaleReport.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.bttSaleReport.ForeColor = System.Drawing.Color.White;
+            this.bttSaleReport.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.bttSaleReport.Location = new System.Drawing.Point(0, 515);
+            this.bttSaleReport.Name = "bttSaleReport";
+            this.bttSaleReport.Size = new System.Drawing.Size(328, 59);
+            this.bttSaleReport.TabIndex = 18;
+            this.bttSaleReport.Text = "Báo cáo doanh thu";
+            this.bttSaleReport.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bttSaleReport.UseVisualStyleBackColor = false;
+            this.bttSaleReport.Click += new System.EventHandler(this.bttSaleReport_Click);
             // 
             // panel2
             // 
@@ -177,6 +193,18 @@
             this.btnMenu.UseVisualStyleBackColor = false;
             this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
             // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::QLCafe.Presentation.Properties.Resources.Time;
+            this.pictureBox3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.pictureBox3.Location = new System.Drawing.Point(25, 207);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(38, 44);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 10;
+            this.pictureBox3.TabStop = false;
+            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
+            // 
             // label5
             // 
             this.label5.Font = new System.Drawing.Font("Segoe UI", 8F);
@@ -187,6 +215,18 @@
             this.label5.Size = new System.Drawing.Size(188, 31);
             this.label5.TabIndex = 9;
             this.label5.Click += new System.EventHandler(this.label5_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(64)))), ((int)(((byte)(14)))));
+            this.pictureBox2.Image = global::QLCafe.Presentation.Properties.Resources.avartar;
+            this.pictureBox2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.pictureBox2.Location = new System.Drawing.Point(25, 120);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(65, 61);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 8;
+            this.pictureBox2.TabStop = false;
             // 
             // lblShift
             // 
@@ -241,30 +281,6 @@
             this.label1.Size = new System.Drawing.Size(206, 47);
             this.label1.TabIndex = 1;
             this.label1.Text = "QL Cafe Pro";
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = global::QLCafe.Presentation.Properties.Resources.Time;
-            this.pictureBox3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.pictureBox3.Location = new System.Drawing.Point(25, 207);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(38, 44);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 10;
-            this.pictureBox3.TabStop = false;
-            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(64)))), ((int)(((byte)(14)))));
-            this.pictureBox2.Image = global::QLCafe.Presentation.Properties.Resources.avartar;
-            this.pictureBox2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.pictureBox2.Location = new System.Drawing.Point(25, 120);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(65, 61);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 8;
-            this.pictureBox2.TabStop = false;
             // 
             // pictureBox1
             // 
@@ -347,22 +363,6 @@
             this.lblFunctionName.TabIndex = 0;
             this.lblFunctionName.Text = "Quản Lý Tài Khoản";
             // 
-            // bttSaleReport
-            // 
-            this.bttSaleReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(64)))), ((int)(((byte)(14)))));
-            this.bttSaleReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bttSaleReport.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.bttSaleReport.ForeColor = System.Drawing.Color.White;
-            this.bttSaleReport.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.bttSaleReport.Location = new System.Drawing.Point(0, 515);
-            this.bttSaleReport.Name = "bttSaleReport";
-            this.bttSaleReport.Size = new System.Drawing.Size(328, 59);
-            this.bttSaleReport.TabIndex = 18;
-            this.bttSaleReport.Text = "Báo cáo doanh thu";
-            this.bttSaleReport.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bttSaleReport.UseVisualStyleBackColor = false;
-            this.bttSaleReport.Click += new System.EventHandler(this.bttSaleReport_Click);
-            // 
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
@@ -375,6 +375,7 @@
             this.Controls.Add(this.panelRight);
             this.Controls.Add(this.panelLeft);
             this.Name = "AdminMainView";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AdminMainView";
             this.panelLeft.ResumeLayout(false);
             this.panelLeft.PerformLayout();
