@@ -69,6 +69,18 @@
     <Compile Include="Components\RoundButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\Table\OrderItemControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Table\OrderItemControl.Designer.cs">
+      <DependentUpon>OrderItemControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Table\ProductControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Table\ProductControl.Designer.cs">
+      <DependentUpon>ProductControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Table\TableButtonControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -136,6 +148,12 @@
     <Compile Include="Views\InventoryMainView\InventoryMainView.Designer.cs">
       <DependentUpon>InventoryMainView.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Controls\Table\OrderItemControl.resx">
+      <DependentUpon>OrderItemControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Table\ProductControl.resx">
+      <DependentUpon>ProductControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Table\TableButtonControl.resx">
       <DependentUpon>TableButtonControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -251,6 +269,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\chuongthongbao.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Delete_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
