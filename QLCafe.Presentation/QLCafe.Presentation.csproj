@@ -92,11 +92,41 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Views\AdminMainView\AdminMainView.cs">
+    <Compile Include="Views\Admin\AccountManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\AdminMainView\AdminMainView.Designer.cs">
+    <Compile Include="Views\Admin\AccountManagementForm.Designer.cs">
+      <DependentUpon>AccountManagementForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\AdminMainView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Admin\AdminMainView.Designer.cs">
       <DependentUpon>AdminMainView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\MenuManagementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Admin\MenuManagementForm.Designer.cs">
+      <DependentUpon>MenuManagementForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\OrganizationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Admin\OrganizationForm.Designer.cs">
+      <DependentUpon>OrganizationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\SalesReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Admin\SalesReportForm.Designer.cs">
+      <DependentUpon>SalesReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\StockReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Admin\StockReportForm.Designer.cs">
+      <DependentUpon>StockReportForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Auth\LoginView.cs">
       <SubType>Form</SubType>
@@ -161,6 +191,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Admin\AdminMainView.resx">
+      <DependentUpon>AdminMainView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Auth\LoginView.resx">
       <DependentUpon>LoginView.cs</DependentUpon>
