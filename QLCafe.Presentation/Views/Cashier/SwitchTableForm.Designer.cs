@@ -32,10 +32,10 @@
             this.lblHeaderPrefix = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.lblTableName = new System.Windows.Forms.Label();
-            this.lblTotalAmount = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.lblItemCount = new System.Windows.Forms.Label();
+            this.lblTotalAmount = new System.Windows.Forms.Label();
+            this.lblTableName = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.btnConfirm = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.comboBoxTargetTable = new System.Windows.Forms.ComboBox();
@@ -66,7 +66,7 @@
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(15, 102);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(178, 29);
@@ -85,16 +85,15 @@
             this.panel2.Size = new System.Drawing.Size(567, 122);
             this.panel2.TabIndex = 4;
             // 
-            // lblTableName
+            // lblItemCount
             // 
-            this.lblTableName.AutoSize = true;
-            this.lblTableName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTableName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(78)))), ((int)(((byte)(216)))));
-            this.lblTableName.Location = new System.Drawing.Point(16, 29);
-            this.lblTableName.Name = "lblTableName";
-            this.lblTableName.Size = new System.Drawing.Size(78, 32);
-            this.lblTableName.TabIndex = 0;
-            this.lblTableName.Text = "Bàn 2";
+            this.lblItemCount.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblItemCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(68)))), ((int)(((byte)(68)))));
+            this.lblItemCount.Location = new System.Drawing.Point(17, 61);
+            this.lblItemCount.Name = "lblItemCount";
+            this.lblItemCount.Size = new System.Drawing.Size(178, 29);
+            this.lblItemCount.TabIndex = 7;
+            this.lblItemCount.Text = "1 món đã order";
             // 
             // lblTotalAmount
             // 
@@ -107,24 +106,25 @@
             this.lblTotalAmount.TabIndex = 1;
             this.lblTotalAmount.Text = "30000";
             // 
+            // lblTableName
+            // 
+            this.lblTableName.AutoSize = true;
+            this.lblTableName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTableName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(78)))), ((int)(((byte)(216)))));
+            this.lblTableName.Location = new System.Drawing.Point(16, 29);
+            this.lblTableName.Name = "lblTableName";
+            this.lblTableName.Size = new System.Drawing.Size(78, 32);
+            this.lblTableName.TabIndex = 0;
+            this.lblTableName.Text = "Bàn 2";
+            // 
             // label4
             // 
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(15, 292);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(178, 29);
             this.label4.TabIndex = 5;
             this.label4.Text = "Chọn bàn đích";
-            // 
-            // lblItemCount
-            // 
-            this.lblItemCount.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblItemCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(68)))), ((int)(((byte)(68)))));
-            this.lblItemCount.Location = new System.Drawing.Point(17, 61);
-            this.lblItemCount.Name = "lblItemCount";
-            this.lblItemCount.Size = new System.Drawing.Size(178, 29);
-            this.lblItemCount.TabIndex = 7;
-            this.lblItemCount.Text = "1 món đã order";
             // 
             // btnConfirm
             // 
