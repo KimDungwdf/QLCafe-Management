@@ -38,7 +38,7 @@
             // 
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(68)))), ((int)(((byte)(68)))));
-            this.label1.Location = new System.Drawing.Point(48, 9);
+            this.label1.Location = new System.Drawing.Point(44, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(589, 35);
             this.label1.TabIndex = 1;
@@ -60,7 +60,7 @@
             this.flowLayoutTables.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutTables.Location = new System.Drawing.Point(0, 55);
             this.flowLayoutTables.Name = "flowLayoutTables";
-            this.flowLayoutTables.Padding = new System.Windows.Forms.Padding(10);
+            this.flowLayoutTables.Padding = new System.Windows.Forms.Padding(0, 0, 0, 50);
             this.flowLayoutTables.Size = new System.Drawing.Size(959, 695);
             this.flowLayoutTables.TabIndex = 4;
             // 
