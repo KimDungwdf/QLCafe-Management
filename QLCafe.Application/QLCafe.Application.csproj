@@ -47,6 +47,7 @@
     <Compile Include="DTOs\Order\ProductDto.cs" />
     <Compile Include="DTOs\Order\TableDto.cs" />
     <Compile Include="DTOs\Order\TableStatusDto.cs" />
+    <Compile Include="DTOs\Table\SwitchTableRequest.cs" />
     <Compile Include="Interfaces\IAuthService.cs" />
     <Compile Include="Interfaces\IOrderService.cs" />
     <Compile Include="Interfaces\IProductService.cs" />

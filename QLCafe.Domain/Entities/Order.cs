@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QLCafe.Domain.Entities
 {
-    internal class Order
+    public class Order
     {
         public int Id { get; set; }
         public int TableId { get; set; }
@@ -15,7 +12,7 @@ namespace QLCafe.Domain.Entities
         public decimal TotalAmount { get; set; }
         public decimal Discount { get; set; }
         public OrderStatus Status { get; set; }
-        public List<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>(); // Thay vì new()
+        public List<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
     }
 
     public enum OrderStatus
