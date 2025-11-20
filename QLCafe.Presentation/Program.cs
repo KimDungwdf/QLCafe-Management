@@ -21,10 +21,13 @@ namespace QLCafe.Presentation
                 MessageBox.Show("Không tìm thấy connection string trong App.config");
                 return;
             }
+            System.Windows.Forms.Application.CurrentCulture =
+       new System.Globalization.CultureInfo("vi-VN");
+
 
             // THÊM System.Windows.Forms. để tránh conflict
             System.Windows.Forms.Application.EnableVisualStyles();
-            System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
+            System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(true);
             System.Windows.Forms.Application.Run(new LoginView());
         }
     }
