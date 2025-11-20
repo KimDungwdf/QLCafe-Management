@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTOs\Account\AccountDto.cs" />
     <Compile Include="DTOs\Auth\LoginRequest.cs" />
     <Compile Include="DTOs\Auth\LoginResponse.cs" />
     <Compile Include="DTOs\Order\OrderDto.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="Interfaces\IProductService.cs" />
     <Compile Include="Interfaces\ITableService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\AuthService.cs" />
     <Compile Include="Services\OrderService.cs" />
     <Compile Include="Services\ProductService.cs" />

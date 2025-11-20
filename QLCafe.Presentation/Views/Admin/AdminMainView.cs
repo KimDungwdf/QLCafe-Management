@@ -72,7 +72,7 @@ namespace QLCafe.Presentation.Views.Admin
 
         private void bttUserAccount_Click(object sender, EventArgs e)
         {
-             ShowAccountManagement();
+            ShowAccountManagement();
         }
 
         private void btnMenu_Click(object sender, EventArgs e)
