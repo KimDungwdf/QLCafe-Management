@@ -35,14 +35,13 @@ namespace QLCafe.Presentation.Views.Cashier
             currentUser = userName;
 
             // Gán tên bàn vào header
-            lblTableNameHeader.Text = tableName;
+            lblTableNameHeader.Text = "" + tableName;
 
             // Load sản phẩm từ database
             LoadProductsFromDatabase();
 
             // Đặt nút về trạng thái ban đầu
             SetSendButtonToReadyState();
-
         }
 
         // Thêm class này trong file OrderForm.cs
@@ -106,8 +105,8 @@ namespace QLCafe.Presentation.Views.Cashier
                 panelFooter.Visible = true;
             }
 
-            // 🟢 DI CHUYỂN ĐOẠN NÀY RA NGOÀI - Reset nút về trạng thái sẵn sàng khi có món mới được thêm
-            if (bttSend.Text == "✓ Đã gửi")
+            // Reset nút về trạng thái sẵn sàng khi có món mới được thêm
+            if (bttSend.Text == "✓ Order đã gửi xuống bếp!")
             {
                 SetSendButtonToReadyState();
             }
@@ -139,6 +138,12 @@ namespace QLCafe.Presentation.Views.Cashier
                     {
                         orderItem.Quantity = newQuantity;
                         UpdateTotalAmount();
+
+                        // Reset nút khi số lượng thay đổi
+                        if (bttSend.Text == "✓ Order đã gửi xuống bếp!")
+                        {
+                            SetSendButtonToReadyState();
+                        }
                     }
                 };
 
@@ -198,22 +203,75 @@ namespace QLCafe.Presentation.Views.Cashier
 
             try
             {
-                // TODO: Thêm code để lưu order vào database ở đây
+                // 🟢 LƯU ORDER VÀO DATABASE
+                SaveOrderToDatabase();
 
-                // Đổi trạng thái nút thành đã gửi
+                // 🟢 ĐỔI TRẠNG THÁI NÚT THÀNH "Order đã gửi xuống bếp!"
                 SetSendButtonToSentState();
 
-                // Hiển thị thông báo
-                MessageBox.Show("Đã gửi Order xuống bếp!", "Thành công",
+                // 🟢 HIỂN THỊ THÔNG BÁO VÀ ĐÓNG FORM SAU 2 GIÂY
+                MessageBox.Show("Đã gửi Order xuống bếp! Form sẽ đóng sau 2 giây.", "Thành công",
                                MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // TODO: Có thể thêm các xử lý khác sau khi gửi order thành công
+                // 🟢 TẠO TIMER ĐỂ ĐÓNG FORM SAU 2 GIÂY
+                Timer closeTimer = new Timer();
+                closeTimer.Interval = 2000; // 2 giây
+                closeTimer.Tick += (s, args) =>
+                {
+                    closeTimer.Stop();
+                    closeTimer.Dispose();
+                    this.DialogResult = DialogResult.OK; // 🟢 TRẢ VỀ KẾT QUẢ THÀNH CÔNG
+                    this.Close(); // 🟢 ĐÓNG FORM
+                };
+                closeTimer.Start();
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi khi gửi order: {ex.Message}", "Lỗi",
                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // 🟢 PHƯƠNG THỨC LƯU ORDER VÀO DATABASE
+        private void SaveOrderToDatabase()
+        {
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                // Sử dụng transaction để đảm bảo tính toàn vẹn dữ liệu
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        // Với mỗi món trong order, gọi stored procedure
+                        foreach (var orderItem in orderItems.Values)
+                        {
+                            connection.Execute(
+                                "sp_AddBillDetail",
+                                new
+                                {
+                                    IDBan = currentTableID,
+                                    IDSanPham = orderItem.ProductID,
+                                    SoLuong = orderItem.Quantity,
+                                    TenDangNhap = currentUser
+                                },
+                                transaction: transaction,
+                                commandType: CommandType.StoredProcedure
+                            );
+                        }
+
+                        transaction.Commit();
+
+                        // TRIGGER SẼ TỰ ĐỘNG CẬP NHẬT TRẠNG THÁI BÀN THÀNH "Có khách"
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
+                }
             }
         }
 
@@ -225,12 +283,17 @@ namespace QLCafe.Presentation.Views.Cashier
             bttSend.Enabled = true;
         }
 
-        // Phương thức đặt nút về trạng thái "✓ Đã gửi"
+        // 🟢 PHƯƠNG THỨC ĐẶT NÚT VỀ TRẠNG THÁI "Order đã gửi xuống bếp!"
         private void SetSendButtonToSentState()
         {
             bttSend.BackColor = Color.Green;
-            bttSend.Text = "✓ Đã gửi";
+            bttSend.Text = "✓ Order đã gửi xuống bếp!";
             bttSend.Enabled = false; // Vô hiệu hóa nút khi đã gửi
+        }
+
+        private void lblHeaderPrefix_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
