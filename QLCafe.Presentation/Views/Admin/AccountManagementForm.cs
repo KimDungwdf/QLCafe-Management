@@ -158,6 +158,11 @@ namespace QLCafe.Presentation.Views.Admin
             _rows = new BindingList<AccountRow>(view);
             dgvAccounts.DataSource = _rows;
         }
+
+        private void lblSearch_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
     internal class AccountRow
