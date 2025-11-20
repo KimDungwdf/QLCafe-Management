@@ -140,6 +140,7 @@
             this.bttSend.TabIndex = 6;
             this.bttSend.Text = "Xác nhận và gửi xuống bếp";
             this.bttSend.UseVisualStyleBackColor = false;
+            this.bttSend.Click += new System.EventHandler(this.bttSend_Click);
             // 
             // lblTotalAmount
             // 
@@ -222,6 +223,7 @@
             this.Controls.Add(this.PanelContent);
             this.Controls.Add(this.panel1);
             this.Name = "AddDishForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddDishForm";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

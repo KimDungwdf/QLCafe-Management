@@ -1,14 +1,13 @@
-﻿using QLCafe.Application.DTOs.Order;
+﻿using System.Collections.Generic;
+using QLCafe.Domain.Entities;
 
-namespace QLCafe.Application.Interfaces
+namespace QLCafe.Domain.Interfaces
 {
-    public interface IOrderService
+    public interface IOrderRepository
     {
-        OrderDto GetOrderByTable(int tableId);
-        OrderDto GetCurrentOrderByTable(int tableId);
+        Order GetCurrentOrderByTable(int tableId);
         void AddItemToOrder(int tableId, int productId, int quantity, string userName, string notes = "");
         void RemoveItemFromOrder(int tableId, int productId, string userName);
         void UpdateItemQuantity(int tableId, int productId, int quantity, string userName);
-        void Checkout(int tableId, decimal discount, string userName);
     }
 }

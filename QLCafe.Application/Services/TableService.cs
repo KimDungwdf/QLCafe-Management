@@ -1,57 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
+using System.Linq;
 using QLCafe.Application.DTOs.Order;
+using QLCafe.Application.DTOs.Table;
 using QLCafe.Application.Interfaces;
+using QLCafe.Domain.Entities;
+using QLCafe.Domain.Interfaces;
 
 namespace QLCafe.Application.Services
 {
     public class TableService : ITableService
     {
-        private readonly string _connectionString;
+        private readonly ITableRepository _tableRepository;
+        private readonly IOrderRepository _orderRepository;
 
-        public TableService()
+        public TableService(ITableRepository tableRepository, IOrderRepository orderRepository)
         {
-            // Lưu ý: Nên lấy connection string từ App.config hoặc Program.ConnectionString thay vì hard-code thế này
-            _connectionString = "Data Source=.\\SQLEXPRESS;Initial Catalog=QLCafe;Integrated Security=True";
+            _tableRepository = tableRepository;
+            _orderRepository = orderRepository;
         }
 
         public List<TableDto> GetTables()
         {
-            var tables = new List<TableDto>();
+            var tables = _tableRepository.GetAllTables();
 
-            using (var connection = new SqlConnection(_connectionString))
-            using (var command = new SqlCommand("sp_GetTableList", connection))
+            return tables.Select(table => new TableDto
             {
-                command.CommandType = CommandType.StoredProcedure;
-
-                connection.Open();
-                using (var reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        var table = new TableDto
-                        {
-                            // SỬA LỖI: Dùng Convert.ToInt32(reader["TenCot"]) thay vì reader.GetInt32("TenCot")
-                            Id = Convert.ToInt32(reader["IDBan"]),
-                            Name = reader["TenBan"].ToString(),
-                            Status = Convert.ToInt32(reader["TrangThai"]) == 1 ? "Có khách" : "Trống",
-                            StatusColor = Convert.ToInt32(reader["TrangThai"]) == 1 ? "Red" : "Green"
-                        };
-                        tables.Add(table);
-                    }
-                }
-            }
-
-            return tables;
+                Id = table.Id,
+                Name = table.Name,
+                Status = table.Status == TableStatus.Occupied ? "Có khách" : "Trống",
+                StatusColor = table.Status == TableStatus.Occupied ? "Red" : "Green"
+            }).ToList();
         }
 
         public List<TableStatusDto> GetTableStatusList()
         {
             var result = new List<TableStatusDto>();
-
-            var tables = GetTables();
+            var tables = _tableRepository.GetAllTables();
 
             foreach (var table in tables)
             {
@@ -59,19 +44,24 @@ namespace QLCafe.Application.Services
                 {
                     Id = table.Id,
                     Name = table.Name,
-                    Status = table.Status,
-                    StatusColor = table.StatusColor,
-                    IsPaid = table.Status != "Có khách"
+                    Status = table.Status == TableStatus.Occupied ? "Có khách" : "Trống",
+                    StatusColor = table.Status == TableStatus.Occupied ? "Red" : "Green",
+                    IsPaid = table.Status != TableStatus.Occupied
                 };
 
-                if (table.Status == "Có khách")
+                if (table.Status == TableStatus.Occupied)
                 {
-                    var orderInfo = GetCurrentOrderInfo(table.Id);
-                    if (orderInfo != null)
+                    var currentOrder = _orderRepository.GetCurrentOrderByTable(table.Id);
+                    if (currentOrder != null)
                     {
-                        tableStatus.CurrentOrderId = orderInfo.OrderId;
-                        tableStatus.OrderItems = orderInfo.Items;
-                        tableStatus.TotalAmount = orderInfo.TotalAmount;
+                        tableStatus.OrderItems = currentOrder.OrderDetails.Select(item => new TableOrderItemDto
+                        {
+                            ProductName = item.ProductName,
+                            Quantity = item.Quantity,
+                            UnitPrice = item.UnitPrice
+                        }).ToList();
+
+                        tableStatus.TotalAmount = currentOrder.OrderDetails.Sum(item => item.UnitPrice * item.Quantity);
                     }
                 }
 
@@ -81,81 +71,73 @@ namespace QLCafe.Application.Services
             return result;
         }
 
-        private OrderInfoDto GetCurrentOrderInfo(int tableId)
-        {
-            var orderInfo = new OrderInfoDto();
-
-            using (var connection = new SqlConnection(_connectionString))
-            using (var command = new SqlCommand("sp_GetBillInfoByTableID", connection))
-            {
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@IDBan", tableId);
-
-                connection.Open();
-                using (var reader = command.ExecuteReader())
-                {
-                    decimal totalAmount = 0;
-
-                    while (reader.Read())
-                    {
-                        var item = new TableOrderItemDto
-                        {
-                            // SỬA LỖI: Dùng Indexer [] và Convert
-                            ProductName = reader["TenSanPham"].ToString(),
-                            Quantity = Convert.ToInt32(reader["SoLuong"]),
-                            UnitPrice = Convert.ToDecimal(reader["DonGiaTaiThoiDiem"])
-                        };
-
-                        orderInfo.Items.Add(item);
-
-                        // SỬA LỖI: Lấy ThanhTien
-                        totalAmount += Convert.ToDecimal(reader["ThanhTien"]);
-                    }
-
-                    orderInfo.TotalAmount = totalAmount;
-
-                    if (orderInfo.Items.Count > 0)
-                    {
-                        orderInfo.OrderId = GetCurrentOrderId(tableId);
-                        return orderInfo;
-                    }
-                }
-            }
-
-            return null;
-        }
-
-        private int GetCurrentOrderId(int tableId)
-        {
-            using (var connection = new SqlConnection(_connectionString))
-            using (var command = new SqlCommand("SELECT IDHoaDon FROM HoaDon WHERE IDBan = @IDBan AND TrangThai = 0", connection))
-            {
-                command.Parameters.AddWithValue("@IDBan", tableId);
-
-                connection.Open();
-                var result = command.ExecuteScalar();
-                return result != null && result != DBNull.Value ? Convert.ToInt32(result) : 0;
-            }
-        }
-
         public TableDto GetTableById(int tableId)
         {
-            var tables = GetTables();
-            return tables.Find(t => t.Id == tableId)
-                    ?? new TableDto { Id = tableId, Name = "Bàn " + tableId, Status = "Không tồn tại", StatusColor = "Gray" };
+            var table = _tableRepository.GetTableById(tableId);
+
+            return new TableDto
+            {
+                Id = table.Id,
+                Name = table.Name,
+                Status = table.Status == TableStatus.Occupied ? "Có khách" : "Trống",
+                StatusColor = table.Status == TableStatus.Occupied ? "Red" : "Green"
+            };
+        }
+
+        public bool IsTableEmpty(int tableId)
+        {
+            return _tableRepository.IsTableEmpty(tableId);
         }
 
         public void UpdateTableStatus(int tableId, string status)
         {
-            // Hàm này hiện tại chỉ log ra console, sau này bạn có thể gọi SP cập nhật DB nếu cần
-            Console.WriteLine($"Cập nhật bàn {tableId} thành trạng thái: {status}");
+            var tableStatus = status == "Có khách" ? TableStatus.Occupied : TableStatus.Empty;
+            _tableRepository.UpdateTableStatus(tableId, tableStatus);
         }
-    }
 
-    internal class OrderInfoDto
-    {
-        public int OrderId { get; set; }
-        public List<TableOrderItemDto> Items { get; set; } = new List<TableOrderItemDto>();
-        public decimal TotalAmount { get; set; }
+        // THÊM METHOD MỚI - Lấy danh sách bàn trống
+        public List<TableDto> GetAvailableTables()
+        {
+            var availableTables = _tableRepository.GetAvailableTables();
+
+            return availableTables.Select(table => new TableDto
+            {
+                Id = table.Id,
+                Name = table.Name,
+                Status = "Trống",
+                StatusColor = "Green"
+            }).ToList();
+        }
+
+        // THÊM METHOD MỚI - Chuyển bàn
+        public bool SwitchTable(SwitchTableRequest request)
+        {
+            try
+            {
+                // Kiểm tra không được chuyển cùng một bàn
+                if (request.FromTableId == request.ToTableId)
+                    throw new Exception("Không thể chuyển cùng một bàn");
+
+                // Kiểm tra bàn đích có trống không
+                var targetTable = _tableRepository.GetTableById(request.ToTableId);
+                if (targetTable == null)
+                    throw new Exception("Bàn đích không tồn tại");
+
+                if (targetTable.Status == TableStatus.Occupied)
+                    throw new Exception("Bàn đích đang có khách");
+
+                // Kiểm tra bàn nguồn có order không
+                var currentOrder = _orderRepository.GetCurrentOrderByTable(request.FromTableId);
+                if (currentOrder == null)
+                    throw new Exception("Bàn nguồn không có order để chuyển");
+
+                // Thực hiện chuyển bàn
+                return _tableRepository.SwitchTable(request.FromTableId, request.ToTableId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Lỗi khi chuyển bàn: {ex.Message}");
+            }
+        }
     }
 }
