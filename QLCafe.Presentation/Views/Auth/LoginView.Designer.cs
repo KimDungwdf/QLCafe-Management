@@ -319,7 +319,7 @@
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(470, 64);
             this.btnExit.TabIndex = 9;
-            this.btnExit.Text = "Thoát";
+            this.btnExit.Text = "&Thoát";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -339,9 +339,9 @@
             // pictureBox6
             // 
             this.pictureBox6.Image = global::QLCafe.Presentation.Properties.Resources.user;
-            this.pictureBox6.Location = new System.Drawing.Point(40, 237);
+            this.pictureBox6.Location = new System.Drawing.Point(40, 170);
             this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(41, 45);
+            this.pictureBox6.Size = new System.Drawing.Size(41, 41);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox6.TabIndex = 7;
             this.pictureBox6.TabStop = false;
@@ -350,20 +350,20 @@
             // pictureBox5
             // 
             this.pictureBox5.Image = global::QLCafe.Presentation.Properties.Resources.block__1_;
-            this.pictureBox5.Location = new System.Drawing.Point(40, 351);
+            this.pictureBox5.Location = new System.Drawing.Point(40, 302);
             this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(41, 45);
+            this.pictureBox5.Size = new System.Drawing.Size(41, 40);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox5.TabIndex = 6;
             this.pictureBox5.TabStop = false;
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(87, 351);
+            this.txtPassword.Location = new System.Drawing.Point(40, 361);
             this.txtPassword.Multiline = true;
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '•';
-            this.txtPassword.Size = new System.Drawing.Size(423, 45);
+            this.txtPassword.Size = new System.Drawing.Size(470, 45);
             this.txtPassword.TabIndex = 5;
             this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
             this.txtPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPassword_KeyPress_1);
@@ -372,7 +372,7 @@
             // 
             this.label12.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label12.Location = new System.Drawing.Point(35, 311);
+            this.label12.Location = new System.Drawing.Point(82, 311);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(320, 31);
             this.label12.TabIndex = 4;
@@ -380,17 +380,17 @@
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(87, 237);
+            this.txtUsername.Location = new System.Drawing.Point(40, 226);
             this.txtUsername.Multiline = true;
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(423, 45);
+            this.txtUsername.Size = new System.Drawing.Size(470, 45);
             this.txtUsername.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label3.Location = new System.Drawing.Point(35, 180);
+            this.label3.Location = new System.Drawing.Point(82, 180);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(320, 31);
             this.label3.TabIndex = 2;
