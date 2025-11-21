@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace QLCafe.Presentation.Views.Cashier
 {
-    public partial class PaymentForm : Form
+    public partial class test : Form
     {
-        public PaymentForm()
+        public test()
         {
             InitializeComponent();
         }

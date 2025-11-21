@@ -69,6 +69,12 @@
     <Compile Include="Components\RoundButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\Table\BillItemRowControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Table\BillItemRowControl.Designer.cs">
+      <DependentUpon>BillItemRowControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Table\OrderItemControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -156,6 +162,12 @@
     <Compile Include="Views\Cashier\CashierMainView.Designer.cs">
       <DependentUpon>CashierMainView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Cashier\CreateBillForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Cashier\CreateBillForm.Designer.cs">
+      <DependentUpon>CreateBillForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Cashier\OrderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -167,12 +179,6 @@
     </Compile>
     <Compile Include="Views\Cashier\OrderHistoryForm.Designer.cs">
       <DependentUpon>OrderHistoryForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Cashier\PaymentForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Cashier\PaymentForm.Designer.cs">
-      <DependentUpon>PaymentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Cashier\ShiftReportForm.cs">
       <SubType>Form</SubType>
@@ -192,12 +198,21 @@
     <Compile Include="Views\Cashier\TableManagementForm.Designer.cs">
       <DependentUpon>TableManagementForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Cashier\test.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Cashier\test.Designer.cs">
+      <DependentUpon>test.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\InventoryMainView\InventoryMainView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\InventoryMainView\InventoryMainView.Designer.cs">
       <DependentUpon>InventoryMainView.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Controls\Table\BillItemRowControl.resx">
+      <DependentUpon>BillItemRowControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Table\OrderItemControl.resx">
       <DependentUpon>OrderItemControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -227,14 +242,14 @@
     <EmbeddedResource Include="Views\Cashier\CashierMainView.resx">
       <DependentUpon>CashierMainView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Cashier\CreateBillForm.resx">
+      <DependentUpon>CreateBillForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Cashier\OrderForm.resx">
       <DependentUpon>OrderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Cashier\OrderHistoryForm.resx">
       <DependentUpon>OrderHistoryForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Cashier\PaymentForm.resx">
-      <DependentUpon>PaymentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Cashier\ShiftReportForm.resx">
       <DependentUpon>ShiftReportForm.cs</DependentUpon>
@@ -244,6 +259,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Cashier\TableManagementForm.resx">
       <DependentUpon>TableManagementForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Cashier\test.resx">
+      <DependentUpon>test.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\InventoryMainView\InventoryMainView.resx">
       <DependentUpon>InventoryMainView.cs</DependentUpon>
@@ -345,6 +363,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Delete_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot_2025-11-21_062308-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot_2025-11-21_062739-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot_2025-11-21_065757-removebg-preview.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

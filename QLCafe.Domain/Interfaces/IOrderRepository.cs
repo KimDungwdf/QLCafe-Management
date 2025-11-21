@@ -9,5 +9,6 @@ namespace QLCafe.Domain.Interfaces
         void AddItemToOrder(int tableId, int productId, int quantity, string userName, string notes = "");
         void RemoveItemFromOrder(int tableId, int productId, string userName);
         void UpdateItemQuantity(int tableId, int productId, int quantity, string userName);
+        bool ProcessPayment(int tableId, decimal discountAmount, string userName);
     }
 }
