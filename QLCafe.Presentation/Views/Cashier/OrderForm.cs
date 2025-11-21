@@ -70,22 +70,65 @@ namespace QLCafe.Presentation.Views.Cashier
                     // Xóa controls cũ
                     flowLayoutProducts.Controls.Clear();
 
-                    foreach (var product in products)
-                    {
-                        var productControl = new ProductControl();
-                        productControl.ProductID = product.IDSanPham;
-                        productControl.ProductName = product.TenSanPham;
-                        productControl.Price = product.DonGia;
-                        productControl.Category = product.TenDanhMuc;
+                    // Group theo danh mục
+                    var grouped = products.GroupBy(p => p.TenDanhMuc);
 
-                        // Xử lý khi click vào product
-                        productControl.ProductClicked += (sender, productId) =>
+                    foreach (var group in grouped)
+                    {
+                        // Panel chứa 1 danh mục
+                        var categoryPanel = new Panel
                         {
-                            AddProductToOrder(productId, product.TenSanPham, product.DonGia);
+                            Width = flowLayoutProducts.ClientSize.Width - 30,
+                            AutoSize = true,
+                            AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                            Margin = new Padding(3, 3, 3, 15)
                         };
 
-                        // THÊM VÀO FLOWLAYOUTPANEL
-                        flowLayoutProducts.Controls.Add(productControl);
+                        // Tiêu đề danh mục
+                        var lblCategoryTitle = new Label
+                        {
+                            Text = group.Key,
+                            AutoSize = true,
+                            Font = new Font("Segoe UI", 9F, FontStyle.Bold),
+                            ForeColor = Color.FromArgb(68, 68, 68),
+                            Dock = DockStyle.Top,
+                            Padding = new Padding(0, 0, 0, 4)
+                        };
+                        categoryPanel.Controls.Add(lblCategoryTitle);
+
+                        // FlowLayoutPanel con cho các món trong danh mục
+                        var productsPanel = new FlowLayoutPanel
+                        {
+                            FlowDirection = FlowDirection.TopDown,
+                            WrapContents = false,
+                            AutoSize = true,
+                            AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                            Dock = DockStyle.Top
+                        };
+
+                        foreach (var product in group)
+                        {
+                            var productControl = new ProductControl();
+                            productControl.ProductID = product.IDSanPham;
+                            productControl.ProductName = product.TenSanPham;
+                            productControl.Price = product.DonGia;
+                            productControl.Category = product.TenDanhMuc;
+                            productControl.ShowCategory = false; // Ẩn vì đã có tiêu đề nhóm
+
+                            // Xử lý khi click vào product
+                            productControl.ProductClicked += (sender, productId) =>
+                            {
+                                AddProductToOrder(productId, product.TenSanPham, product.DonGia);
+                            };
+
+                            productsPanel.Controls.Add(productControl);
+                        }
+
+                        // Thêm panel món vào dưới label (đảo ngược thứ tự Dock)
+                        categoryPanel.Controls.Add(productsPanel);
+                        productsPanel.BringToFront();
+
+                        flowLayoutProducts.Controls.Add(categoryPanel);
                     }
                 }
             }

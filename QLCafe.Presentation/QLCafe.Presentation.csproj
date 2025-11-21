@@ -69,6 +69,12 @@
     <Compile Include="Components\RoundButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\Table\FoodControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Table\FoodControl.Designer.cs">
+      <DependentUpon>FoodControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Table\OrderItemControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -105,6 +111,15 @@
     </Compile>
     <Compile Include="Views\Admin\AccountManagementForm.Designer.cs">
       <DependentUpon>AccountManagementForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\AddCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Admin\AddCategory.Designer.cs">
+      <DependentUpon>AddCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\AddProductDialog.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\Admin\AdminMainView.cs">
       <SubType>Form</SubType>
@@ -192,6 +207,9 @@
     <Compile Include="Views\InventoryMainView\InventoryMainView.Designer.cs">
       <DependentUpon>InventoryMainView.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Controls\Table\FoodControl.resx">
+      <DependentUpon>FoodControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Table\OrderItemControl.resx">
       <DependentUpon>OrderItemControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -209,8 +227,14 @@
     <EmbeddedResource Include="Views\Admin\AccountManagementForm.resx">
       <DependentUpon>AccountManagementForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Admin\AddCategory.resx">
+      <DependentUpon>AddCategory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Admin\AdminMainView.resx">
       <DependentUpon>AdminMainView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Admin\MenuManagementForm.resx">
+      <DependentUpon>MenuManagementForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Auth\LoginView.resx">
       <DependentUpon>LoginView.cs</DependentUpon>
@@ -272,6 +296,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Controls\Food\" />
     <Folder Include="Services\" />
     <Folder Include="ViewModels\Auth\" />
   </ItemGroup>
@@ -336,6 +361,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Delete_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete_nobg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\deletebutton2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

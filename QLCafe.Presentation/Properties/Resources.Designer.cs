@@ -163,6 +163,26 @@ namespace QLCafe.Presentation.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap delete_nobg {
+            get {
+                object obj = ResourceManager.GetObject("delete_nobg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap deletebutton2 {
+            get {
+                object obj = ResourceManager.GetObject("deletebutton2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_quan_ly_ban {
             get {
                 object obj = ResourceManager.GetObject("icon_quan_ly_ban", resourceCulture);
