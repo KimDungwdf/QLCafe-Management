@@ -192,7 +192,28 @@ namespace QLCafe.Presentation.Views.Cashier
 
         private void OpenCreateBillForm(int tableId)
         {
-            MessageBox.Show($"Mở form Tạo hóa đơn cho bàn {tableId}", "Tạo hóa đơn");
+            try
+            {
+                // 1. Lấy tên bàn
+                string tableName = GetTableNameById(tableId);
+
+                // 2. Mở Form Thanh Toán (CreateBillForm)
+                // Truyền đủ 4 tham số: ID Bàn, Tên Bàn, Người dùng, Service
+                var createBillForm = new CreateBillForm(tableId, tableName, currentUser, _orderService);
+
+                var result = createBillForm.ShowDialog();
+
+                // 3. Nếu thanh toán thành công (Form trả về OK)
+                if (result == DialogResult.OK)
+                {
+                    // Tải lại danh sách bàn (để bàn vừa thanh toán chuyển sang màu Trống/Xanh)
+                    RefreshTableStatus();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi mở form thanh toán: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

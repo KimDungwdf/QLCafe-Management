@@ -46,7 +46,6 @@
             this.lblShift = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.btnTableManagement = new System.Windows.Forms.Button();
-            this.btnPayment = new System.Windows.Forms.Button();
             this.btnOrderHistory = new System.Windows.Forms.Button();
             this.btnShiftReport = new System.Windows.Forms.Button();
             this.panelLeft = new System.Windows.Forms.Panel();
@@ -229,22 +228,6 @@
             this.btnTableManagement.UseVisualStyleBackColor = false;
             this.btnTableManagement.Click += new System.EventHandler(this.btnTableManagement_Click);
             // 
-            // btnPayment
-            // 
-            this.btnPayment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(64)))), ((int)(((byte)(14)))));
-            this.btnPayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPayment.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.btnPayment.ForeColor = System.Drawing.Color.White;
-            this.btnPayment.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnPayment.Location = new System.Drawing.Point(0, 345);
-            this.btnPayment.Name = "btnPayment";
-            this.btnPayment.Size = new System.Drawing.Size(328, 59);
-            this.btnPayment.TabIndex = 13;
-            this.btnPayment.Text = "Thanh toán";
-            this.btnPayment.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPayment.UseVisualStyleBackColor = false;
-            this.btnPayment.Click += new System.EventHandler(this.btnPayment_Click);
-            // 
             // btnOrderHistory
             // 
             this.btnOrderHistory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(64)))), ((int)(((byte)(14)))));
@@ -252,7 +235,7 @@
             this.btnOrderHistory.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnOrderHistory.ForeColor = System.Drawing.Color.White;
             this.btnOrderHistory.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnOrderHistory.Location = new System.Drawing.Point(0, 400);
+            this.btnOrderHistory.Location = new System.Drawing.Point(-5, 344);
             this.btnOrderHistory.Name = "btnOrderHistory";
             this.btnOrderHistory.Size = new System.Drawing.Size(328, 59);
             this.btnOrderHistory.TabIndex = 14;
@@ -268,7 +251,7 @@
             this.btnShiftReport.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnShiftReport.ForeColor = System.Drawing.Color.White;
             this.btnShiftReport.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnShiftReport.Location = new System.Drawing.Point(0, 456);
+            this.btnShiftReport.Location = new System.Drawing.Point(-5, 398);
             this.btnShiftReport.Name = "btnShiftReport";
             this.btnShiftReport.Size = new System.Drawing.Size(328, 59);
             this.btnShiftReport.TabIndex = 15;
@@ -285,7 +268,6 @@
             this.panelLeft.Controls.Add(this.btnLogout);
             this.panelLeft.Controls.Add(this.btnShiftReport);
             this.panelLeft.Controls.Add(this.btnOrderHistory);
-            this.panelLeft.Controls.Add(this.btnPayment);
             this.panelLeft.Controls.Add(this.pictureBox3);
             this.panelLeft.Controls.Add(this.label5);
             this.panelLeft.Controls.Add(this.pictureBox2);
@@ -304,7 +286,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Gold;
-            this.panel2.Location = new System.Drawing.Point(0, 505);
+            this.panel2.Location = new System.Drawing.Point(0, 452);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(328, 18);
             this.panel2.TabIndex = 17;
@@ -399,7 +381,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Button btnTableManagement;
-        private System.Windows.Forms.Button btnPayment;
         private System.Windows.Forms.Button btnOrderHistory;
         private System.Windows.Forms.Button btnShiftReport;
         private System.Windows.Forms.Panel panelLeft;

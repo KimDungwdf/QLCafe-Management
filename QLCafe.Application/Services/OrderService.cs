@@ -99,5 +99,26 @@ namespace QLCafe.Application.Services
         {
             throw new NotImplementedException("Chức năng thanh toán chưa được triển khai");
         }
+
+        // THÊM PHƯƠNG THỨC THANH TOÁN
+        public bool Checkout(int tableId, decimal discount, string paymentMethod, string userName)
+        {
+            try
+            {
+                return _orderRepository.ProcessPayment(tableId, discount, userName);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Lỗi khi thanh toán: {ex.Message}");
+            }
+        }
+
+        public decimal CalculateChange(decimal totalAmount, decimal customerPayment)
+        {
+            if (customerPayment < totalAmount)
+                throw new Exception("Số tiền khách đưa không đủ");
+
+            return customerPayment - totalAmount;
+        }
     }
 }

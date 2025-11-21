@@ -9,6 +9,9 @@ namespace QLCafe.Application.Interfaces
         void AddItemToOrder(int tableId, int productId, int quantity, string userName, string notes = "");
         void RemoveItemFromOrder(int tableId, int productId, string userName);
         void UpdateItemQuantity(int tableId, int productId, int quantity, string userName);
-        void Checkout(int tableId, decimal discount, string userName);
+
+        // THÊM PHƯƠNG THỨC THANH TOÁN
+        bool Checkout(int tableId, decimal discount, string paymentMethod, string userName);
+        decimal CalculateChange(decimal totalAmount, decimal customerPayment);
     }
 }
