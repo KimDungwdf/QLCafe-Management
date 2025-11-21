@@ -33,20 +33,18 @@
             this.lbPrice = new System.Windows.Forms.Label();
             this.lbFoodName = new System.Windows.Forms.Label();
             this.lbCategoryName = new System.Windows.Forms.Label();
-            this.btnAddCategory = new System.Windows.Forms.Button();
             this.panelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbDelete)).BeginInit();
             this.SuspendLayout();
             // 
             // panelMain
             // 
-            this.panelMain.BackColor = System.Drawing.Color.FromArgb(249, 249, 249);
+            this.panelMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
             this.panelMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelMain.Controls.Add(this.pbDelete);
             this.panelMain.Controls.Add(this.lbPrice);
             this.panelMain.Controls.Add(this.lbFoodName);
             this.panelMain.Controls.Add(this.lbCategoryName);
-            this.panelMain.Controls.Add(this.btnAddCategory);
             this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMain.Location = new System.Drawing.Point(0, 0);
             this.panelMain.Name = "panelMain";
@@ -55,24 +53,24 @@
             // 
             // pbDelete
             // 
+            this.pbDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pbDelete.Image = global::QLCafe.Presentation.Properties.Resources.Delete_icon;
+            this.pbDelete.Location = new System.Drawing.Point(440, 18);
+            this.pbDelete.Name = "pbDelete";
             this.pbDelete.Size = new System.Drawing.Size(30, 30);
             this.pbDelete.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbDelete.TabIndex = 4;
             this.pbDelete.TabStop = false;
-            this.pbDelete.Visible = false; // Ẩn mặc định, bật bằng DeleteMode
-            this.pbDelete.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-            this.pbDelete.Location = new System.Drawing.Point(440, 18); // cố định theo width 480
+            this.pbDelete.Visible = false;
             // 
             // lbPrice
             // 
             this.lbPrice.AutoSize = true;
             this.lbPrice.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.lbPrice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(110)))), ((int)(((byte)(235)))));
-
             this.lbPrice.Location = new System.Drawing.Point(330, 28);
             this.lbPrice.Name = "lbPrice";
-            this.lbPrice.Size = new System.Drawing.Size(39, 15);
+            this.lbPrice.Size = new System.Drawing.Size(25, 15);
             this.lbPrice.TabIndex = 3;
             this.lbPrice.Text = "0 đ";
             // 
@@ -82,7 +80,7 @@
             this.lbFoodName.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.lbFoodName.Location = new System.Drawing.Point(16, 24);
             this.lbFoodName.Name = "lbFoodName";
-            this.lbFoodName.Size = new System.Drawing.Size(85, 19);
+            this.lbFoodName.Size = new System.Drawing.Size(66, 19);
             this.lbFoodName.TabIndex = 2;
             this.lbFoodName.Text = "Tên món";
             // 
@@ -93,25 +91,9 @@
             this.lbCategoryName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
             this.lbCategoryName.Location = new System.Drawing.Point(16, 6);
             this.lbCategoryName.Name = "lbCategoryName";
-            this.lbCategoryName.Size = new System.Drawing.Size(66, 13);
+            this.lbCategoryName.Size = new System.Drawing.Size(56, 13);
             this.lbCategoryName.TabIndex = 1;
             this.lbCategoryName.Text = "Danh mục";
-            // 
-            // btnAddCategory
-            // 
-            this.btnAddCategory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddCategory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(110)))), ((int)(((byte)(235)))));
-            this.btnAddCategory.FlatAppearance.BorderSize = 0;
-            this.btnAddCategory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddCategory.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.btnAddCategory.ForeColor = System.Drawing.Color.White;
-            this.btnAddCategory.Location = new System.Drawing.Point(330, 6);
-            this.btnAddCategory.Name = "btnAddCategory";
-            this.btnAddCategory.Size = new System.Drawing.Size(88, 23);
-            this.btnAddCategory.TabIndex = 5;
-            this.btnAddCategory.Text = "+ Thêm";
-            this.btnAddCategory.UseVisualStyleBackColor = false;
-            this.btnAddCategory.Visible = false;
             // 
             // FoodControl
             // 
@@ -134,6 +116,5 @@
         private System.Windows.Forms.Label lbPrice;
         private System.Windows.Forms.Label lbFoodName;
         private System.Windows.Forms.Label lbCategoryName;
-        private System.Windows.Forms.Button btnAddCategory;
     }
 }

@@ -94,21 +94,6 @@ namespace QLCafe.Presentation.Views.Admin
                 lblDelete.Click += (s, e) => DeleteCategory(cat.Name);
                 categoryPanel.Controls.Add(lblDelete);
 
-                var btnAddFood = new Button
-                {
-                    Text = "+ Thêm món",
-                    BackColor = Color.FromArgb(35, 110, 235),
-                    ForeColor = Color.White,
-                    FlatStyle = FlatStyle.Flat,
-                    Width = 120,
-                    Height = 28,
-                    Location = new Point(categoryPanel.Width - 200, 12),
-                    Font = new Font("Segoe UI", 9F)
-                };
-                btnAddFood.FlatAppearance.BorderSize = 0;
-                btnAddFood.Click += (s, e) => OpenAddProduct();
-                categoryPanel.Controls.Add(btnAddFood);
-
                 // Panel chứa món
                 var itemsStartY = 50;
                 int itemHeight = 54;
@@ -164,11 +149,9 @@ namespace QLCafe.Presentation.Views.Admin
                 {
                     fc.Width = itemWidth;
                 }
-                // Cập nhật vị trí các control bên phải header
+                // Update delete label position
                 var lblDelete = categoryPanel.Controls.OfType<Label>().FirstOrDefault(l => l.Text.Contains("Xóa"));
-                var btnAdd = categoryPanel.Controls.OfType<Button>().FirstOrDefault(b => b.Text.Contains("Thêm món"));
                 if (lblDelete != null) lblDelete.Left = categoryPanel.Width - 70;
-                if (btnAdd != null) btnAdd.Left = categoryPanel.Width - 200;
             }
         }
 
