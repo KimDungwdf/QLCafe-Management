@@ -14,7 +14,6 @@ namespace QLCafe.Presentation.Views.Cashier
     public partial class CashierMainView : Form
     {
         private TableManagementForm tableManagementForm;
-        private PaymentForm paymentForm;
         private OrderHistoryForm orderHistoryForm;
         private ShiftReportForm shiftReportForm;
         public CashierMainView()
@@ -36,12 +35,10 @@ namespace QLCafe.Presentation.Views.Cashier
         {
             // Khởi tạo các form con
             tableManagementForm = new TableManagementForm();
-            paymentForm = new PaymentForm();
             orderHistoryForm = new OrderHistoryForm();
             shiftReportForm = new ShiftReportForm();
 
             SetFormProperties(tableManagementForm);
-            SetFormProperties(paymentForm);
             SetFormProperties(orderHistoryForm);
             SetFormProperties(shiftReportForm);
         }
@@ -75,8 +72,7 @@ namespace QLCafe.Presentation.Views.Cashier
         }
 
         private void btnPayment_Click(object sender, EventArgs e)
-        {
-            ShowPayment();
+        {;
         }
 
         private void btnOrderHistory_Click(object sender, EventArgs e)
@@ -102,14 +98,6 @@ namespace QLCafe.Presentation.Views.Cashier
             tableManagementForm.Show();
 
             UpdateHeader("QUẢN LÝ BÀN");
-        }
-
-        private void ShowPayment()
-        {
-            ClearPanelContent(); 
-            panelContent.Controls.Add(paymentForm); 
-            paymentForm.Show();
-            UpdateHeader("THANH TOÁN");
         }
 
         private void ShowOrderHistory()

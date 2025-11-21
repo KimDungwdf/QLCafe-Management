@@ -3,15 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Configuration;
+using QLCafe.Application.Interfaces;
+using QLCafe.Application.Services;
+using QLCafe.Infrastructure.Repositories;
 using Dapper;
-using QLCafe.Presentation.Controls.Table;
 
 namespace QLCafe.Presentation.Views.Cashier
 {
@@ -22,6 +21,7 @@ namespace QLCafe.Presentation.Views.Cashier
         private string currentTableName;
         private string currentUser;
         private Dictionary<int, OrderItemControl> orderItems = new Dictionary<int, OrderItemControl>();
+        private IOrderService _orderService;
 
         public OrderForm(int tableID, string tableName, string userName)
         {
@@ -29,6 +29,11 @@ namespace QLCafe.Presentation.Views.Cashier
 
             // Lấy connection string từ App.config
             connectionString = ConfigurationManager.ConnectionStrings["QLCafeConnection"].ConnectionString;
+
+            // KHỞI TẠO SERVICE LAYER - ĐÚNG KIẾN TRÚC N-LAYER
+            var orderRepository = new OrderRepository(connectionString);
+            _orderService = new OrderService(orderRepository);
+
             bttSend.Click += bttSend_Click;
             currentTableID = tableID;
             currentTableName = tableName;
@@ -44,7 +49,7 @@ namespace QLCafe.Presentation.Views.Cashier
             SetSendButtonToReadyState();
         }
 
-        // Thêm class này trong file OrderForm.cs
+        // Class ProductInfo để map dữ liệu từ database
         public class ProductInfo
         {
             public int IDSanPham { get; set; }
@@ -57,7 +62,7 @@ namespace QLCafe.Presentation.Views.Cashier
         {
             try
             {
-                using (var connection = new SqlConnection(connectionString))
+                using (var connection = new System.Data.SqlClient.SqlConnection(connectionString))
                 {
                     var products = connection.Query<ProductInfo>(
                         @"SELECT sp.IDSanPham, sp.TenSanPham, sp.DonGia, dm.TenDanhMuc 
@@ -231,7 +236,6 @@ namespace QLCafe.Presentation.Views.Cashier
 
         private void OrderForm_Load(object sender, EventArgs e)
         {
-
         }
 
         private void bttSend_Click(object sender, EventArgs e)
@@ -246,7 +250,7 @@ namespace QLCafe.Presentation.Views.Cashier
 
             try
             {
-                // 🟢 LƯU ORDER VÀO DATABASE
+                // 🟢 LƯU ORDER VÀO DATABASE - DÙNG SERVICE LAYER
                 SaveOrderToDatabase();
 
                 // 🟢 ĐỔI TRẠNG THÁI NÚT THÀNH "Order đã gửi xuống bếp!"
@@ -267,7 +271,6 @@ namespace QLCafe.Presentation.Views.Cashier
                     this.Close(); // 🟢 ĐÓNG FORM
                 };
                 closeTimer.Start();
-
             }
             catch (Exception ex)
             {
@@ -276,45 +279,21 @@ namespace QLCafe.Presentation.Views.Cashier
             }
         }
 
-        // 🟢 PHƯƠNG THỨC LƯU ORDER VÀO DATABASE
+        // 🟢 PHƯƠNG THỨC LƯU ORDER VÀO DATABASE - ĐÃ REFACTOR DÙNG SERVICE LAYER
         private void SaveOrderToDatabase()
         {
-            using (var connection = new SqlConnection(connectionString))
+            try
             {
-                connection.Open();
-
-                // Sử dụng transaction để đảm bảo tính toàn vẹn dữ liệu
-                using (var transaction = connection.BeginTransaction())
+                // DÙNG SERVICE LAYER THAY VÌ DIRECT DB ACCESS
+                // Với mỗi món trong order, gọi service method
+                foreach (var orderItem in orderItems.Values)
                 {
-                    try
-                    {
-                        // Với mỗi món trong order, gọi stored procedure
-                        foreach (var orderItem in orderItems.Values)
-                        {
-                            connection.Execute(
-                                "sp_AddBillDetail",
-                                new
-                                {
-                                    IDBan = currentTableID,
-                                    IDSanPham = orderItem.ProductID,
-                                    SoLuong = orderItem.Quantity,
-                                    TenDangNhap = currentUser
-                                },
-                                transaction: transaction,
-                                commandType: CommandType.StoredProcedure
-                            );
-                        }
-
-                        transaction.Commit();
-
-                        // TRIGGER SẼ TỰ ĐỘNG CẬP NHẬT TRẠNG THÁI BÀN THÀNH "Có khách"
-                    }
-                    catch
-                    {
-                        transaction.Rollback();
-                        throw;
-                    }
+                    _orderService.AddItemToOrder(currentTableID, orderItem.ProductID, orderItem.Quantity, currentUser);
                 }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Lỗi khi lưu order: {ex.Message}");
             }
         }
 
@@ -336,7 +315,6 @@ namespace QLCafe.Presentation.Views.Cashier
 
         private void lblHeaderPrefix_Click(object sender, EventArgs e)
         {
-
         }
     }
 }

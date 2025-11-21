@@ -1,20 +1,335 @@
-﻿using System;
+﻿using Dapper;
+using QLCafe.Application.Interfaces;
+using QLCafe.Application.Services;
+using QLCafe.Infrastructure.Repositories;
+using QLCafe.Presentation.Controls.Table;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QLCafe.Presentation.Views.Cashier
 {
     public partial class AddDishForm : Form
     {
-        public AddDishForm()
+        private string connectionString;
+        private int currentTableID;
+        private string currentTableName;
+        private string currentUser;
+        private Dictionary<int, OrderItemControl> orderItems = new Dictionary<int, OrderItemControl>();
+        private Dictionary<int, int> originalQuantities = new Dictionary<int, int>();
+        private IOrderService _orderService;
+
+        public AddDishForm(int tableID, string tableName, string userName)
         {
             InitializeComponent();
+
+            connectionString = ConfigurationManager.ConnectionStrings["QLCafeConnection"].ConnectionString;
+
+            // KHỞI TẠO SERVICE LAYER
+            var orderRepository = new OrderRepository(connectionString);
+            _orderService = new OrderService(orderRepository);
+
+            currentTableID = tableID;
+            currentTableName = tableName;
+            currentUser = userName;
+
+            // Đổi tiêu đề thành "Thêm món"
+            lblHeaderPrefix.Text = "Thêm món -";
+            lblTableNameHeader.Text = tableName;
+
+            // Load sản phẩm và order hiện tại
+            LoadProductsFromDatabase();
+            LoadCurrentOrder();
+
+            SetSendButtonToReadyState();
+        }
+
+        // Class ProductInfo
+        public class ProductInfo
+        {
+            public int IDSanPham { get; set; }
+            public string TenSanPham { get; set; }
+            public decimal DonGia { get; set; }
+            public string TenDanhMuc { get; set; }
+        }
+
+        private void LoadProductsFromDatabase()
+        {
+            try
+            {
+                using (var connection = new System.Data.SqlClient.SqlConnection(connectionString))
+                {
+                    var products = connection.Query<ProductInfo>(
+                        @"SELECT sp.IDSanPham, sp.TenSanPham, sp.DonGia, dm.TenDanhMuc 
+                  FROM SanPham sp 
+                  JOIN DanhMucMon dm ON sp.IDDanhMuc = dm.IDDanhMuc 
+                  ORDER BY dm.TenDanhMuc, sp.TenSanPham",
+                        commandType: CommandType.Text
+                    ).ToList();
+
+                    flowLayoutProducts.Controls.Clear();
+
+                    foreach (var product in products)
+                    {
+                        var productControl = new ProductControl();
+                        productControl.ProductID = product.IDSanPham;
+                        productControl.ProductName = product.TenSanPham;
+                        productControl.Price = product.DonGia;
+                        productControl.Category = product.TenDanhMuc;
+
+                        productControl.ProductClicked += (sender, productId) =>
+                        {
+                            AddProductToOrder(productId, product.TenSanPham, product.DonGia);
+                        };
+
+                        flowLayoutProducts.Controls.Add(productControl);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải danh sách sản phẩm: {ex.Message}");
+            }
+        }
+
+        private void LoadCurrentOrder()
+        {
+            try
+            {
+                var currentOrder = _orderService.GetCurrentOrderByTable(currentTableID);
+
+                if (currentOrder.Items.Count == 0)
+                {
+                    lblEmptyOrder.Visible = true;
+                    flowLayoutOrderItems.Visible = false;
+                    panelFooter.Visible = false;
+                    return;
+                }
+
+                lblEmptyOrder.Visible = false;
+                flowLayoutOrderItems.Visible = true;
+                panelFooter.Visible = true;
+
+                foreach (var item in currentOrder.Items)
+                {
+                    AddExistingProductToOrder(item.ProductId, item.ProductName, item.UnitPrice, item.Quantity);
+                }
+
+                UpdateTotalAmount();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải order hiện tại: {ex.Message}");
+            }
+        }
+
+        private void AddExistingProductToOrder(int productId, string productName, decimal price, int quantity)
+        {
+            var orderItem = new OrderItemControl();
+            orderItem.ProductID = productId;
+            orderItem.ProductName = productName;
+            orderItem.UnitPrice = price;
+            orderItem.Quantity = quantity;
+
+            originalQuantities[productId] = quantity;
+            CustomizeOrderItemForAddDish(orderItem);
+
+            flowLayoutOrderItems.Controls.Add(orderItem);
+            orderItems.Add(productId, orderItem);
+        }
+
+        private void AddProductToOrder(int productId, string productName, decimal price)
+        {
+            if (bttSend.Text == "✓ Order đã gửi xuống bếp!")
+            {
+                SetSendButtonToReadyState();
+            }
+
+            if (orderItems.ContainsKey(productId))
+            {
+                var existingItem = orderItems[productId];
+                int newQuantity = existingItem.Quantity + 1;
+
+                if (newQuantity < originalQuantities[productId])
+                {
+                    MessageBox.Show($"Không thể giảm số lượng món {productName} từ {existingItem.Quantity} xuống {newQuantity}. Số lượng tối thiểu là {originalQuantities[productId]}",
+                                  "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                existingItem.Quantity = newQuantity;
+            }
+            else
+            {
+                var orderItem = new OrderItemControl();
+                orderItem.ProductID = productId;
+                orderItem.ProductName = productName;
+                orderItem.UnitPrice = price;
+                orderItem.Quantity = 1;
+
+                originalQuantities[productId] = 0;
+                CustomizeOrderItemForAddDish(orderItem);
+
+                flowLayoutOrderItems.Controls.Add(orderItem);
+                orderItems.Add(productId, orderItem);
+            }
+
+            UpdateTotalAmount();
+
+            if (lblEmptyOrder.Visible)
+            {
+                lblEmptyOrder.Visible = false;
+                flowLayoutOrderItems.Visible = true;
+                panelFooter.Visible = true;
+            }
+        }
+
+        private void CustomizeOrderItemForAddDish(OrderItemControl orderItem)
+        {
+            orderItem.QuantityChanged += (sender, newQuantity) =>
+            {
+                if (originalQuantities.ContainsKey(orderItem.ProductID))
+                {
+                    int minQuantity = originalQuantities[orderItem.ProductID];
+
+                    if (newQuantity < minQuantity)
+                    {
+                        MessageBox.Show($"Không thể giảm số lượng món {orderItem.ProductName} xuống dưới {minQuantity}",
+                                      "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        orderItem.Quantity = minQuantity;
+                        return;
+                    }
+                }
+
+                orderItem.Quantity = newQuantity;
+                UpdateTotalAmount();
+
+                if (bttSend.Text == "✓ Order đã gửi xuống bếp!")
+                {
+                    SetSendButtonToReadyState();
+                }
+            };
+
+            orderItem.ItemRemoved += (sender, productIdToRemove) =>
+            {
+                if (originalQuantities.ContainsKey(productIdToRemove) && originalQuantities[productIdToRemove] > 0)
+                {
+                    MessageBox.Show($"Không thể xóa món {orderItem.ProductName} vì đã được order trước đó. Chỉ có thể thêm số lượng.",
+                                  "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                RemoveProductFromOrder(productIdToRemove);
+            };
+        }
+
+        private void RemoveProductFromOrder(int productId)
+        {
+            if (orderItems.ContainsKey(productId))
+            {
+                var itemToRemove = orderItems[productId];
+                flowLayoutOrderItems.Controls.Remove(itemToRemove);
+                orderItems.Remove(productId);
+                originalQuantities.Remove(productId);
+
+                UpdateTotalAmount();
+
+                if (orderItems.Count == 0)
+                {
+                    lblEmptyOrder.Visible = true;
+                    flowLayoutOrderItems.Visible = false;
+                    panelFooter.Visible = false;
+                }
+            }
+        }
+
+        private void UpdateTotalAmount()
+        {
+            decimal total = orderItems.Values.Sum(item => item.UnitPrice * item.Quantity);
+            lblTotalAmount.Text = total.ToString("N0") + " đ";
+        }
+
+        private void bttSend_Click(object sender, EventArgs e)
+        {
+            bool hasNewItems = orderItems.Any(item =>
+                item.Value.Quantity > (originalQuantities.ContainsKey(item.Key) ? originalQuantities[item.Key] : 0));
+
+            if (!hasNewItems)
+            {
+                MessageBox.Show("Vui lòng thêm món mới hoặc tăng số lượng món hiện có trước khi gửi!", "Thông báo",
+                               MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                SaveAdditionalItemsToDatabase();
+                SetSendButtonToSentState();
+
+                MessageBox.Show("Đã thêm món và gửi Order xuống bếp! Form sẽ đóng sau 2 giây.", "Thành công",
+                               MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                Timer closeTimer = new Timer();
+                closeTimer.Interval = 2000;
+                closeTimer.Tick += (s, args) =>
+                {
+                    closeTimer.Stop();
+                    closeTimer.Dispose();
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                };
+                closeTimer.Start();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi thêm món: {ex.Message}", "Lỗi",
+                               MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void SaveAdditionalItemsToDatabase()
+        {
+            try
+            {
+                foreach (var orderItem in orderItems.Values)
+                {
+                    int originalQty = originalQuantities.ContainsKey(orderItem.ProductID) ?
+                                    originalQuantities[orderItem.ProductID] : 0;
+                    int additionalQty = orderItem.Quantity - originalQty;
+
+                    if (additionalQty > 0)
+                    {
+                        _orderService.AddItemToOrder(currentTableID, orderItem.ProductID, additionalQty, currentUser);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Lỗi khi lưu món thêm: {ex.Message}");
+            }
+        }
+
+        private void SetSendButtonToReadyState()
+        {
+            bttSend.BackColor = Color.FromArgb(0, 192, 0);
+            bttSend.Text = "Xác nhận và gửi xuống bếp";
+            bttSend.Enabled = true;
+        }
+
+        private void SetSendButtonToSentState()
+        {
+            bttSend.BackColor = Color.Green;
+            bttSend.Text = "✓ Order đã gửi xuống bếp!";
+            bttSend.Enabled = false;
+        }
+
+        private void AddDishForm_Load(object sender, EventArgs e)
+        {
         }
     }
 }

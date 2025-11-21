@@ -49,7 +49,11 @@
     <Compile Include="DTOs\Order\ProductDto.cs" />
     <Compile Include="DTOs\Order\TableDto.cs" />
     <Compile Include="DTOs\Order\TableStatusDto.cs" />
+<<<<<<< HEAD
     <Compile Include="DTOs\Product\ProductDto.cs" />
+=======
+    <Compile Include="DTOs\Table\SwitchTableRequest.cs" />
+>>>>>>> c765895a1fa8ef732ef6384a8f4f4de6d799f28e
     <Compile Include="Interfaces\IAuthService.cs" />
     <Compile Include="Interfaces\IOrderService.cs" />
     <Compile Include="Interfaces\IProductService.cs" />

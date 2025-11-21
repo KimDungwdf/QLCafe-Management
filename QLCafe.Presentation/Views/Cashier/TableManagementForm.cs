@@ -1,24 +1,30 @@
-﻿using Dapper;
-using QLCafe.Application.Services;
-using QLCafe.Presentation.Controls.Table;
+﻿using QLCafe.Presentation.Controls.Table;
 using System;
 using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
+using QLCafe.Application.Interfaces;
+using QLCafe.Application.Services;
+using QLCafe.Infrastructure.Repositories;
 
 namespace QLCafe.Presentation.Views.Cashier
 {
     public partial class TableManagementForm : Form
     {
         private string connectionString;
-        private string currentUser = "thungan1"; // 🟢 THÊM BIẾN CURRENT USER
+        private string currentUser = "thungan1";
+        private ITableService _tableService;
+        private IOrderService _orderService;
 
         public TableManagementForm()
         {
             InitializeComponent();
             connectionString = ConfigurationManager.ConnectionStrings["QLCafeConnection"].ConnectionString;
+
+            var tableRepository = new TableRepository(connectionString);
+            var orderRepository = new OrderRepository(connectionString);
+            _tableService = new TableService(tableRepository, orderRepository);
+            _orderService = new OrderService(orderRepository);
 
             LoadTablesFromDatabase();
         }
@@ -29,8 +35,7 @@ namespace QLCafe.Presentation.Views.Cashier
 
             try
             {
-                var tableService = new TableService();
-                var tableStatuses = tableService.GetTableStatusList();
+                var tableStatuses = _tableService.GetTableStatusList();
 
                 foreach (var tableStatus in tableStatuses)
                 {
@@ -45,19 +50,19 @@ namespace QLCafe.Presentation.Views.Cashier
                         OnTableButtonClick(clickedTable.TableID, clickedTable.TableName);
                     };
 
-                    // 🆕 CLICK VÀO BUTTON "THÊM MÓN"
+                    // CLICK VÀO BUTTON "THÊM MÓN"
                     tableControl.AddDishClicked += (sender, tableId) =>
                     {
                         OpenAddDishForm(tableId);
                     };
 
-                    // 🆕 CLICK VÀO BUTTON "CHUYỂN BÀN"
+                    // CLICK VÀO BUTTON "CHUYỂN BÀN"
                     tableControl.SwitchTableClicked += (sender, tableId) =>
                     {
                         OpenSwitchTableForm(tableId);
                     };
 
-                    // 🆕 CLICK VÀO BUTTON "TẠO HÓA ĐƠN"
+                    // CLICK VÀO BUTTON "TẠO HÓA ĐƠN"
                     tableControl.CreateBillClicked += (sender, tableId) =>
                     {
                         OpenCreateBillForm(tableId);
@@ -72,46 +77,38 @@ namespace QLCafe.Presentation.Views.Cashier
             }
         }
 
-        // 🟢 PHƯƠNG THỨC XỬ LÝ CLICK BÀN
+        // PHƯƠNG THỨC XỬ LÝ CLICK BÀN
         private void OnTableButtonClick(int tableID, string tableName)
         {
-            // Kiểm tra nếu bàn trống
+            // Kiểm tra nếu bàn trống - DÙNG SERVICE
             if (IsTableEmpty(tableID))
             {
                 // MỞ ORDERFORM CHO BÀN TRỐNG
                 var orderForm = new OrderForm(tableID, tableName, currentUser);
-                var result = orderForm.ShowDialog(); // 🟢 DÙNG ShowDialog() ĐỂ CHỜ KẾT QUẢ
+                var result = orderForm.ShowDialog();
 
-                // 🟢 SAU KHI ORDERFORM ĐÓNG, CẬP NHẬT LẠI GIAO DIỆN BÀN
                 if (result == DialogResult.OK)
                 {
-                    RefreshTableStatus(); // 🟢 LOAD LẠI TOÀN BỘ DANH SÁCH BÀN
+                    RefreshTableStatus();
                     MessageBox.Show($"Đã tạo order cho {tableName}!", "Thành công",
                                   MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else
             {
-                // Bàn đã có khách -> Mở form "Thêm món" (sẽ làm sau)
+                // Bàn đã có khách -> Mở form "Thêm món"
                 MessageBox.Show($"Bàn {tableName} đã có khách! Vui lòng chọn 'Thêm món' hoặc chọn bàn khác!", "Thông báo",
                               MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
-        // 🟢 PHƯƠNG THỨC KIỂM TRA BÀN TRỐNG
+        // 🟢 PHƯƠNG THỨC KIỂM TRA BÀN TRỐNG - DÙNG SERVICE
         private bool IsTableEmpty(int tableID)
         {
             try
             {
-                using (var connection = new SqlConnection(connectionString))
-                {
-                    var tableStatus = connection.QueryFirstOrDefault<int>(
-                        "SELECT TrangThai FROM Ban WHERE IDBan = @TableID",
-                        new { TableID = tableID }
-                    );
-
-                    return tableStatus == 0; // 0 = Trống, 1 = Có khách
-                }
+                // DÙNG SERVICE THAY VÌ DIRECT DB ACCESS
+                return _tableService.IsTableEmpty(tableID);
             }
             catch (Exception ex)
             {
@@ -123,43 +120,100 @@ namespace QLCafe.Presentation.Views.Cashier
         // 🟢 PHƯƠNG THỨC CẬP NHẬT LẠI TRẠNG THÁI BÀN
         private void RefreshTableStatus()
         {
-            LoadTablesFromDatabase(); // 🟢 RELOAD LẠI TOÀN BỘ DANH SÁCH BÀN
+            LoadTablesFromDatabase();
         }
 
-        // Class để map dữ liệu từ database
-        public class TableInfo
-        {
-            public int IDBan { get; set; }
-            public string TenBan { get; set; }
-            public int TrangThai { get; set; }
-        }
-
-        // 🟢 THÊM NÚT REFRESH ĐỂ CẬP NHẬT THỦ CÔNG (NẾU CẦN)
+        // 🟢 NÚT REFRESH
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             RefreshTableStatus();
         }
 
-        // 🆕 THÊM CÁC PHƯƠNG THỨC XỬ LÝ BUTTON
+        // 🟢 MỞ FORM THÊM MÓN - ĐÃ CẬP NHẬT THÀNH FORM THẬT
         private void OpenAddDishForm(int tableId)
         {
-            // TẠM THỜI HIỆN MESSAGEBOX - SAU SẼ THAY BẰNG FORM THẬT
-            MessageBox.Show($"Mở form Thêm món cho bàn {tableId}", "Thêm món");
+            try
+            {
+                string tableName = GetTableNameById(tableId);
+                var addDishForm = new AddDishForm(tableId, tableName, currentUser);
+                var result = addDishForm.ShowDialog();
 
-            // SAU NÀY: 
-            // var addDishForm = new AddDishForm(tableId);
-            // addDishForm.ShowDialog();
-            // RefreshTableStatus(); // Cập nhật lại sau khi thêm món
+                if (result == DialogResult.OK)
+                {
+                    RefreshTableStatus();
+                    MessageBox.Show($"Đã thêm món cho {tableName}!", "Thành công",
+                                  MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi mở form thêm món: {ex.Message}", "Lỗi",
+                              MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // 🟢 PHƯƠNG THỨC LẤY TÊN BÀN THEO ID - DÙNG SERVICE
+        private string GetTableNameById(int tableId)
+        {
+            try
+            {
+                var table = _tableService.GetTableById(tableId);
+                return table?.Name ?? $"Bàn {tableId}";
+            }
+            catch
+            {
+                return $"Bàn {tableId}";
+            }
         }
 
         private void OpenSwitchTableForm(int tableId)
         {
-            MessageBox.Show($"Mở form Chuyển bàn cho bàn {tableId}", "Chuyển bàn");
+            try
+            {
+                string tableName = GetTableNameById(tableId);
+
+                // Mở form chuyển bàn
+                var switchTableForm = new SwitchTableForm(tableId, tableName, currentUser, _tableService, _orderService);
+                var result = switchTableForm.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    RefreshTableStatus();
+                    MessageBox.Show($"Đã chuyển bàn {tableName} thành công!", "Thành công",
+                                  MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi mở form chuyển bàn: {ex.Message}", "Lỗi",
+                              MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void OpenCreateBillForm(int tableId)
         {
-            MessageBox.Show($"Mở form Tạo hóa đơn cho bàn {tableId}", "Tạo hóa đơn");
+            try
+            {
+                // 1. Lấy tên bàn
+                string tableName = GetTableNameById(tableId);
+
+                // 2. Mở Form Thanh Toán (CreateBillForm)
+                // Truyền đủ 4 tham số: ID Bàn, Tên Bàn, Người dùng, Service
+                var createBillForm = new CreateBillForm(tableId, tableName, currentUser, _orderService);
+
+                var result = createBillForm.ShowDialog();
+
+                // 3. Nếu thanh toán thành công (Form trả về OK)
+                if (result == DialogResult.OK)
+                {
+                    // Tải lại danh sách bàn (để bàn vừa thanh toán chuyển sang màu Trống/Xanh)
+                    RefreshTableStatus();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi mở form thanh toán: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

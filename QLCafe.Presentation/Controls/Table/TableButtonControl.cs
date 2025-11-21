@@ -113,5 +113,10 @@ namespace QLCafe.Presentation.Controls.Table
         {
             // CÓ THỂ XÓA
         }
+
+        private void btnCreateBill_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
