@@ -53,8 +53,6 @@ namespace QLCafe.Presentation.Views.Admin
 
             int availableWidth = flowLayoutPanel1.DisplayRectangle.Width - 20;
             if (availableWidth < 300) availableWidth = flowLayoutPanel1.Width - 40;
-
-            // Nhóm sản phẩm theo danh mục
             var dict = products.GroupBy(p => p.CategoryName).ToDictionary(g => g.Key, g => g.ToList());
 
             foreach (var cat in categories.OrderBy(c => c.Name))
@@ -62,13 +60,12 @@ namespace QLCafe.Presentation.Views.Admin
                 var categoryPanel = new Panel
                 {
                     Width = availableWidth,
-                    Height = 60, // sẽ tăng sau
+                    Height = 60,
                     Margin = new Padding(5, 5, 5, 15),
                     BackColor = Color.White,
                     BorderStyle = BorderStyle.FixedSingle
                 };
 
-                // Header
                 var lblCategory = new Label
                 {
                     Text = cat.Name,
@@ -88,17 +85,16 @@ namespace QLCafe.Presentation.Views.Admin
                     ForeColor = Color.White,
                     TextAlign = ContentAlignment.MiddleCenter,
                     Cursor = Cursors.Hand,
-                    Font = new Font("Segoe UI", 9F, FontStyle.Bold),
-                    Location = new Point(categoryPanel.Width - 70, 12)
+                    Font = new Font("Segoe UI", 9F, FontStyle.Bold)
                 };
+                lblDelete.Location = new Point(lblCategory.Right + 12, lblCategory.Top + 2);
                 lblDelete.Click += (s, e) => DeleteCategory(cat.Name);
                 categoryPanel.Controls.Add(lblDelete);
 
-                // Panel chứa món
                 var itemsStartY = 50;
-                int itemHeight = 54;
-                int verticalSpacing = 8;
-                int itemWidth = availableWidth - 24; // padding
+                int itemHeight = 72;
+                int verticalSpacing = 6;
+                int itemWidth = availableWidth - 24;
                 int currentY = itemsStartY;
 
                 if (dict.TryGetValue(cat.Name, out var list) && list.Count > 0)
@@ -106,14 +102,13 @@ namespace QLCafe.Presentation.Views.Admin
                     foreach (var p in list)
                     {
                         var fc = new FoodControl();
-                        fc.Bind(p.Id, p.Name, p.CategoryName, p.Price);
-                        fc.DeleteRequested += Food_DeleteRequested;
-                        fc.DeleteMode = true;
-                        fc.SetCategoryVisible(false);
                         fc.Width = itemWidth;
                         fc.Height = itemHeight;
                         fc.Left = 12;
                         fc.Top = currentY;
+                        fc.Bind(p.Id, p.Name, p.CategoryName, p.Price);
+                        fc.DeleteRequested += Food_DeleteRequested;
+                        fc.SetCategoryVisible(false);
                         categoryPanel.Controls.Add(fc);
                         currentY += itemHeight + verticalSpacing;
                     }
@@ -149,9 +144,13 @@ namespace QLCafe.Presentation.Views.Admin
                 {
                     fc.Width = itemWidth;
                 }
-                // Update delete label position
+                var lblCategory = categoryPanel.Controls.OfType<Label>().FirstOrDefault(l => l.Font.Size >= 13);
                 var lblDelete = categoryPanel.Controls.OfType<Label>().FirstOrDefault(l => l.Text.Contains("Xóa"));
-                if (lblDelete != null) lblDelete.Left = categoryPanel.Width - 70;
+                if (lblCategory != null && lblDelete != null)
+                {
+                    lblDelete.Left = lblCategory.Right + 12;
+                    lblDelete.Top = lblCategory.Top + 2;
+                }
             }
         }
 
@@ -161,7 +160,7 @@ namespace QLCafe.Presentation.Views.Admin
             if (MessageBox.Show($"Xóa món '{ctrl.ProductName}'?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 if (_productRepo.Delete(productId)) LoadProducts();
-                else MessageBox.Show("Không xóa được (có thể đang dùng trong hóa đơn)", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else MessageBox.Show("Không xóa được vì món đang có trong hóa đơn chưa thanh toán", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -196,7 +195,7 @@ namespace QLCafe.Presentation.Views.Admin
             if (MessageBox.Show($"Xóa danh mục '{categoryName}' và các món thuộc danh mục?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 if (_categoryService.DeleteWithProducts(pair.Id)) LoadProducts();
-                else MessageBox.Show("Không xóa được danh mục", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else MessageBox.Show("Không xóa được vì có món trong danh mục đang nằm trong hóa đơn chưa thanh toán", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
