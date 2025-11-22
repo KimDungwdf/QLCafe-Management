@@ -12,6 +12,7 @@ namespace QLCafe.Presentation.Controls.Table
             // Đặt kích thước mặc định cho dòng này
             this.Size = new Size(750, 40);
             this.BackColor = Color.White;
+            this.Margin = new Padding(0, 2, 0, 2);
         }
 
         // Hàm này nhận dữ liệu từ bên ngoài đổ vào các Label
@@ -19,6 +20,7 @@ namespace QLCafe.Presentation.Controls.Table
         {
             // Xóa các control cũ nếu có để tránh trùng lặp khi gọi lại
             this.Controls.Clear();
+            this.Width = 720;
 
             // 1. Cột Thành tiền (Nằm sát bên phải)
             Label lblThanhTien = new Label();
@@ -65,6 +67,11 @@ namespace QLCafe.Presentation.Controls.Table
             this.Controls.Add(lblDonGia);
             this.Controls.Add(lblThanhTien);
             this.Controls.Add(pnlLine);
+
+            lblTenMon.Width = 350;  // Tên món rộng hơn
+            lblSL.Width = 60;       // Số lượng
+            lblDonGia.Width = 120;  // Đơn giá
+            lblThanhTien.Width = 120; // Thành tiền
         }
     }
 }
