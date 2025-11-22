@@ -1,5 +1,6 @@
 ﻿using QLCafe.Presentation.Controls.Table;
 using System;
+using System.Globalization;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,6 +23,7 @@ namespace QLCafe.Presentation.Views.Cashier
         private string currentUser;
         private Dictionary<int, OrderItemControl> orderItems = new Dictionary<int, OrderItemControl>();
         private IOrderService _orderService;
+        private List<ProductInfo> allProducts = new List<ProductInfo>(); // Lưu toàn bộ sản phẩm để tìm kiếm
 
         public OrderForm(int tableID, string tableName, string userName)
         {
@@ -34,7 +36,6 @@ namespace QLCafe.Presentation.Views.Cashier
             var orderRepository = new OrderRepository(connectionString);
             _orderService = new OrderService(orderRepository);
 
-            bttSend.Click += bttSend_Click;
             currentTableID = tableID;
             currentTableName = tableName;
             currentUser = userName;
@@ -47,6 +48,15 @@ namespace QLCafe.Presentation.Views.Cashier
 
             // Đặt nút về trạng thái ban đầu
             SetSendButtonToReadyState();
+
+            // 🆕 THÊM SỰ KIỆN CHO TEXTBOX TÌM KIẾM
+            TxtSearch.Enter += TxtSearch_Enter;
+            TxtSearch.Leave += TxtSearch_Leave;
+            TxtSearch.TextChanged += TxtSearch_TextChanged;
+
+            // 🆕 Đặt placeholder text ban đầu
+            TxtSearch.Text = "Tìm kiếm món...";
+            TxtSearch.ForeColor = Color.Gray;
         }
 
         // Class ProductInfo để map dữ liệu từ database
@@ -60,44 +70,27 @@ namespace QLCafe.Presentation.Views.Cashier
 
         private void LoadProductsFromDatabase()
         {
-            try
-            {
-                using (var connection = new System.Data.SqlClient.SqlConnection(connectionString))
-                {
-                    var products = connection.Query<ProductInfo>(
-                        @"SELECT sp.IDSanPham, sp.TenSanPham, sp.DonGia, dm.TenDanhMuc 
+             try
+    {
+        using (var connection = new System.Data.SqlClient.SqlConnection(connectionString))
+        {
+            // 🆕 QUAN TRỌNG: LƯU DANH SÁCH SẢN PHẨM ĐẦY ĐỦ VÀO allProducts
+            allProducts = connection.Query<ProductInfo>(
+                @"SELECT sp.IDSanPham, sp.TenSanPham, sp.DonGia, dm.TenDanhMuc 
                   FROM SanPham sp 
                   JOIN DanhMucMon dm ON sp.IDDanhMuc = dm.IDDanhMuc 
                   ORDER BY dm.TenDanhMuc, sp.TenSanPham",
-                        commandType: CommandType.Text
-                    ).ToList();
+                commandType: CommandType.Text
+            ).ToList();
 
-                    // Xóa controls cũ
-                    flowLayoutProducts.Controls.Clear();
-
-                    foreach (var product in products)
-                    {
-                        var productControl = new ProductControl();
-                        productControl.ProductID = product.IDSanPham;
-                        productControl.ProductName = product.TenSanPham;
-                        productControl.Price = product.DonGia;
-                        productControl.Category = product.TenDanhMuc;
-
-                        // Xử lý khi click vào product
-                        productControl.ProductClicked += (sender, productId) =>
-                        {
-                            AddProductToOrder(productId, product.TenSanPham, product.DonGia);
-                        };
-
-                        // THÊM VÀO FLOWLAYOUTPANEL
-                        flowLayoutProducts.Controls.Add(productControl);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi tải danh sách sản phẩm: {ex.Message}");
-            }
+            // 🆕 HIỂN THỊ TẤT CẢ SẢN PHẨM BAN ĐẦU
+            DisplayProducts(allProducts);
+        }
+    }
+    catch (Exception ex)
+    {
+        MessageBox.Show($"Lỗi khi tải danh sách sản phẩm: {ex.Message}");
+    }
         }
 
         private void AddProductToOrder(int productId, string productName, decimal price)
@@ -272,6 +265,142 @@ namespace QLCafe.Presentation.Views.Cashier
 
         private void lblHeaderPrefix_Click(object sender, EventArgs e)
         {
+        }
+
+        private void TxtSearch_Enter(object sender, EventArgs e)
+        {
+            if (TxtSearch.Text == "Tìm kiếm món...")
+            {
+                TxtSearch.Text = "";
+                TxtSearch.ForeColor = Color.Black;
+            }
+        }
+
+        private void TxtSearch_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(TxtSearch.Text))
+            {
+                TxtSearch.Text = "Tìm kiếm món...";
+                TxtSearch.ForeColor = Color.Gray;
+            }
+        }
+
+        private void TxtSearch_TextChanged(object sender, EventArgs e)
+        {
+            // Chỉ tìm kiếm khi không phải là placeholder text
+            if (TxtSearch.Text != "Tìm kiếm món..." && TxtSearch.ForeColor != Color.Gray)
+            {
+                SearchProducts();
+            }
+        }
+
+        // 🆕 PHƯƠNG THỨC TÌM KIẾM
+        private void SearchProducts()
+        {
+            try
+            {
+                string searchText = TxtSearch.Text.Trim();
+
+                if (searchText == "Tìm kiếm món..." || string.IsNullOrWhiteSpace(searchText))
+                {
+                    DisplayProducts(allProducts);
+                    return;
+                }
+
+                // 🆕 CHUẨN HÓA TỪ KHÓA TÌM KIẾM
+                string normalizedSearch = NormalizeSearchText(searchText);
+
+                // Tìm kiếm CÓ DẤU, KHÔNG DẤU, và KHÔNG KHOẢNG CÁCH
+                var filteredProducts = allProducts.Where(product =>
+                {
+                    string productName = product.TenSanPham.ToLower();
+                    string category = product.TenDanhMuc.ToLower();
+
+                    // 🆕 CHUẨN HÓA TÊN SẢN PHẨM
+                    string normalizedProductName = NormalizeSearchText(productName);
+                    string normalizedCategory = NormalizeSearchText(category);
+
+                    // Tìm kiếm có dấu
+                    bool exactMatch = productName.Contains(searchText.ToLower()) ||
+                                     category.Contains(searchText.ToLower());
+
+                    // Tìm kiếm không dấu
+                    bool noDiacriticMatch = RemoveDiacritics(productName).Contains(RemoveDiacritics(searchText.ToLower())) ||
+                                           RemoveDiacritics(category).Contains(RemoveDiacritics(searchText.ToLower()));
+
+                    // 🆕 TÌM KIẾM KHÔNG KHOẢNG CÁCH
+                    bool noSpaceMatch = normalizedProductName.Contains(normalizedSearch) ||
+                                       normalizedCategory.Contains(normalizedSearch);
+
+                    return exactMatch || noDiacriticMatch || noSpaceMatch;
+                }).ToList();
+
+                DisplayProducts(filteredProducts);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tìm kiếm: {ex.Message}", "Lỗi",
+                              MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // 🆕 PHƯƠNG THỨC CHUẨN HÓA TỪ KHÓA TÌM KIẾM
+        private string NormalizeSearchText(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+                return text;
+
+            // Chuyển về chữ thường, bỏ dấu, và loại bỏ khoảng trắng
+            string noDiacritics = RemoveDiacritics(text.ToLower());
+            string noSpaces = noDiacritics.Replace(" ", "").Replace("  ", "");
+
+            return noSpaces;
+        }
+
+
+        private string RemoveDiacritics(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+                return text;
+
+            var normalizedString = text.Normalize(System.Text.NormalizationForm.FormD);
+            var stringBuilder = new System.Text.StringBuilder();
+
+            foreach (var c in normalizedString)
+            {
+                var unicodeCategory = System.Globalization.CharUnicodeInfo.GetUnicodeCategory(c);
+                if (unicodeCategory != System.Globalization.UnicodeCategory.NonSpacingMark)
+                {
+                    stringBuilder.Append(c);
+                }
+            }
+
+            return stringBuilder.ToString().Normalize(System.Text.NormalizationForm.FormC).ToLower();
+        }
+
+        // 🆕 PHƯƠNG THỨC HIỂN THỊ SẢN PHẨM
+        private void DisplayProducts(List<ProductInfo> products)
+        {
+            // Xóa controls cũ
+            flowLayoutProducts.Controls.Clear();
+
+            foreach (var product in products)
+            {
+                var productControl = new ProductControl();
+                productControl.ProductID = product.IDSanPham;
+                productControl.ProductName = product.TenSanPham;
+                productControl.Price = product.DonGia;
+                productControl.Category = product.TenDanhMuc;
+
+                // Xử lý khi click vào product
+                productControl.ProductClicked += (sender, productId) =>
+                {
+                    AddProductToOrder(productId, product.TenSanPham, product.DonGia);
+                };
+
+                // THÊM VÀO FLOWLAYOUTPANEL
+                flowLayoutProducts.Controls.Add(productControl);
+            }
         }
     }
 }

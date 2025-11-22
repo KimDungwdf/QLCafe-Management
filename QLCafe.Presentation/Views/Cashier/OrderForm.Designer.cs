@@ -30,6 +30,7 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblTableNameHeader = new System.Windows.Forms.Label();
+            this.lblHeaderPrefix = new System.Windows.Forms.Label();
             this.PanelContent = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.flowLayoutOrderItems = new System.Windows.Forms.FlowLayoutPanel();
@@ -42,7 +43,7 @@
             this.PanelLeft = new System.Windows.Forms.Panel();
             this.flowLayoutProducts = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.lblHeaderPrefix = new System.Windows.Forms.Label();
+            this.TxtSearch = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.PanelContent.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -71,6 +72,18 @@
             this.lblTableNameHeader.Size = new System.Drawing.Size(104, 45);
             this.lblTableNameHeader.TabIndex = 1;
             this.lblTableNameHeader.Text = "Bàn 1";
+            // 
+            // lblHeaderPrefix
+            // 
+            this.lblHeaderPrefix.AutoSize = true;
+            this.lblHeaderPrefix.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHeaderPrefix.ForeColor = System.Drawing.Color.White;
+            this.lblHeaderPrefix.Location = new System.Drawing.Point(12, 9);
+            this.lblHeaderPrefix.Name = "lblHeaderPrefix";
+            this.lblHeaderPrefix.Size = new System.Drawing.Size(214, 45);
+            this.lblHeaderPrefix.TabIndex = 0;
+            this.lblHeaderPrefix.Text = "Nhận order -";
+            this.lblHeaderPrefix.Click += new System.EventHandler(this.lblHeaderPrefix_Click);
             // 
             // PanelContent
             // 
@@ -176,6 +189,7 @@
             // 
             // PanelLeft
             // 
+            this.PanelLeft.Controls.Add(this.TxtSearch);
             this.PanelLeft.Controls.Add(this.flowLayoutProducts);
             this.PanelLeft.Controls.Add(this.label1);
             this.PanelLeft.Dock = System.Windows.Forms.DockStyle.Left;
@@ -189,9 +203,9 @@
             // 
             this.flowLayoutProducts.AutoScroll = true;
             this.flowLayoutProducts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutProducts.Location = new System.Drawing.Point(10, 39);
+            this.flowLayoutProducts.Location = new System.Drawing.Point(10, 52);
             this.flowLayoutProducts.Name = "flowLayoutProducts";
-            this.flowLayoutProducts.Size = new System.Drawing.Size(408, 427);
+            this.flowLayoutProducts.Size = new System.Drawing.Size(408, 414);
             this.flowLayoutProducts.TabIndex = 1;
             // 
             // label1
@@ -200,21 +214,21 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(10, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(408, 29);
+            this.label1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.label1.Size = new System.Drawing.Size(408, 42);
             this.label1.TabIndex = 0;
             this.label1.Text = "Chọn món";
             // 
-            // lblHeaderPrefix
+            // TxtSearch
             // 
-            this.lblHeaderPrefix.AutoSize = true;
-            this.lblHeaderPrefix.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHeaderPrefix.ForeColor = System.Drawing.Color.White;
-            this.lblHeaderPrefix.Location = new System.Drawing.Point(12, 9);
-            this.lblHeaderPrefix.Name = "lblHeaderPrefix";
-            this.lblHeaderPrefix.Size = new System.Drawing.Size(214, 45);
-            this.lblHeaderPrefix.TabIndex = 0;
-            this.lblHeaderPrefix.Text = "Nhận order -";
-            this.lblHeaderPrefix.Click += new System.EventHandler(this.lblHeaderPrefix_Click);
+            this.TxtSearch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtSearch.Location = new System.Drawing.Point(114, 13);
+            this.TxtSearch.Name = "TxtSearch";
+            this.TxtSearch.Size = new System.Drawing.Size(269, 31);
+            this.TxtSearch.TabIndex = 2;
+            this.TxtSearch.TextChanged += new System.EventHandler(this.TxtSearch_TextChanged);
+            this.TxtSearch.Enter += new System.EventHandler(this.TxtSearch_Enter);
+            this.TxtSearch.Leave += new System.EventHandler(this.TxtSearch_Leave);
             // 
             // OrderForm
             // 
@@ -235,6 +249,7 @@
             this.panelFooter.ResumeLayout(false);
             this.panelFooter.PerformLayout();
             this.PanelLeft.ResumeLayout(false);
+            this.PanelLeft.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -247,7 +262,6 @@
         private System.Windows.Forms.Panel PanelLeft;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutProducts;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblCurrentOrde;
         private System.Windows.Forms.Label lblEmptyOrder;
         private System.Windows.Forms.Panel panelFooter;
@@ -256,5 +270,7 @@
         private System.Windows.Forms.Button bttSend;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutOrderItems;
         private System.Windows.Forms.Label lblHeaderPrefix;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox TxtSearch;
     }
 }

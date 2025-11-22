@@ -43,6 +43,10 @@ namespace QLCafe.Presentation.Views.Cashier
 
             // Cài đặt hiển thị ban đầu
             SetupInitialUI();
+            this.AutoSize = true;
+            this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            this.button3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.button3.Height = 66;
         }
 
         private void SetupInitialUI()
@@ -66,6 +70,7 @@ namespace QLCafe.Presentation.Views.Cashier
         private void CreateBillForm_Load(object sender, EventArgs e)
         {
             LoadOrderDetails();
+            AdjustLayout();
         }
 
         // --- HÀM LOAD DỮ LIỆU TỪ SERVER ---
@@ -79,40 +84,54 @@ namespace QLCafe.Presentation.Views.Cashier
                 if (order == null || order.Items.Count == 0)
                 {
                     MessageBox.Show("Bàn này chưa có món nào!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    this.Close(); // Đóng form nếu không có order
+                    this.Close();
                     return;
                 }
 
                 // 2. Xóa danh sách cũ
                 flowBillItems.Controls.Clear();
 
-                // 3. Duyệt qua từng món và thêm UserControl vào FlowLayout
+                // 3. Cập nhật kích thước flowBillItems
+                flowBillItems.Width = panelMain.Width - 50; // Trừ margin
+                flowBillItems.Height = Math.Max(100, order.Items.Count * 45); // Tự động điều chỉnh chiều cao
+
+                // 4. Duyệt qua từng món
                 foreach (var item in order.Items)
                 {
-                    // Khởi tạo UserControl dòng món ăn
                     var rowControl = new BillItemRowControl();
-
-                    // Đổ dữ liệu vào (Hàm SetData bạn đã viết trong UserControl)
                     rowControl.SetData(item.ProductName, item.Quantity, item.UnitPrice);
 
-                    // Chỉnh kích thước chiều rộng cho khớp (Trừ đi margin của thanh cuộn ~25px)
-                    // Lưu ý: Nếu flowBillItems chưa hiện, Width có thể sai, nên lấy theo Panel tiêu đề
-                    rowControl.Width = flowBillItems.ClientSize.Width > 100 ? flowBillItems.ClientSize.Width - 25 : 740;
+                    // QUAN TRỌNG: Đặt chiều rộng cho row control
+                    rowControl.Width = flowBillItems.Width - 5; // Trừ scrollbar
 
-                    // Thêm vào danh sách
                     flowBillItems.Controls.Add(rowControl);
                 }
 
-                // 4. Cập nhật số liệu Tạm tính
+                // 5. Cập nhật số liệu
                 _subTotal = order.SubTotal;
-
-                // 5. Tính toán lại toàn bộ
                 UpdateCalculations();
+
+                // 6. Tự động điều chỉnh vị trí các panel
+                AdjustLayout();
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi tải dữ liệu: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void AdjustLayout()
+        {
+            // Tính toán vị trí panel3 dựa trên chiều cao thực tế của panelMain
+            int panelMainBottom = panelMain.Location.Y + panelMain.Height;
+
+            // Đặt panel3 ngay dưới panelMain với khoảng cách 20px
+            panel3.Location = new Point(panelMain.Location.X, panelMainBottom + 20);
+
+            // Tự động điều chỉnh chiều cao Form
+            int formHeight = panel3.Location.Y + panel3.Height + 100; // +100 để có padding dưới
+            this.ClientSize = new Size(this.ClientSize.Width, Math.Min(formHeight, 1200)); // Giới hạn max height
         }
 
         // --- HÀM TÍNH TOÁN TIỀN ---
@@ -281,7 +300,6 @@ namespace QLCafe.Presentation.Views.Cashier
             }
         }
 
-        // --- NÚT CHỐT ĐƠN: THANH TOÁN & IN ---
         // --- NÚT CHỐT ĐƠN: THANH TOÁN & IN ---
         private void button3_Click(object sender, EventArgs e)
         {

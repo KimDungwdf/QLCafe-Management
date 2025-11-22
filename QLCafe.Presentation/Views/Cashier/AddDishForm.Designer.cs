@@ -43,6 +43,7 @@
             this.PanelLeft = new System.Windows.Forms.Panel();
             this.flowLayoutProducts = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
+            this.TxtSearch = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.PanelContent.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -187,6 +188,7 @@
             // 
             // PanelLeft
             // 
+            this.PanelLeft.Controls.Add(this.TxtSearch);
             this.PanelLeft.Controls.Add(this.flowLayoutProducts);
             this.PanelLeft.Controls.Add(this.label1);
             this.PanelLeft.Dock = System.Windows.Forms.DockStyle.Left;
@@ -200,9 +202,9 @@
             // 
             this.flowLayoutProducts.AutoScroll = true;
             this.flowLayoutProducts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutProducts.Location = new System.Drawing.Point(10, 39);
+            this.flowLayoutProducts.Location = new System.Drawing.Point(10, 52);
             this.flowLayoutProducts.Name = "flowLayoutProducts";
-            this.flowLayoutProducts.Size = new System.Drawing.Size(408, 427);
+            this.flowLayoutProducts.Size = new System.Drawing.Size(408, 414);
             this.flowLayoutProducts.TabIndex = 1;
             // 
             // label1
@@ -211,9 +213,21 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(10, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(408, 29);
+            this.label1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.label1.Size = new System.Drawing.Size(408, 42);
             this.label1.TabIndex = 0;
             this.label1.Text = "Chọn món";
+            // 
+            // TxtSearch
+            // 
+            this.TxtSearch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtSearch.Location = new System.Drawing.Point(114, 13);
+            this.TxtSearch.Name = "TxtSearch";
+            this.TxtSearch.Size = new System.Drawing.Size(269, 31);
+            this.TxtSearch.TabIndex = 3;
+            this.TxtSearch.TextChanged += new System.EventHandler(this.TxtSearch_TextChanged);
+            this.TxtSearch.Enter += new System.EventHandler(this.TxtSearch_Enter);
+            this.TxtSearch.Leave += new System.EventHandler(this.TxtSearch_Leave);
             // 
             // AddDishForm
             // 
@@ -232,6 +246,7 @@
             this.panelFooter.ResumeLayout(false);
             this.panelFooter.PerformLayout();
             this.PanelLeft.ResumeLayout(false);
+            this.PanelLeft.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -253,5 +268,6 @@
         private System.Windows.Forms.Panel PanelLeft;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutProducts;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox TxtSearch;
     }
 }
