@@ -82,6 +82,15 @@ namespace QLCafe.Presentation.Views.Admin
         private void Ctl_EditRequested(object sender, int tableId)
         {
             var ctl = (TableManagementControl)sender;
+
+            // Kiểm tra xem bàn có đang có order không
+            var table = _service.GetAll().FirstOrDefault(t => t.Id == tableId);
+            if (table != null && table.IsOccupied)
+            {
+                MessageBox.Show("Không thể đổi tên bàn khi đang có order", "Không thể chỉnh sửa", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             var currentName = ctl.TableNameText;
             var newName = PromptInput($"Đổi tên bàn (ID {tableId})", currentName);
             if (newName == null) return;
