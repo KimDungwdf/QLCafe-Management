@@ -77,17 +77,27 @@ namespace QLCafe.Infrastructure.Repositories
             using (var cn = new SqlConnection(_connectionString))
             {
                 cn.Open();
+
+                // Ki?m tra b?t k? s?n ph?m nào trong danh m?c ?ang n?m trong hóa ??n ch?a thanh toán
+                using (var check = new SqlCommand(@"SELECT COUNT(*) FROM ChiTietHoaDon ct 
+JOIN SanPham sp ON ct.IDSanPham = sp.IDSanPham 
+JOIN HoaDon h ON ct.IDHoaDon = h.IDHoaDon 
+WHERE sp.IDDanhMuc = @cid AND h.TrangThai = 0", cn))
+                {
+                    check.Parameters.AddWithValue("@cid", categoryId);
+                    int used = Convert.ToInt32(check.ExecuteScalar());
+                    if (used > 0) return false; // Không cho xóa
+                }
+
                 using (var tx = cn.BeginTransaction())
                 {
                     try
                     {
-                        // Xóa s?n ph?m thu?c danh m?c
                         using (var cmdDelProducts = new SqlCommand("DELETE FROM SanPham WHERE IDDanhMuc=@cid", cn, tx))
                         {
                             cmdDelProducts.Parameters.AddWithValue("@cid", categoryId);
                             cmdDelProducts.ExecuteNonQuery();
                         }
-                        // Xóa danh m?c
                         using (var cmdDelCat = new SqlCommand("DELETE FROM DanhMucMon WHERE IDDanhMuc=@cid", cn, tx))
                         {
                             cmdDelCat.Parameters.AddWithValue("@cid", categoryId);

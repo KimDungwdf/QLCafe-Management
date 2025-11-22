@@ -28,12 +28,18 @@ namespace QLCafe.Application.Services
             foreach (var t in tables)
             {
                 decimal total = 0;
+                var orderItems = new List<TableAdminOrderItemDto>();
                 if (t.Status == TableStatus.Occupied)
                 {
                     var order = _orderRepo.GetCurrentOrderByTable(t.Id);
                     if (order != null && order.OrderDetails != null)
                     {
                         total = order.OrderDetails.Sum(d => d.UnitPrice * d.Quantity);
+                        orderItems = order.OrderDetails.Select(d => new TableAdminOrderItemDto
+                        {
+                            ProductName = d.ProductName,
+                            Quantity = d.Quantity
+                        }).ToList();
                     }
                 }
                 list.Add(new TableAdminItemDto
@@ -42,7 +48,8 @@ namespace QLCafe.Application.Services
                     Name = t.Name,
                     IsOccupied = t.Status == TableStatus.Occupied,
                     StatusText = t.Status == TableStatus.Occupied ? "Có khách" : "Trống",
-                    TotalAmount = total
+                    TotalAmount = total,
+                    OrderItems = orderItems
                 });
             }
             return list;

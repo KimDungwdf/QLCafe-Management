@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panelMain = new System.Windows.Forms.Panel();
+            this.listBoxItems = new System.Windows.Forms.ListBox();
             this.btnDeleteTable = new System.Windows.Forms.Button();
             this.btnEditDish = new System.Windows.Forms.Button();
             this.lblTotalAmount = new System.Windows.Forms.Label();
@@ -41,6 +42,7 @@
             // panelMain
             // 
             this.panelMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelMain.Controls.Add(this.listBoxItems);
             this.panelMain.Controls.Add(this.btnDeleteTable);
             this.panelMain.Controls.Add(this.btnEditDish);
             this.panelMain.Controls.Add(this.lblTotalAmount);
@@ -55,12 +57,23 @@
             this.panelMain.TabIndex = 1;
             this.panelMain.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMain_Paint);
             // 
+            // listBoxItems
+            // 
+            this.listBoxItems.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBoxItems.FormattingEnabled = true;
+            this.listBoxItems.Location = new System.Drawing.Point(11, 28);
+            this.listBoxItems.Margin = new System.Windows.Forms.Padding(2);
+            this.listBoxItems.Name = "listBoxItems";
+            this.listBoxItems.Size = new System.Drawing.Size(307, 43);
+            this.listBoxItems.TabIndex = 9;
+            this.listBoxItems.Visible = false;
+            // 
             // btnDeleteTable
             // 
             this.btnDeleteTable.BackColor = System.Drawing.Color.Red;
             this.btnDeleteTable.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeleteTable.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnDeleteTable.Location = new System.Drawing.Point(215, 106);
+            this.btnDeleteTable.Location = new System.Drawing.Point(215, 119);
             this.btnDeleteTable.Margin = new System.Windows.Forms.Padding(2);
             this.btnDeleteTable.Name = "btnDeleteTable";
             this.btnDeleteTable.Size = new System.Drawing.Size(89, 27);
@@ -74,7 +87,7 @@
             this.btnEditDish.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnEditDish.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEditDish.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnEditDish.Location = new System.Drawing.Point(12, 106);
+            this.btnEditDish.Location = new System.Drawing.Point(24, 119);
             this.btnEditDish.Margin = new System.Windows.Forms.Padding(2);
             this.btnEditDish.Name = "btnEditDish";
             this.btnEditDish.Size = new System.Drawing.Size(89, 27);
@@ -151,5 +164,6 @@
         private System.Windows.Forms.ListBox listBoxOrderItems;
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Label lblTableName;
+        private System.Windows.Forms.ListBox listBoxItems;
     }
 }

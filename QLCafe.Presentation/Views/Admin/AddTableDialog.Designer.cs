@@ -133,6 +133,7 @@
             this.Name = "AddTableDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AddTableDialog";
+            this.Load += new System.EventHandler(this.AddTableDialog_Load);
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();
             this.ResumeLayout(false);

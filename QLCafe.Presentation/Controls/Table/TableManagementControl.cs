@@ -26,13 +26,24 @@ namespace QLCafe.Presentation.Controls.Table
             TableNameText = dto.Name;
             StatusText = dto.StatusText;
             lblStatus.ForeColor = dto.IsOccupied ? System.Drawing.Color.Red : System.Drawing.Color.Green;
-            // Show admin buttons
             btnEditDish.Visible = true;
             btnDeleteTable.Visible = true;
-            // Hide order details area for admin view
-            listBoxOrderItems.Visible = false;
             lblTotalAmount.Visible = dto.TotalAmount > 0;
             if (dto.TotalAmount > 0) lblTotalAmount.Text = $"Tổng: {dto.TotalAmount:N0} đ";
+
+            listBoxItems.Items.Clear();
+            if (dto.IsOccupied && dto.OrderItems != null && dto.OrderItems.Count > 0)
+            {
+                foreach (var item in dto.OrderItems)
+                {
+                    listBoxItems.Items.Add($"{item.ProductName} x{item.Quantity}");
+                }
+                listBoxItems.Visible = true;
+            }
+            else
+            {
+                listBoxItems.Visible = false;
+            }
         }
 
         private void panelMain_Paint(object sender, PaintEventArgs e) { }

@@ -17,5 +17,12 @@ namespace QLCafe.Application.DTOs.Table
         public string StatusText { get; set; }
         public bool IsOccupied { get; set; }
         public decimal TotalAmount { get; set; } // tổng tiền hiện tại của bàn
+        public List<TableAdminOrderItemDto> OrderItems { get; set; } = new List<TableAdminOrderItemDto>();
+    }
+
+    public class TableAdminOrderItemDto
+    {
+        public string ProductName { get; set; }
+        public int Quantity { get; set; }
     }
 }

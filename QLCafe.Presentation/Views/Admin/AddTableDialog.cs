@@ -27,5 +27,10 @@ namespace QLCafe.Presentation.Views.Admin
         }
 
         private void lblName_Click(object sender, EventArgs e) { }
+
+        private void AddTableDialog_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

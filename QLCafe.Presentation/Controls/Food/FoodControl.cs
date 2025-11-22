@@ -24,18 +24,6 @@ namespace QLCafe.Presentation.Controls.Table
 
         public event EventHandler<int> DeleteRequested;
 
-        private bool _deleteMode;
-
-        public static FoodControl CreateForManagement(int id, string name, string category, decimal price, EventHandler<int> deleteHandler)
-        {
-            var fc = new FoodControl();
-            fc.Bind(id, name, category, price);
-            fc.SetCategoryVisible(false);
-            fc.DeleteMode = true; // bật xóa mặc định cho màn quản lý
-            if (deleteHandler != null) fc.DeleteRequested += deleteHandler;
-            return fc;
-        }
-
         public FoodControl()
         {
             InitializeComponent();
@@ -44,9 +32,13 @@ namespace QLCafe.Presentation.Controls.Table
 
         private void ConfigureUI()
         {
-            // Các font đã set trong Designer, chỉ thêm sự kiện Xóa
-            pbDelete.Cursor = Cursors.Hand;
-            pbDelete.Click += pbDelete_Click;
+            lblDeleteProduct.Click += (s, e) => TriggerDelete();
+            this.Resize += (s, e) => PositionDeleteLabel();
+        }
+
+        private void PositionDeleteLabel()
+        {
+            lblDeleteProduct.Left = panelMain.Width - lblDeleteProduct.Width - 12;
         }
 
         public void Bind(int id, string name, string category, decimal price)
@@ -56,22 +48,12 @@ namespace QLCafe.Presentation.Controls.Table
             CategoryName = category;
             Price = price;
             lbPrice.Text = price.ToString("N0") + " đ";
+            PositionDeleteLabel();
         }
 
-        public bool DeleteMode
+        private void TriggerDelete()
         {
-            get => _deleteMode;
-            set
-            {
-                _deleteMode = value;
-                pbDelete.Visible = value;
-            }
-        }
-
-        private void pbDelete_Click(object sender, EventArgs e)
-        {
-            if (_deleteMode)
-                DeleteRequested?.Invoke(this, ProductId);
+            DeleteRequested?.Invoke(this, ProductId);
         }
 
         public void SetCategoryVisible(bool show)
