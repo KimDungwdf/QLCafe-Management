@@ -50,6 +50,7 @@
     <Compile Include="Enums\RoleType.cs" />
     <Compile Include="Exceptions\AppException.cs" />
     <Compile Include="Interfaces\IOrderRepository.cs" />
+    <Compile Include="Interfaces\ITableManagementRepository.cs" />
     <Compile Include="Interfaces\ITableRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

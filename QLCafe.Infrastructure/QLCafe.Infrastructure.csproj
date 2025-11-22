@@ -63,6 +63,7 @@
     <Compile Include="Repositories\CategoryRepository.cs" />
     <Compile Include="Repositories\MenuProductRepository.cs" />
     <Compile Include="Repositories\OrderRepository.cs" />
+    <Compile Include="Repositories\TableManagementRepository.cs" />
     <Compile Include="Repositories\TableRepository.cs" />
   </ItemGroup>
   <ItemGroup>

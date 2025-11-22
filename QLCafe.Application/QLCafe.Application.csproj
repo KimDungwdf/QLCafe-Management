@@ -51,9 +51,11 @@
     <Compile Include="DTOs\Order\TableStatusDto.cs" />
     <Compile Include="DTOs\Product\ProductDto.cs" />
     <Compile Include="DTOs\Table\SwitchTableRequest.cs" />
+    <Compile Include="DTOs\Table\TableManagement.cs" />
     <Compile Include="Interfaces\IAuthService.cs" />
     <Compile Include="Interfaces\IOrderService.cs" />
     <Compile Include="Interfaces\IProductService.cs" />
+    <Compile Include="Interfaces\ITableManagementService.cs" />
     <Compile Include="Interfaces\ITableService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AccountService.cs" />
@@ -61,6 +63,7 @@
     <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\OrderService.cs" />
     <Compile Include="Services\ProductService.cs" />
+    <Compile Include="Services\TableManagementService.cs" />
     <Compile Include="Services\TableService.cs" />
   </ItemGroup>
   <ItemGroup>

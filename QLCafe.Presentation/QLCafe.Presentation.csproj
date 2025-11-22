@@ -99,6 +99,12 @@
     <Compile Include="Controls\Table\TableButtonControl.Designer.cs">
       <DependentUpon>TableButtonControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Table\TableManagementControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Table\TableManagementControl.Designer.cs">
+      <DependentUpon>TableManagementControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -126,6 +132,12 @@
     </Compile>
     <Compile Include="Views\Admin\AddProductDialog.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Admin\AddTableDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Admin\AddTableDialog.Designer.cs">
+      <DependentUpon>AddTableDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Admin\AdminMainView.cs">
       <SubType>Form</SubType>
@@ -240,6 +252,9 @@
     <EmbeddedResource Include="Controls\Table\TableButtonControl.resx">
       <DependentUpon>TableButtonControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Table\TableManagementControl.resx">
+      <DependentUpon>TableManagementControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -251,11 +266,17 @@
     <EmbeddedResource Include="Views\Admin\AddCategory.resx">
       <DependentUpon>AddCategory.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Admin\AddTableDialog.resx">
+      <DependentUpon>AddTableDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Admin\AdminMainView.resx">
       <DependentUpon>AdminMainView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Admin\MenuManagementForm.resx">
       <DependentUpon>MenuManagementForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Admin\OrganizationForm.resx">
+      <DependentUpon>OrganizationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Auth\LoginView.resx">
       <DependentUpon>LoginView.cs</DependentUpon>
