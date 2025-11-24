@@ -225,12 +225,6 @@
     <Compile Include="Views\Cashier\TableManagementForm.Designer.cs">
       <DependentUpon>TableManagementForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Cashier\test.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Cashier\test.Designer.cs">
-      <DependentUpon>test.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\InventoryMainView\InventoryMainView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -304,9 +298,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Cashier\TableManagementForm.resx">
       <DependentUpon>TableManagementForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Cashier\test.resx">
-      <DependentUpon>test.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\InventoryMainView\InventoryMainView.resx">
       <DependentUpon>InventoryMainView.cs</DependentUpon>
