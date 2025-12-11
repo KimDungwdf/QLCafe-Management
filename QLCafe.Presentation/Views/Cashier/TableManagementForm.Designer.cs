@@ -31,6 +31,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.flowLayoutTables = new System.Windows.Forms.FlowLayoutPanel();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,6 +47,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -63,6 +65,14 @@
             this.flowLayoutTables.Padding = new System.Windows.Forms.Padding(0, 0, 0, 50);
             this.flowLayoutTables.Size = new System.Drawing.Size(959, 695);
             this.flowLayoutTables.TabIndex = 4;
+            // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(119)))), ((int)(((byte)(6)))));
+            this.label2.Location = new System.Drawing.Point(0, 45);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(959, 10);
+            this.label2.TabIndex = 2;
             // 
             // TableManagementForm
             // 
@@ -85,5 +95,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutTables;
+        private System.Windows.Forms.Label label2;
     }
 }

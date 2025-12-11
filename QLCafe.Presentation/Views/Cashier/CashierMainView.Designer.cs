@@ -40,17 +40,15 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.lblUserName = new System.Windows.Forms.Label();
             this.lblShift = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.btnTableManagement = new System.Windows.Forms.Button();
-            this.btnOrderHistory = new System.Windows.Forms.Button();
-            this.btnShiftReport = new System.Windows.Forms.Button();
             this.panelLeft = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.btnTableManagement = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
+            this.btnShiftReport = new System.Windows.Forms.Button();
+            this.btnOrderHistory = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -157,14 +155,6 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "QL Cafe Pro";
             // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.Gold;
-            this.panel1.Location = new System.Drawing.Point(0, 275);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(328, 18);
-            this.panel1.TabIndex = 4;
-            // 
             // label2
             // 
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(64)))), ((int)(((byte)(14)))));
@@ -212,58 +202,9 @@
             this.label5.Size = new System.Drawing.Size(188, 31);
             this.label5.TabIndex = 9;
             // 
-            // btnTableManagement
-            // 
-            this.btnTableManagement.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(64)))), ((int)(((byte)(14)))));
-            this.btnTableManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTableManagement.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.btnTableManagement.ForeColor = System.Drawing.Color.White;
-            this.btnTableManagement.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnTableManagement.Location = new System.Drawing.Point(0, 291);
-            this.btnTableManagement.Name = "btnTableManagement";
-            this.btnTableManagement.Size = new System.Drawing.Size(328, 59);
-            this.btnTableManagement.TabIndex = 12;
-            this.btnTableManagement.Text = "Quản lý Bàn";
-            this.btnTableManagement.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTableManagement.UseVisualStyleBackColor = false;
-            this.btnTableManagement.Click += new System.EventHandler(this.btnTableManagement_Click);
-            // 
-            // btnOrderHistory
-            // 
-            this.btnOrderHistory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(64)))), ((int)(((byte)(14)))));
-            this.btnOrderHistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOrderHistory.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.btnOrderHistory.ForeColor = System.Drawing.Color.White;
-            this.btnOrderHistory.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnOrderHistory.Location = new System.Drawing.Point(-5, 344);
-            this.btnOrderHistory.Name = "btnOrderHistory";
-            this.btnOrderHistory.Size = new System.Drawing.Size(328, 59);
-            this.btnOrderHistory.TabIndex = 14;
-            this.btnOrderHistory.Text = "Lịch sử Order";
-            this.btnOrderHistory.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnOrderHistory.UseVisualStyleBackColor = false;
-            this.btnOrderHistory.Click += new System.EventHandler(this.btnOrderHistory_Click);
-            // 
-            // btnShiftReport
-            // 
-            this.btnShiftReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(64)))), ((int)(((byte)(14)))));
-            this.btnShiftReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnShiftReport.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.btnShiftReport.ForeColor = System.Drawing.Color.White;
-            this.btnShiftReport.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnShiftReport.Location = new System.Drawing.Point(-5, 398);
-            this.btnShiftReport.Name = "btnShiftReport";
-            this.btnShiftReport.Size = new System.Drawing.Size(328, 59);
-            this.btnShiftReport.TabIndex = 15;
-            this.btnShiftReport.Text = "Báo cáo ca";
-            this.btnShiftReport.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnShiftReport.UseVisualStyleBackColor = false;
-            this.btnShiftReport.Click += new System.EventHandler(this.btnShiftReport_Click);
-            // 
             // panelLeft
             // 
             this.panelLeft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(53)))), ((int)(((byte)(15)))));
-            this.panelLeft.Controls.Add(this.panel2);
             this.panelLeft.Controls.Add(this.btnTableManagement);
             this.panelLeft.Controls.Add(this.btnLogout);
             this.panelLeft.Controls.Add(this.btnShiftReport);
@@ -274,7 +215,6 @@
             this.panelLeft.Controls.Add(this.lblShift);
             this.panelLeft.Controls.Add(this.lblUserName);
             this.panelLeft.Controls.Add(this.label2);
-            this.panelLeft.Controls.Add(this.panel1);
             this.panelLeft.Controls.Add(this.label1);
             this.panelLeft.Controls.Add(this.pictureBox1);
             this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
@@ -283,13 +223,22 @@
             this.panelLeft.Size = new System.Drawing.Size(323, 802);
             this.panelLeft.TabIndex = 0;
             // 
-            // panel2
+            // btnTableManagement
             // 
-            this.panel2.BackColor = System.Drawing.Color.Gold;
-            this.panel2.Location = new System.Drawing.Point(0, 452);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(328, 18);
-            this.panel2.TabIndex = 17;
+            this.btnTableManagement.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(53)))), ((int)(((byte)(15)))));
+            this.btnTableManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTableManagement.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnTableManagement.ForeColor = System.Drawing.Color.White;
+            this.btnTableManagement.Image = global::QLCafe.Presentation.Properties.Resources.Screenshot_2025_12_11_124943_removebg_preview;
+            this.btnTableManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTableManagement.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnTableManagement.Location = new System.Drawing.Point(21, 286);
+            this.btnTableManagement.Name = "btnTableManagement";
+            this.btnTableManagement.Size = new System.Drawing.Size(283, 72);
+            this.btnTableManagement.TabIndex = 12;
+            this.btnTableManagement.Text = "Quản lý Bàn";
+            this.btnTableManagement.UseVisualStyleBackColor = false;
+            this.btnTableManagement.Click += new System.EventHandler(this.btnTableManagement_Click);
             // 
             // btnLogout
             // 
@@ -306,6 +255,40 @@
             this.btnLogout.Text = "-> Đăng xuất";
             this.btnLogout.UseVisualStyleBackColor = false;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            // 
+            // btnShiftReport
+            // 
+            this.btnShiftReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(53)))), ((int)(((byte)(15)))));
+            this.btnShiftReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnShiftReport.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnShiftReport.ForeColor = System.Drawing.Color.White;
+            this.btnShiftReport.Image = global::QLCafe.Presentation.Properties.Resources.Screenshot_2025_12_11_125444_removebg_preview;
+            this.btnShiftReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnShiftReport.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnShiftReport.Location = new System.Drawing.Point(21, 506);
+            this.btnShiftReport.Name = "btnShiftReport";
+            this.btnShiftReport.Size = new System.Drawing.Size(283, 72);
+            this.btnShiftReport.TabIndex = 15;
+            this.btnShiftReport.Text = "Báo cáo ca";
+            this.btnShiftReport.UseVisualStyleBackColor = false;
+            this.btnShiftReport.Click += new System.EventHandler(this.btnShiftReport_Click);
+            // 
+            // btnOrderHistory
+            // 
+            this.btnOrderHistory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(53)))), ((int)(((byte)(15)))));
+            this.btnOrderHistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOrderHistory.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnOrderHistory.ForeColor = System.Drawing.Color.White;
+            this.btnOrderHistory.Image = global::QLCafe.Presentation.Properties.Resources.Screenshot_2025_12_11_125233_removebg_preview;
+            this.btnOrderHistory.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnOrderHistory.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnOrderHistory.Location = new System.Drawing.Point(21, 396);
+            this.btnOrderHistory.Name = "btnOrderHistory";
+            this.btnOrderHistory.Size = new System.Drawing.Size(283, 72);
+            this.btnOrderHistory.TabIndex = 14;
+            this.btnOrderHistory.Text = "Lịch sử Order";
+            this.btnOrderHistory.UseVisualStyleBackColor = false;
+            this.btnOrderHistory.Click += new System.EventHandler(this.btnOrderHistory_Click);
             // 
             // pictureBox3
             // 
@@ -373,7 +356,6 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblUserName;
         private System.Windows.Forms.Label lblShift;
@@ -391,6 +373,5 @@
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.Panel panelContent;
-        private System.Windows.Forms.Panel panel2;
     }
 }
