@@ -69,6 +69,9 @@
     <Compile Include="Components\RoundButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Components\RoundedPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\Food\FoodControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -123,6 +126,12 @@
     </Compile>
     <Compile Include="Views\Admin\AccountManagementForm.Designer.cs">
       <DependentUpon>AccountManagementForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\AccountManagementForm2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Admin\AccountManagementForm2.Designer.cs">
+      <DependentUpon>AccountManagementForm2.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Admin\AddCategory.cs">
       <SubType>Form</SubType>
@@ -262,6 +271,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Admin\AccountManagementForm.resx">
       <DependentUpon>AccountManagementForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Admin\AccountManagementForm2.resx">
+      <DependentUpon>AccountManagementForm2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Admin\AddCategory.resx">
       <DependentUpon>AddCategory.cs</DependentUpon>
