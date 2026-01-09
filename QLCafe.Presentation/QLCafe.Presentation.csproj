@@ -108,6 +108,12 @@
     <Compile Include="Controls\Table\TableManagementControl.Designer.cs">
       <DependentUpon>TableManagementControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Table\TableManagementControl2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Table\TableManagementControl2.Designer.cs">
+      <DependentUpon>TableManagementControl2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -133,6 +139,7 @@
     <Compile Include="Views\Admin\AccountManagementForm2.Designer.cs">
       <DependentUpon>AccountManagementForm2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Admin\AddAccount.Designer.cs" />
     <Compile Include="Views\Admin\AddCategory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -153,6 +160,12 @@
     </Compile>
     <Compile Include="Views\Admin\AdminMainView.Designer.cs">
       <DependentUpon>AdminMainView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\EditTableDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Admin\EditTableDialog.Designer.cs">
+      <DependentUpon>EditTableDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Admin\MenuManagementForm.cs">
       <SubType>Form</SubType>
@@ -263,6 +276,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Table\TableManagementControl.resx">
       <DependentUpon>TableManagementControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Table\TableManagementControl2.resx">
+      <DependentUpon>TableManagementControl2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
