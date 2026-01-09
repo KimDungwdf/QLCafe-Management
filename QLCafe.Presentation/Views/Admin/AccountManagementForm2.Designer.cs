@@ -10,15 +10,12 @@ namespace QLCafe.Presentation.Views.Admin
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
-        private System.Windows.Forms.Label lblTitle;
         private RoundedPanel pnlSearch;
         private System.Windows.Forms.Label lblSearchIcon;
         private System.Windows.Forms.TextBox txtSearch;
         private RoundButton btnAddAccount;
         private RoundedPanel pnlCard;
         private System.Windows.Forms.DataGridView dgvAccounts;
-        private System.Windows.Forms.Panel lineAccent;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUsername;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFullName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRole;
@@ -42,7 +39,6 @@ namespace QLCafe.Presentation.Views.Admin
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.lblTitle = new System.Windows.Forms.Label();
             this.pnlSearch = new QLCafe.Presentation.Components.RoundedPanel();
             this.lblSearchIcon = new System.Windows.Forms.Label();
             this.txtSearch = new System.Windows.Forms.TextBox();
@@ -55,22 +51,10 @@ namespace QLCafe.Presentation.Views.Admin
             this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEdit = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colDelete = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.lineAccent = new System.Windows.Forms.Panel();
             this.pnlSearch.SuspendLayout();
             this.pnlCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).BeginInit();
             this.SuspendLayout();
-            // 
-            // lblTitle
-            // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
-            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(49)))), ((int)(((byte)(34)))));
-            this.lblTitle.Location = new System.Drawing.Point(24, 18);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(343, 45);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "QUẢN LÝ TÀI KHOẢN";
             // 
             // pnlSearch
             // 
@@ -81,31 +65,34 @@ namespace QLCafe.Presentation.Views.Admin
             this.pnlSearch.Controls.Add(this.lblSearchIcon);
             this.pnlSearch.Controls.Add(this.txtSearch);
             this.pnlSearch.CornerRadius = 12;
-            this.pnlSearch.Location = new System.Drawing.Point(474, 26);
+            this.pnlSearch.Location = new System.Drawing.Point(52, 72);
+            this.pnlSearch.Margin = new System.Windows.Forms.Padding(4);
             this.pnlSearch.Name = "pnlSearch";
-            this.pnlSearch.Size = new System.Drawing.Size(330, 36);
+            this.pnlSearch.Size = new System.Drawing.Size(245, 44);
             this.pnlSearch.TabIndex = 1;
             // 
             // lblSearchIcon
             // 
             this.lblSearchIcon.Font = new System.Drawing.Font("Segoe UI Symbol", 11F);
             this.lblSearchIcon.ForeColor = System.Drawing.Color.Gray;
-            this.lblSearchIcon.Location = new System.Drawing.Point(10, 8);
+            this.lblSearchIcon.Location = new System.Drawing.Point(13, 10);
+            this.lblSearchIcon.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSearchIcon.Name = "lblSearchIcon";
-            this.lblSearchIcon.Size = new System.Drawing.Size(20, 20);
+            this.lblSearchIcon.Size = new System.Drawing.Size(27, 25);
             this.lblSearchIcon.TabIndex = 0;
             this.lblSearchIcon.Text = "🔍";
             this.lblSearchIcon.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtSearch
             // 
-            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.txtSearch.Location = new System.Drawing.Point(36, 8);
+            this.txtSearch.Location = new System.Drawing.Point(48, 10);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(4);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(284, 20);
+            this.txtSearch.Size = new System.Drawing.Size(184, 25);
             this.txtSearch.TabIndex = 1;
             this.txtSearch.Text = "Tìm kiếm";
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
@@ -119,27 +106,29 @@ namespace QLCafe.Presentation.Views.Admin
             this.btnAddAccount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddAccount.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
             this.btnAddAccount.ForeColor = System.Drawing.Color.White;
-            this.btnAddAccount.Location = new System.Drawing.Point(820, 22);
+            this.btnAddAccount.Location = new System.Drawing.Point(1028, 62);
+            this.btnAddAccount.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddAccount.Name = "btnAddAccount";
-            this.btnAddAccount.Size = new System.Drawing.Size(180, 44);
+            this.btnAddAccount.Size = new System.Drawing.Size(240, 54);
             this.btnAddAccount.TabIndex = 2;
             this.btnAddAccount.Text = "+  Thêm tài khoản";
             this.btnAddAccount.UseVisualStyleBackColor = false;
             // 
             // pnlCard
             // 
-            this.pnlCard.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.pnlCard.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlCard.BackColor = System.Drawing.Color.White;
             this.pnlCard.BorderColor = System.Drawing.Color.Gainsboro;
             this.pnlCard.BorderThickness = 1;
             this.pnlCard.Controls.Add(this.dgvAccounts);
             this.pnlCard.CornerRadius = 18;
-            this.pnlCard.Location = new System.Drawing.Point(26, 122);
+            this.pnlCard.Location = new System.Drawing.Point(36, 145);
+            this.pnlCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlCard.Name = "pnlCard";
-            this.pnlCard.Padding = new System.Windows.Forms.Padding(12);
-            this.pnlCard.Size = new System.Drawing.Size(974, 460);
+            this.pnlCard.Padding = new System.Windows.Forms.Padding(16, 15, 16, 15);
+            this.pnlCard.Size = new System.Drawing.Size(1299, 485);
             this.pnlCard.TabIndex = 4;
             // 
             // dgvAccounts
@@ -179,14 +168,16 @@ namespace QLCafe.Presentation.Views.Admin
             this.dgvAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvAccounts.EnableHeadersVisualStyles = false;
             this.dgvAccounts.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(236)))), ((int)(((byte)(240)))));
-            this.dgvAccounts.Location = new System.Drawing.Point(12, 12);
+            this.dgvAccounts.Location = new System.Drawing.Point(16, 15);
+            this.dgvAccounts.Margin = new System.Windows.Forms.Padding(4);
             this.dgvAccounts.MultiSelect = false;
             this.dgvAccounts.Name = "dgvAccounts";
             this.dgvAccounts.ReadOnly = true;
             this.dgvAccounts.RowHeadersVisible = false;
+            this.dgvAccounts.RowHeadersWidth = 51;
             this.dgvAccounts.RowTemplate.Height = 44;
             this.dgvAccounts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAccounts.Size = new System.Drawing.Size(950, 436);
+            this.dgvAccounts.Size = new System.Drawing.Size(1267, 455);
             this.dgvAccounts.TabIndex = 0;
             this.dgvAccounts.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvAccounts_CellPainting);
             // 
@@ -194,6 +185,7 @@ namespace QLCafe.Presentation.Views.Admin
             // 
             this.colUsername.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colUsername.HeaderText = "Tên đăng nhập";
+            this.colUsername.MinimumWidth = 6;
             this.colUsername.Name = "colUsername";
             this.colUsername.ReadOnly = true;
             // 
@@ -201,6 +193,7 @@ namespace QLCafe.Presentation.Views.Admin
             // 
             this.colFullName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colFullName.HeaderText = "Họ tên";
+            this.colFullName.MinimumWidth = 6;
             this.colFullName.Name = "colFullName";
             this.colFullName.ReadOnly = true;
             // 
@@ -208,6 +201,7 @@ namespace QLCafe.Presentation.Views.Admin
             // 
             this.colRole.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colRole.HeaderText = "Vai trò";
+            this.colRole.MinimumWidth = 6;
             this.colRole.Name = "colRole";
             this.colRole.ReadOnly = true;
             // 
@@ -215,9 +209,10 @@ namespace QLCafe.Presentation.Views.Admin
             // 
             this.colStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colStatus.HeaderText = "Trạng thái";
+            this.colStatus.MinimumWidth = 6;
             this.colStatus.Name = "colStatus";
             this.colStatus.ReadOnly = true;
-            this.colStatus.Width = 110;
+            this.colStatus.Width = 135;
             // 
             // colEdit
             // 
@@ -225,12 +220,13 @@ namespace QLCafe.Presentation.Views.Admin
             this.colEdit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colEdit.HeaderText = "Thao tác";
             this.colEdit.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(99)))), ((int)(((byte)(255)))));
+            this.colEdit.MinimumWidth = 6;
             this.colEdit.Name = "colEdit";
             this.colEdit.ReadOnly = true;
             this.colEdit.Text = "Sửa";
             this.colEdit.UseColumnTextForLinkValue = true;
             this.colEdit.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(99)))), ((int)(((byte)(255)))));
-            this.colEdit.Width = 79;
+            this.colEdit.Width = 98;
             // 
             // colDelete
             // 
@@ -238,35 +234,25 @@ namespace QLCafe.Presentation.Views.Admin
             this.colDelete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colDelete.HeaderText = "";
             this.colDelete.LinkColor = System.Drawing.Color.Firebrick;
+            this.colDelete.MinimumWidth = 6;
             this.colDelete.Name = "colDelete";
             this.colDelete.ReadOnly = true;
             this.colDelete.Text = "Xóa";
             this.colDelete.UseColumnTextForLinkValue = true;
             this.colDelete.VisitedLinkColor = System.Drawing.Color.Firebrick;
-            this.colDelete.Width = 5;
-            // 
-            // lineAccent
-            // 
-            this.lineAccent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lineAccent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(116)))), ((int)(((byte)(25)))));
-            this.lineAccent.Location = new System.Drawing.Point(0, 82);
-            this.lineAccent.Name = "lineAccent";
-            this.lineAccent.Size = new System.Drawing.Size(1025, 6);
-            this.lineAccent.TabIndex = 3;
+            this.colDelete.Width = 6;
             // 
             // AccountManagementForm2
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(249)))), ((int)(((byte)(236)))));
-            this.ClientSize = new System.Drawing.Size(1024, 610);
+            this.ClientSize = new System.Drawing.Size(1365, 751);
             this.Controls.Add(this.pnlCard);
-            this.Controls.Add(this.lineAccent);
             this.Controls.Add(this.btnAddAccount);
             this.Controls.Add(this.pnlSearch);
-            this.Controls.Add(this.lblTitle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AccountManagementForm2";
             this.Text = "Quản lý tài khoản";
             this.pnlSearch.ResumeLayout(false);
@@ -274,7 +260,6 @@ namespace QLCafe.Presentation.Views.Admin
             this.pnlCard.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

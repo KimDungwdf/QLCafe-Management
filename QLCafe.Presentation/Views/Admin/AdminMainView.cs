@@ -13,7 +13,7 @@ namespace QLCafe.Presentation.Views.Admin
 {
     public partial class AdminMainView : Form
     {
-        private AccountManagementForm accountManagementForm;
+        private AccountManagementForm2 accountManagementForm;
         private MenuManagementForm menuManagementForm;
         private OrganizationForm organizationForm;
         private SalesReportForm salesReportForm;
@@ -36,7 +36,7 @@ namespace QLCafe.Presentation.Views.Admin
         private void InitializeForms()
         {
             // Khởi tạo các form con
-            accountManagementForm = new AccountManagementForm();
+            accountManagementForm = new AccountManagementForm2();
             menuManagementForm = new MenuManagementForm();
             organizationForm = new OrganizationForm();
             salesReportForm = new SalesReportForm();
