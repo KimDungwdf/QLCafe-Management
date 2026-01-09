@@ -108,7 +108,7 @@
             // 
             // txtTableName
             // 
-            this.txtTableName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtTableName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtTableName.Location = new System.Drawing.Point(24, 104);
             this.txtTableName.Name = "txtTableName";
@@ -149,4 +149,4 @@
 
         #endregion
     }
-}}
+}
