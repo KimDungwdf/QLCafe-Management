@@ -133,12 +133,6 @@
     <Compile Include="Views\Admin\AccountManagementForm2.Designer.cs">
       <DependentUpon>AccountManagementForm2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Admin\AddAccount.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Views\Admin\AddAccount.Designer.cs">
-      <DependentUpon>AddAccount.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\Admin\AddCategory.cs">
       <SubType>Form</SubType>
     </Compile>
