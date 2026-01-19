@@ -16,5 +16,10 @@ namespace QLCafe.Presentation.Views.Admin
         {
             InitializeComponent();
         }
+
+        private void txtTableName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -300,6 +300,9 @@
     <EmbeddedResource Include="Views\Admin\AdminMainView.resx">
       <DependentUpon>AdminMainView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Admin\EditTableDialog.resx">
+      <DependentUpon>EditTableDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Admin\MenuManagementForm.resx">
       <DependentUpon>MenuManagementForm.cs</DependentUpon>
     </EmbeddedResource>
