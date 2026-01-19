@@ -48,9 +48,9 @@ namespace QLCafe.Presentation.Views.Admin
             var items = _service.GetAll();
             foreach (var t in items)
             {
-                var ctl = new TableManagementControl();
+                var ctl = new TableManagementControl2();
                 ctl.Margin = new Padding(10);
-                ctl.Height = 170;
+                ctl.Height = 180;
                 ctl.Bind(t);
                 ctl.EditRequested += Ctl_EditRequested;
                 ctl.DeleteRequested += Ctl_DeleteRequested;
@@ -63,14 +63,12 @@ namespace QLCafe.Presentation.Views.Admin
 
         private void AdjustItemWidths()
         {
-            // Tính toán chiều rộng phù hợp theo số cột, giữ min width
             int panelWidth = flowLayoutPanel1.ClientSize.Width - flowLayoutPanel1.Padding.Horizontal;
             if (panelWidth <= 0) return;
 
-            // Chọn số cột mục tiêu theo kích thước hiện tại
-            int minItemWidth = 360; // tối thiểu để layout đẹp
-            int columns = Math.Max(1, panelWidth / (minItemWidth + 20)); // 20 = margin 2 bên
-            int itemWidth = (panelWidth - (columns * 20)) / columns; // trừ khoảng cách
+            int minItemWidth = 360;
+            int columns = Math.Max(1, panelWidth / (minItemWidth + 20));
+            int itemWidth = (panelWidth - (columns * 20)) / columns;
             if (itemWidth < minItemWidth) itemWidth = minItemWidth;
 
             foreach (Control c in flowLayoutPanel1.Controls)
@@ -81,9 +79,7 @@ namespace QLCafe.Presentation.Views.Admin
 
         private void Ctl_EditRequested(object sender, int tableId)
         {
-            var ctl = (TableManagementControl)sender;
-
-            // Kiểm tra xem bàn có đang có order không
+            var ctl = (TableManagementControl2)sender;
             var table = _service.GetAll().FirstOrDefault(t => t.Id == tableId);
             if (table != null && table.IsOccupied)
             {
@@ -91,37 +87,39 @@ namespace QLCafe.Presentation.Views.Admin
                 return;
             }
 
-            var currentName = ctl.TableNameText;
-            var newName = PromptInput($"Đổi tên bàn (ID {tableId})", currentName);
-            if (newName == null) return;
-            newName = newName.Trim();
-            if (string.IsNullOrWhiteSpace(newName))
+            using (var dlg = new EditTableDialog())
             {
-                MessageBox.Show("Tên bàn không được để trống", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            // Nếu không thay đổi tên
-            if (string.Equals(currentName, newName, StringComparison.OrdinalIgnoreCase)) return;
-            // Kiểm tra trùng tên với bàn khác
-            var exists = _service.GetAll().Any(t => t.Id != tableId && string.Equals(t.Name, newName, StringComparison.OrdinalIgnoreCase));
-            if (exists)
-            {
-                MessageBox.Show("Tên bàn đã tồn tại, không thể đặt tên trùng bàn đã có", "Trùng tên", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            if (_service.Rename(tableId, newName))
-            {
-                ctl.TableNameText = newName;
-            }
-            else
-            {
-                MessageBox.Show("Không đổi tên được (lỗi hệ thống)", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                dlg.TableNameText = ctl.TableNameText;
+                if (dlg.ShowDialog(this) == DialogResult.OK)
+                {
+                    var newName = dlg.TableNameText.Trim();
+                    if (string.IsNullOrWhiteSpace(newName))
+                    {
+                        MessageBox.Show("Tên bàn không được để trống", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    if (string.Equals(ctl.TableNameText, newName, System.StringComparison.OrdinalIgnoreCase)) return;
+                    var exists = _service.GetAll().Any(t => t.Id != tableId && string.Equals(t.Name, newName, System.StringComparison.OrdinalIgnoreCase));
+                    if (exists)
+                    {
+                        MessageBox.Show("Tên bàn đã tồn tại, không thể đặt tên trùng bàn đã có", "Trùng tên", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    if (_service.Rename(tableId, newName))
+                    {
+                        ctl.TableNameText = newName;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Không đổi tên được (lỗi hệ thống)", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
         }
 
         private void Ctl_DeleteRequested(object sender, int tableId)
         {
-            var ctl = (TableManagementControl)sender;
+            var ctl = (TableManagementControl2)sender;
             var confirm = MessageBox.Show($"Xóa bàn '{ctl.TableNameText}'?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (confirm != DialogResult.Yes) return;
 
@@ -143,8 +141,7 @@ namespace QLCafe.Presentation.Views.Admin
                 if (dlg.ShowDialog(this) == DialogResult.OK)
                 {
                     var name = dlg.TableNameText.Trim();
-                    // kiểm tra trùng trước khi tạo
-                    if (_service.GetAll().Any(t => string.Equals(t.Name, name, StringComparison.OrdinalIgnoreCase)))
+                    if (_service.GetAll().Any(t => string.Equals(t.Name, name, System.StringComparison.OrdinalIgnoreCase)))
                     {
                         MessageBox.Show("Tên bàn đã tồn tại, vui lòng nhập tên khác", "Trùng tên", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;

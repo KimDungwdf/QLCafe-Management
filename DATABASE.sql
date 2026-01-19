@@ -4,6 +4,8 @@ GO
 USE QLCafe
 GO
 
+DROP TABLE TaiKhoan
+
 -- 1.1. Bảng Vai Trò (Phân quyền)
 CREATE TABLE VaiTro (
     IDVaiTro INT PRIMARY KEY,
@@ -697,3 +699,199 @@ GO
  INSERT INTO SanPham (TenSanPham, IDDanhMuc, DonGia) VALUES
  (N'Trà Đào', 2, 20000)
  GO
+
+ -- 1. CẮT ĐỨT LIÊN KẾT (Xóa khóa ngoại từ bảng Hóa Đơn và Phiếu Nhập)
+DECLARE @sql NVARCHAR(MAX) = N'';
+
+SELECT @sql += N'ALTER TABLE ' + QUOTENAME(OBJECT_SCHEMA_NAME(parent_object_id))
+    + '.' + QUOTENAME(OBJECT_NAME(parent_object_id)) + 
+    ' DROP CONSTRAINT ' + QUOTENAME(name) + ';'
+FROM sys.foreign_keys
+WHERE referenced_object_id = OBJECT_ID('TaiKhoan');
+
+EXEC sp_executesql @sql;
+GO
+
+-- 2. XÓA BẢNG TÀI KHOẢN CŨ
+IF OBJECT_ID('TaiKhoan', 'U') IS NOT NULL
+    DROP TABLE TaiKhoan
+GO
+
+-- 3. TẠO LẠI BẢNG TÀI KHOẢN MỚI (BẢO MẬT)
+CREATE TABLE TaiKhoan (
+    TenDangNhap NVARCHAR(100) NOT NULL,
+    TenHienThi NVARCHAR(100) NOT NULL,
+    
+    -- LƯU MÃ BĂM (KHÔNG LƯU TEXT THƯỜNG)
+    MatKhau VARBINARY(32) NOT NULL, 
+    
+    IDVaiTro INT NOT NULL,
+    
+    -- Ràng buộc Khóa chính
+    CONSTRAINT PK_TaiKhoan PRIMARY KEY (TenDangNhap),
+    
+    -- Ràng buộc Khóa ngoại
+    CONSTRAINT FK_TaiKhoan_VaiTro FOREIGN KEY (IDVaiTro) REFERENCES VaiTro(IDVaiTro),
+
+    -- Ràng buộc Tên đăng nhập (Không dấu cách, không ký tự lạ, >=5 ký tự)
+    CONSTRAINT CK_TaiKhoan_NoSpace CHECK (TenDangNhap NOT LIKE '% %'),
+    CONSTRAINT CK_TaiKhoan_Length CHECK (LEN(TenDangNhap) >= 5),
+    CONSTRAINT CK_TaiKhoan_ValidChars CHECK (TenDangNhap NOT LIKE '%[^a-zA-Z0-9]%')
+)
+GO
+
+-- 4. NỐI LẠI LIÊN KẾT (Tạo lại khóa ngoại cho Hóa Đơn và Phiếu Nhập)
+ALTER TABLE HoaDon
+ADD CONSTRAINT FK_HoaDon_TaiKhoan FOREIGN KEY (TenDangNhap) REFERENCES TaiKhoan(TenDangNhap)
+GO
+
+ALTER TABLE PhieuNhap
+ADD CONSTRAINT FK_PhieuNhap_TaiKhoan FOREIGN KEY (TenDangNhap) REFERENCES TaiKhoan(TenDangNhap)
+GO
+
+-- 1. SP THÊM TÀI KHOẢN (Kiểm tra mạnh mẽ -> Băm -> Lưu)
+CREATE OR ALTER PROCEDURE sp_Admin_InsertAccount
+    @TenDangNhap NVARCHAR(100),
+    @TenHienThi NVARCHAR(100),
+    @MatKhau NVARCHAR(100), -- Mật khẩu thô (VD: Cafe@12345)
+    @IDVaiTro INT
+AS
+BEGIN
+    -- Check trùng tên & vai trò
+    IF EXISTS (SELECT 1 FROM TaiKhoan WHERE TenDangNhap = @TenDangNhap) RETURN 0; 
+    IF NOT EXISTS (SELECT 1 FROM VaiTro WHERE IDVaiTro = @IDVaiTro) RETURN -1;
+
+    -- === KIỂM TRA ĐỘ MẠNH MẬT KHẨU ===
+    IF LEN(@MatKhau) < 9 RETURN -2; -- Quá ngắn
+    IF @MatKhau COLLATE Latin1_General_BIN NOT LIKE '%[A-Z]%' RETURN -3; -- Thiếu Hoa
+    IF @MatKhau COLLATE Latin1_General_BIN NOT LIKE '%[a-z]%' RETURN -4; -- Thiếu Thường
+    IF @MatKhau NOT LIKE '%[0-9]%' RETURN -5; -- Thiếu Số
+    IF @MatKhau NOT LIKE '%[^a-zA-Z0-9]%' RETURN -6; -- Thiếu Ký tự đặc biệt
+
+    -- === BĂM VÀ LƯU ===
+    INSERT INTO TaiKhoan (TenDangNhap, TenHienThi, MatKhau, IDVaiTro)
+    VALUES (@TenDangNhap, @TenHienThi, HASHBYTES('SHA2_256', @MatKhau), @IDVaiTro)
+    
+    RETURN 1; -- Thành công
+END
+GO
+
+-- 2. SP CẬP NHẬT TÀI KHOẢN (Logic tương tự khi đổi mật khẩu)
+CREATE OR ALTER PROCEDURE sp_Admin_UpdateAccount
+    @TenDangNhap NVARCHAR(100),
+    @TenHienThi NVARCHAR(100),
+    @MatKhau NVARCHAR(100), -- Mật khẩu mới (Để trống = không đổi)
+    @IDVaiTro INT
+AS
+BEGIN
+    IF @MatKhau IS NOT NULL AND LEN(@MatKhau) > 0
+    BEGIN
+        -- Check mật khẩu mới
+        IF LEN(@MatKhau) < 9 RETURN -2;
+        IF @MatKhau COLLATE Latin1_General_BIN NOT LIKE '%[A-Z]%' RETURN -3;
+        IF @MatKhau COLLATE Latin1_General_BIN NOT LIKE '%[a-z]%' RETURN -4;
+        IF @MatKhau NOT LIKE '%[0-9]%' RETURN -5;
+        IF @MatKhau NOT LIKE '%[^a-zA-Z0-9]%' RETURN -6;
+
+        UPDATE TaiKhoan
+        SET TenHienThi = @TenHienThi,
+            MatKhau = HASHBYTES('SHA2_256', @MatKhau), -- Băm lại
+            IDVaiTro = @IDVaiTro
+        WHERE TenDangNhap = @TenDangNhap
+    END
+    ELSE
+    BEGIN
+        UPDATE TaiKhoan
+        SET TenHienThi = @TenHienThi, IDVaiTro = @IDVaiTro
+        WHERE TenDangNhap = @TenDangNhap
+    END
+    RETURN 1;
+END
+GO
+
+-- 3. SP ĐĂNG NHẬP (Chỉ Băm để so sánh)
+CREATE OR ALTER PROCEDURE sp_Login
+    @tenDangNhap NVARCHAR(100),
+    @matKhau NVARCHAR(100)
+AS
+BEGIN
+    DECLARE @matKhauHash VARBINARY(32) = HASHBYTES('SHA2_256', @matKhau)
+
+    SELECT TenDangNhap, TenHienThi, IDVaiTro
+    FROM TaiKhoan 
+    WHERE TenDangNhap = @tenDangNhap AND MatKhau = @matKhauHash
+END
+GO
+
+-- Tạo tài khoản Admin mặc định (Pass: Admin@12345)
+-- Lưu ý: Phải dùng mật khẩu mạnh vì SP đã chặn mật khẩu yếu
+DECLARE @result INT;
+EXEC @result = sp_Admin_InsertAccount 
+    @TenDangNhap = 'admin', 
+    @TenHienThi = N'Quản Trị Viên', 
+    @MatKhau = 'Admin@12345', 
+    @IDVaiTro = 1;
+
+-- Kiểm tra kết quả
+SELECT * FROM TaiKhoan;
+-- Nếu thấy dòng dữ liệu có cột MatKhau mã hóa (ký tự lạ) là thành công.
+
+
+-- 1. Thêm lại Thu Ngân (Mật khẩu mới: Staff@12345)
+DECLARE @kq1 INT;
+EXEC @kq1 = sp_Admin_InsertAccount 
+    @TenDangNhap = 'thungan1', 
+    @TenHienThi = N'Thu Ngân Ca Sáng', 
+    @MatKhau = 'Staff@12345',  -- Đủ 9 ký tự, Hoa, Thường, Số, Đặc biệt
+    @IDVaiTro = 2; -- Vai trò Thu ngân
+SELECT 'KetQua_ThuNgan' = @kq1;
+
+-- 2. Thêm lại Thủ Kho (Mật khẩu mới: Staff@12345)
+DECLARE @kq2 INT;
+EXEC @kq2 = sp_Admin_InsertAccount 
+    @TenDangNhap = 'thukho1', 
+    @TenHienThi = N'Nhân Viên Kho A', 
+    @MatKhau = 'Staff@12345', 
+    @IDVaiTro = 3; -- Vai trò Thủ kho
+SELECT 'KetQua_ThuKho' = @kq2;
+
+USE QLCafe
+GO
+
+-- BƯỚC 1: KHÔI PHỤC DỮ LIỆU BẢNG VAI TRÒ (Đây là nguyên nhân gây lỗi -1)
+DELETE FROM VaiTro -- Xóa cũ cho sạch (chỉ chạy được khi chưa có user nào)
+GO
+
+INSERT INTO VaiTro (IDVaiTro, TenVaiTro) VALUES 
+(1, N'Admin'),
+(2, N'Thu ngân'),
+(3, N'Thủ kho')
+GO
+
+-- BƯỚC 2: THÊM LẠI ADMIN (Vì bảng đang trống)
+DECLARE @kqAdmin INT;
+EXEC @kqAdmin = sp_Admin_InsertAccount 
+    @TenDangNhap = 'admin', 
+    @TenHienThi = N'Quản Trị Viên', 
+    @MatKhau = 'Admin@12345', 
+    @IDVaiTro = 1; -- Vai trò 1 đã có ở trên -> Sẽ thành công
+
+-- BƯỚC 3: THÊM LẠI THU NGÂN
+DECLARE @kqThuNgan INT;
+EXEC @kqThuNgan = sp_Admin_InsertAccount 
+    @TenDangNhap = 'thungan1', 
+    @TenHienThi = N'Thu Ngân Ca Sáng', 
+    @MatKhau = 'Staff@12345', 
+    @IDVaiTro = 2; -- Vai trò 2 đã có -> Sẽ thành công
+
+-- BƯỚC 4: THÊM LẠI THỦ KHO
+DECLARE @kqThuKho INT;
+EXEC @kqThuKho = sp_Admin_InsertAccount 
+    @TenDangNhap = 'thukho1', 
+    @TenHienThi = N'Nhân Viên Kho A', 
+    @MatKhau = 'Staff@12345', 
+    @IDVaiTro = 3; -- Vai trò 3 đã có -> Sẽ thành công
+
+-- BƯỚC 5: KIỂM TRA KẾT QUẢ
+SELECT 'KetQua_Admin' = @kqAdmin, 'KetQua_ThuNgan' = @kqThuNgan, 'KetQua_ThuKho' = @kqThuKho;
+SELECT * FROM TaiKhoan;

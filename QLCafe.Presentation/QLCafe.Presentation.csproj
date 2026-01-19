@@ -69,6 +69,9 @@
     <Compile Include="Components\RoundButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Components\RoundedPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\Food\FoodControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -105,6 +108,12 @@
     <Compile Include="Controls\Table\TableManagementControl.Designer.cs">
       <DependentUpon>TableManagementControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Table\TableManagementControl2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Table\TableManagementControl2.Designer.cs">
+      <DependentUpon>TableManagementControl2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -124,6 +133,13 @@
     <Compile Include="Views\Admin\AccountManagementForm.Designer.cs">
       <DependentUpon>AccountManagementForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Admin\AccountManagementForm2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Admin\AccountManagementForm2.Designer.cs">
+      <DependentUpon>AccountManagementForm2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\AddAccount.Designer.cs" />
     <Compile Include="Views\Admin\AddCategory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +160,12 @@
     </Compile>
     <Compile Include="Views\Admin\AdminMainView.Designer.cs">
       <DependentUpon>AdminMainView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\EditTableDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Admin\EditTableDialog.Designer.cs">
+      <DependentUpon>EditTableDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Admin\MenuManagementForm.cs">
       <SubType>Form</SubType>
@@ -255,6 +277,9 @@
     <EmbeddedResource Include="Controls\Table\TableManagementControl.resx">
       <DependentUpon>TableManagementControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Table\TableManagementControl2.resx">
+      <DependentUpon>TableManagementControl2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -262,6 +287,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Admin\AccountManagementForm.resx">
       <DependentUpon>AccountManagementForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Admin\AccountManagementForm2.resx">
+      <DependentUpon>AccountManagementForm2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Admin\AddCategory.resx">
       <DependentUpon>AddCategory.cs</DependentUpon>
@@ -271,6 +299,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Admin\AdminMainView.resx">
       <DependentUpon>AdminMainView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Admin\EditTableDialog.resx">
+      <DependentUpon>EditTableDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Admin\MenuManagementForm.resx">
       <DependentUpon>MenuManagementForm.cs</DependentUpon>

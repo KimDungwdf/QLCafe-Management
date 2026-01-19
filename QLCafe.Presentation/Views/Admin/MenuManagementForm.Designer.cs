@@ -39,11 +39,12 @@
             this.btnAddCategory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(110)))), ((int)(((byte)(235)))));
             this.btnAddCategory.FlatAppearance.BorderSize = 0;
             this.btnAddCategory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddCategory.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold);
+            this.btnAddCategory.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
             this.btnAddCategory.ForeColor = System.Drawing.Color.White;
-            this.btnAddCategory.Location = new System.Drawing.Point(1045, 12);
+            this.btnAddCategory.Location = new System.Drawing.Point(695, 30);
+            this.btnAddCategory.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddCategory.Name = "btnAddCategory";
-            this.btnAddCategory.Size = new System.Drawing.Size(239, 62);
+            this.btnAddCategory.Size = new System.Drawing.Size(178, 61);
             this.btnAddCategory.TabIndex = 3;
             this.btnAddCategory.Text = "+  Thêm món";
             this.btnAddCategory.UseVisualStyleBackColor = false;
@@ -55,11 +56,12 @@
             this.btnAddProduct.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(110)))), ((int)(((byte)(235)))));
             this.btnAddProduct.FlatAppearance.BorderSize = 0;
             this.btnAddProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddProduct.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold);
+            this.btnAddProduct.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
             this.btnAddProduct.ForeColor = System.Drawing.Color.White;
-            this.btnAddProduct.Location = new System.Drawing.Point(780, 12);
+            this.btnAddProduct.Location = new System.Drawing.Point(478, 30);
+            this.btnAddProduct.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddProduct.Name = "btnAddProduct";
-            this.btnAddProduct.Size = new System.Drawing.Size(239, 62);
+            this.btnAddProduct.Size = new System.Drawing.Size(178, 61);
             this.btnAddProduct.TabIndex = 5;
             this.btnAddProduct.Text = "+  Thêm danh mục";
             this.btnAddProduct.UseVisualStyleBackColor = false;
@@ -72,20 +74,22 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(112, 103);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(114, 176);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1031, 449);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(778, 390);
             this.flowLayoutPanel1.TabIndex = 4;
             this.flowLayoutPanel1.WrapContents = false;
             // 
             // MenuManagementForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1330, 647);
+            this.ClientSize = new System.Drawing.Size(996, 641);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.btnAddProduct);
             this.Controls.Add(this.btnAddCategory);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MenuManagementForm";
             this.Text = "MenuManagementForm";
             this.ResumeLayout(false);

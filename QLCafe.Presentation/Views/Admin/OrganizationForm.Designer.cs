@@ -38,11 +38,12 @@
             this.btnAddTable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(110)))), ((int)(((byte)(235)))));
             this.btnAddTable.FlatAppearance.BorderSize = 0;
             this.btnAddTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddTable.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold);
+            this.btnAddTable.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
             this.btnAddTable.ForeColor = System.Drawing.Color.White;
-            this.btnAddTable.Location = new System.Drawing.Point(663, 12);
+            this.btnAddTable.Location = new System.Drawing.Point(615, 28);
+            this.btnAddTable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAddTable.Name = "btnAddTable";
-            this.btnAddTable.Size = new System.Drawing.Size(239, 62);
+            this.btnAddTable.Size = new System.Drawing.Size(175, 62);
             this.btnAddTable.TabIndex = 6;
             this.btnAddTable.Text = "+  Thêm bàn";
             this.btnAddTable.UseVisualStyleBackColor = false;
@@ -52,18 +53,20 @@
             this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(73, 107);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(114, 126);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(763, 325);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(676, 400);
             this.flowLayoutPanel1.TabIndex = 7;
             // 
             // OrganizationForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(914, 469);
+            this.ClientSize = new System.Drawing.Size(1081, 577);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.btnAddTable);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "OrganizationForm";
             this.Text = "OrganizationForm";
             this.ResumeLayout(false);
