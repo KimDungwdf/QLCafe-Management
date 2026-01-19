@@ -60,5 +60,10 @@ namespace QLCafe.Presentation.Controls.Table
         {
             lbCategoryName.Visible = show;
         }
+
+        private void panelMain_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
