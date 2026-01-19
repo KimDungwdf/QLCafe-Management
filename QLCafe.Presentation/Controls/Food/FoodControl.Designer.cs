@@ -64,7 +64,7 @@
             this.lblDeleteProduct.Name = "lblDeleteProduct";
             this.lblDeleteProduct.Size = new System.Drawing.Size(73, 30);
             this.lblDeleteProduct.TabIndex = 6;
-            this.lblDeleteProduct.Text = "✕ Xóa";
+            this.lblDeleteProduct.Text = "Xóa";
             this.lblDeleteProduct.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbPrice

@@ -83,12 +83,12 @@
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnDelete.ForeColor = System.Drawing.Color.White;
-            this.btnDelete.Location = new System.Drawing.Point(472, 16);
+            this.btnDelete.Location = new System.Drawing.Point(432, 16);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(0);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(32, 28);
+            this.btnDelete.Size = new System.Drawing.Size(64, 28);
             this.btnDelete.TabIndex = 6;
-            this.btnDelete.Text = "🗑";
+            this.btnDelete.Text = "Xóa";
             this.btnDelete.UseVisualStyleBackColor = false;
             // 
             // btnEdit
@@ -99,12 +99,12 @@
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEdit.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnEdit.ForeColor = System.Drawing.Color.White;
-            this.btnEdit.Location = new System.Drawing.Point(432, 16);
+            this.btnEdit.Location = new System.Drawing.Point(352, 16);
             this.btnEdit.Margin = new System.Windows.Forms.Padding(0);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(32, 28);
+            this.btnEdit.Size = new System.Drawing.Size(64, 28);
             this.btnEdit.TabIndex = 5;
-            this.btnEdit.Text = "✎";
+            this.btnEdit.Text = "Sửa";
             this.btnEdit.UseVisualStyleBackColor = false;
             // 
             // statusPill
@@ -138,13 +138,13 @@
             this.lblTableName.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold);
             this.lblTableName.Location = new System.Drawing.Point(16, 16);
             this.lblTableName.Name = "lblTableName";
-            this.lblTableName.Size = new System.Drawing.Size(76, 25);
+            this.lblTableName.Size = new System.Drawing.Size(83, 32);
             this.lblTableName.TabIndex = 0;
             this.lblTableName.Text = "Bàn 11";
             // 
             // itemsPanel
             // 
-            this.itemsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.itemsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.itemsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(246)))), ((int)(((byte)(250)))));
             this.itemsPanel.Controls.Add(this.lblItems);
@@ -167,7 +167,7 @@
             // 
             // separator
             // 
-            this.separator.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.separator.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.separator.BackColor = System.Drawing.Color.Gainsboro;
             this.separator.Location = new System.Drawing.Point(20, 132);
@@ -180,7 +180,7 @@
             this.lblTotalLabel.AutoSize = true;
             this.lblTotalLabel.Location = new System.Drawing.Point(16, 140);
             this.lblTotalLabel.Name = "lblTotalLabel";
-            this.lblTotalLabel.Size = new System.Drawing.Size(45, 19);
+            this.lblTotalLabel.Size = new System.Drawing.Size(53, 23);
             this.lblTotalLabel.TabIndex = 7;
             this.lblTotalLabel.Text = "Tổng:";
             // 
@@ -191,13 +191,13 @@
             this.lblTotalAmount.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.lblTotalAmount.Location = new System.Drawing.Point(420, 140);
             this.lblTotalAmount.Name = "lblTotalAmount";
-            this.lblTotalAmount.Size = new System.Drawing.Size(84, 19);
+            this.lblTotalAmount.Size = new System.Drawing.Size(91, 23);
             this.lblTotalAmount.TabIndex = 8;
             this.lblTotalAmount.Text = "110.000 đ";
             // 
             // TableManagementControl2
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.cardPanel);
