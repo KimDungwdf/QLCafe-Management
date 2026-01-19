@@ -80,7 +80,6 @@ namespace QLCafe.Presentation.Views.Admin
         private void Ctl_EditRequested(object sender, int tableId)
         {
             var ctl = (TableManagementControl2)sender;
-
             var table = _service.GetAll().FirstOrDefault(t => t.Id == tableId);
             if (table != null && table.IsOccupied)
             {
@@ -88,29 +87,33 @@ namespace QLCafe.Presentation.Views.Admin
                 return;
             }
 
-            var currentName = ctl.TableNameText;
-            var newName = PromptInput($"Đổi tên bàn (ID {tableId})", currentName);
-            if (newName == null) return;
-            newName = newName.Trim();
-            if (string.IsNullOrWhiteSpace(newName))
+            using (var dlg = new EditTableDialog())
             {
-                MessageBox.Show("Tên bàn không được để trống", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            if (string.Equals(currentName, newName, StringComparison.OrdinalIgnoreCase)) return;
-            var exists = _service.GetAll().Any(t => t.Id != tableId && string.Equals(t.Name, newName, StringComparison.OrdinalIgnoreCase));
-            if (exists)
-            {
-                MessageBox.Show("Tên bàn đã tồn tại, không thể đặt tên trùng bàn đã có", "Trùng tên", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            if (_service.Rename(tableId, newName))
-            {
-                ctl.TableNameText = newName;
-            }
-            else
-            {
-                MessageBox.Show("Không đổi tên được (lỗi hệ thống)", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                dlg.TableNameText = ctl.TableNameText;
+                if (dlg.ShowDialog(this) == DialogResult.OK)
+                {
+                    var newName = dlg.TableNameText.Trim();
+                    if (string.IsNullOrWhiteSpace(newName))
+                    {
+                        MessageBox.Show("Tên bàn không được để trống", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    if (string.Equals(ctl.TableNameText, newName, System.StringComparison.OrdinalIgnoreCase)) return;
+                    var exists = _service.GetAll().Any(t => t.Id != tableId && string.Equals(t.Name, newName, System.StringComparison.OrdinalIgnoreCase));
+                    if (exists)
+                    {
+                        MessageBox.Show("Tên bàn đã tồn tại, không thể đặt tên trùng bàn đã có", "Trùng tên", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    if (_service.Rename(tableId, newName))
+                    {
+                        ctl.TableNameText = newName;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Không đổi tên được (lỗi hệ thống)", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
         }
 
@@ -138,7 +141,7 @@ namespace QLCafe.Presentation.Views.Admin
                 if (dlg.ShowDialog(this) == DialogResult.OK)
                 {
                     var name = dlg.TableNameText.Trim();
-                    if (_service.GetAll().Any(t => string.Equals(t.Name, name, StringComparison.OrdinalIgnoreCase)))
+                    if (_service.GetAll().Any(t => string.Equals(t.Name, name, System.StringComparison.OrdinalIgnoreCase)))
                     {
                         MessageBox.Show("Tên bàn đã tồn tại, vui lòng nhập tên khác", "Trùng tên", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
