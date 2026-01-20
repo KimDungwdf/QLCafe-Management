@@ -30,7 +30,6 @@ namespace QLCafe.Presentation.Views.Admin
             txtSearch.TextChanged += txtSearch_TextChanged;
 
             btnAddAccount.Click += btnAddAccount_Click;
-            dgvAccounts.CellContentClick += dgvAccounts_CellContentClick;
 
             // Style tweak
             dgvAccounts.ColumnHeadersHeight = 56;
@@ -109,32 +108,49 @@ namespace QLCafe.Presentation.Views.Admin
             }
         }
 
-        private void dgvAccounts_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        // Handle click inside actions cell: determine whether user clicked "Sửa" or "Xóa" by x position
+        private void dgvAccounts_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.RowIndex < 0) return;
-            if (dgvAccounts.Columns[e.ColumnIndex] == colEdit)
+            if (dgvAccounts.Columns[e.ColumnIndex].Name != "colActions") return;
+            var row = dgvAccounts.Rows[e.RowIndex].DataBoundItem as AccountRow;
+            if (row == null) return;
+
+            // Calculate zones similar to painting
+            var cellRect = dgvAccounts.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
+            int padding = 12;
+            // Assume two link segments: "Sửa" and "Xóa" separated by a vertical bar
+            using (var f = new Font("Segoe UI", 11f, FontStyle.Underline))
             {
-                var row = dgvAccounts.Rows[e.RowIndex].DataBoundItem as AccountRow;
-                if (row == null) return;
-                using (var f = new AccountEditDialog(_accountService, new AccountDto
+                var g = dgvAccounts.CreateGraphics();
+                Size editSize = TextRenderer.MeasureText(g, "Sửa", f, new Size(int.MaxValue, int.MaxValue), TextFormatFlags.NoPadding);
+                Size deleteSize = TextRenderer.MeasureText(g, "Xóa", f, new Size(int.MaxValue, int.MaxValue), TextFormatFlags.NoPadding);
+                int xEdit = cellRect.X + padding;
+                var editRect = new Rectangle(xEdit, cellRect.Y + (cellRect.Height - editSize.Height) / 2, editSize.Width, editSize.Height);
+                int xDelete = editRect.Right + 12 + 6; // 12 for separator padding, 6 for separator width/margin
+                var deleteRect = new Rectangle(xDelete, cellRect.Y + (cellRect.Height - deleteSize.Height) / 2, deleteSize.Width, deleteSize.Height);
+
+                var clickPoint = new Point(e.X + cellRect.X, e.Y + cellRect.Y);
+                if (editRect.Contains(clickPoint))
                 {
-                    Username = row.UserName,
-                    DisplayName = row.FullName,
-                    Role = ParseRole(row.Role),
-                    Status = row.Status
-                }))
-                {
-                    if (f.ShowDialog() == DialogResult.OK) LoadData();
+                    using (var dialog = new AccountEditDialog(_accountService, new AccountDto
+                    {
+                        Username = row.UserName,
+                        DisplayName = row.FullName,
+                        Role = ParseRole(row.Role),
+                        Status = row.Status
+                    }))
+                    {
+                        if (dialog.ShowDialog() == DialogResult.OK) LoadData();
+                    }
                 }
-            }
-            else if (dgvAccounts.Columns[e.ColumnIndex] == colDelete)
-            {
-                var row = dgvAccounts.Rows[e.RowIndex].DataBoundItem as AccountRow;
-                if (row == null) return;
-                if (MessageBox.Show($"Xóa tài khoản '{row.UserName}'?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                else if (deleteRect.Contains(clickPoint))
                 {
-                    _accountService.Delete(row.UserName);
-                    LoadData();
+                    if (MessageBox.Show($"Xóa tài khoản '{row.UserName}'?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        _accountService.Delete(row.UserName);
+                        LoadData();
+                    }
                 }
             }
         }
@@ -191,17 +207,33 @@ namespace QLCafe.Presentation.Views.Admin
                 return;
             }
 
-            // Draw vertical separator between edit and delete link columns to mimic "Sửa | Xóa"
-            if (dgvAccounts.Columns[e.ColumnIndex].Name == "colDelete")
+            // Custom paint for Actions column: draw two links "Sửa" | "Xóa"
+            if (dgvAccounts.Columns[e.ColumnIndex].Name == "colActions")
             {
-                e.Paint(e.ClipBounds, DataGridViewPaintParts.All);
-                e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                var x = e.CellBounds.Left - 6;
-                using (Pen p = new Pen(Color.Silver))
-                {
-                    e.Graphics.DrawLine(p, x, e.CellBounds.Top + 12, x, e.CellBounds.Bottom - 12);
-                }
                 e.Handled = true;
+                e.PaintBackground(e.CellBounds, true);
+                var g = e.Graphics;
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+                int padding = 12;
+                using (var linkFont = new Font("Segoe UI", 11f, FontStyle.Underline))
+                using (var blue = new SolidBrush(Color.FromArgb(33, 99, 255)))
+                using (var red = new SolidBrush(Color.Firebrick))
+                using (var sepPen = new Pen(Color.Silver))
+                {
+                    Size editSize = TextRenderer.MeasureText(g, "Sửa", linkFont, new Size(int.MaxValue, int.MaxValue), TextFormatFlags.NoPadding);
+                    Size deleteSize = TextRenderer.MeasureText(g, "Xóa", linkFont, new Size(int.MaxValue, int.MaxValue), TextFormatFlags.NoPadding);
+                    int xEdit = e.CellBounds.X + padding;
+                    int y = e.CellBounds.Y + (e.CellBounds.Height - editSize.Height) / 2;
+                    g.DrawString("Sửa", linkFont, blue, new PointF(xEdit, y));
+
+                    int sepX = xEdit + editSize.Width + 6;
+                    g.DrawLine(sepPen, sepX, e.CellBounds.Y + 12, sepX, e.CellBounds.Bottom - 12);
+
+                    int xDelete = sepX + 6;
+                    g.DrawString("Xóa", linkFont, red, new PointF(xDelete, y));
+                }
+                e.Paint(e.ClipBounds, DataGridViewPaintParts.Border);
+                return;
             }
         }
 
