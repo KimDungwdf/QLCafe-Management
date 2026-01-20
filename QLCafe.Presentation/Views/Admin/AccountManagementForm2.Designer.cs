@@ -20,8 +20,7 @@ namespace QLCafe.Presentation.Views.Admin
         private System.Windows.Forms.DataGridViewTextBoxColumn colFullName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRole;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
-        private System.Windows.Forms.DataGridViewLinkColumn colEdit;
-        private System.Windows.Forms.DataGridViewLinkColumn colDelete;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colActions;
 
         protected override void Dispose(bool disposing)
         {
@@ -49,8 +48,7 @@ namespace QLCafe.Presentation.Views.Admin
             this.colFullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRole = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEdit = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.colDelete = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colActions = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlSearch.SuspendLayout();
             this.pnlCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).BeginInit();
@@ -155,8 +153,7 @@ namespace QLCafe.Presentation.Views.Admin
             this.colFullName,
             this.colRole,
             this.colStatus,
-            this.colEdit,
-            this.colDelete});
+            this.colActions});
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 11F);
@@ -180,6 +177,7 @@ namespace QLCafe.Presentation.Views.Admin
             this.dgvAccounts.Size = new System.Drawing.Size(1267, 455);
             this.dgvAccounts.TabIndex = 0;
             this.dgvAccounts.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvAccounts_CellPainting);
+            this.dgvAccounts.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvAccounts_CellMouseClick);
             // 
             // colUsername
             // 
@@ -214,33 +212,14 @@ namespace QLCafe.Presentation.Views.Admin
             this.colStatus.ReadOnly = true;
             this.colStatus.Width = 135;
             // 
-            // colEdit
+            // colActions
             // 
-            this.colEdit.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(92)))), ((int)(((byte)(186)))));
-            this.colEdit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colEdit.HeaderText = "Thao tác";
-            this.colEdit.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(99)))), ((int)(((byte)(255)))));
-            this.colEdit.MinimumWidth = 6;
-            this.colEdit.Name = "colEdit";
-            this.colEdit.ReadOnly = true;
-            this.colEdit.Text = "Sửa";
-            this.colEdit.UseColumnTextForLinkValue = true;
-            this.colEdit.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(99)))), ((int)(((byte)(255)))));
-            this.colEdit.Width = 98;
-            // 
-            // colDelete
-            // 
-            this.colDelete.ActiveLinkColor = System.Drawing.Color.Maroon;
-            this.colDelete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colDelete.HeaderText = "";
-            this.colDelete.LinkColor = System.Drawing.Color.Firebrick;
-            this.colDelete.MinimumWidth = 6;
-            this.colDelete.Name = "colDelete";
-            this.colDelete.ReadOnly = true;
-            this.colDelete.Text = "Xóa";
-            this.colDelete.UseColumnTextForLinkValue = true;
-            this.colDelete.VisitedLinkColor = System.Drawing.Color.Firebrick;
-            this.colDelete.Width = 6;
+            this.colActions.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colActions.HeaderText = "Thao tác";
+            this.colActions.MinimumWidth = 6;
+            this.colActions.Name = "colActions";
+            this.colActions.ReadOnly = true;
+            this.colActions.Width = 112;
             // 
             // AccountManagementForm2
             // 
