@@ -186,6 +186,7 @@ namespace QLCafe.Presentation.Views.Admin
             this.colUsername.MinimumWidth = 6;
             this.colUsername.Name = "colUsername";
             this.colUsername.ReadOnly = true;
+            this.colUsername.FillWeight = 140F;
             // 
             // colFullName
             // 
@@ -194,6 +195,7 @@ namespace QLCafe.Presentation.Views.Admin
             this.colFullName.MinimumWidth = 6;
             this.colFullName.Name = "colFullName";
             this.colFullName.ReadOnly = true;
+            this.colFullName.FillWeight = 160F;
             // 
             // colRole
             // 
@@ -202,24 +204,25 @@ namespace QLCafe.Presentation.Views.Admin
             this.colRole.MinimumWidth = 6;
             this.colRole.Name = "colRole";
             this.colRole.ReadOnly = true;
+            this.colRole.FillWeight = 90F;
             // 
             // colStatus
             // 
-            this.colStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colStatus.HeaderText = "Trạng thái";
             this.colStatus.MinimumWidth = 6;
             this.colStatus.Name = "colStatus";
             this.colStatus.ReadOnly = true;
-            this.colStatus.Width = 135;
+            this.colStatus.FillWeight = 120F;
             // 
             // colActions
             // 
-            this.colActions.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colActions.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colActions.HeaderText = "Thao tác";
             this.colActions.MinimumWidth = 6;
             this.colActions.Name = "colActions";
             this.colActions.ReadOnly = true;
-            this.colActions.Width = 112;
+            this.colActions.FillWeight = 120F;
             // 
             // AccountManagementForm2
             // 
