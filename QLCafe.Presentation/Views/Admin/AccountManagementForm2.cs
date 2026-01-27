@@ -14,8 +14,8 @@ namespace QLCafe.Presentation.Views.Admin
     public partial class AccountManagementForm2 : Form
     {
         private AccountService _accountService;
-        private BindingList<AccountRow> _rows;
-        private System.Collections.Generic.List<AccountRow> _allRows;
+        private BindingList<AccountRow2> _rows;
+        private System.Collections.Generic.List<AccountRow2> _allRows;
         private string _currentUsername; // Lưu username đang đăng nhập
 
         public AccountManagementForm2()
@@ -52,22 +52,21 @@ namespace QLCafe.Presentation.Views.Admin
         private void InitGrid()
         {
             dgvAccounts.AutoGenerateColumns = false;
-            // Map data properties
-            colUsername.DataPropertyName = nameof(AccountRow.UserName);
-            colFullName.DataPropertyName = nameof(AccountRow.FullName);
-            colRole.DataPropertyName = nameof(AccountRow.Role);
-            colStatus.DataPropertyName = nameof(AccountRow.Status);
+            // Map data properties (bỏ Status)
+            colUsername.DataPropertyName = nameof(AccountRow2.UserName);
+            colFullName.DataPropertyName = nameof(AccountRow2.FullName);
+            colRole.DataPropertyName = nameof(AccountRow2.Role);
         }
 
         private void LoadData()
         {
             var data = _accountService.GetAll();
-            _allRows = data.Select(d => new AccountRow
+            _allRows = data.Select(d => new AccountRow2
             {
                 UserName = d.Username,
                 FullName = d.DisplayName,
-                Role = MapRole(d.Role),
-                Status = string.IsNullOrEmpty(d.Status) ? "Hoạt động" : d.Status
+                Role = MapRole(d.Role)
+                // Bỏ Status
             }).ToList();
             ApplyFilter();
         }
@@ -100,9 +99,8 @@ namespace QLCafe.Presentation.Views.Admin
                 ? _allRows
                 : _allRows.Where(r => (r.UserName ?? "").ToLowerInvariant().Contains(term)
                                     || (r.FullName ?? "").ToLowerInvariant().Contains(term)
-                                    || (r.Role ?? "").ToLowerInvariant().Contains(term)
-                                    || (r.Status ?? "").ToLowerInvariant().Contains(term)).ToList();
-            _rows = new BindingList<AccountRow>(view);
+                                    || (r.Role ?? "").ToLowerInvariant().Contains(term)).ToList();
+            _rows = new BindingList<AccountRow2>(view);
             dgvAccounts.DataSource = _rows;
         }
 
@@ -119,7 +117,7 @@ namespace QLCafe.Presentation.Views.Admin
         {
             if (e.RowIndex < 0) return;
             if (dgvAccounts.Columns[e.ColumnIndex].Name != "colActions") return;
-            var row = dgvAccounts.Rows[e.RowIndex].DataBoundItem as AccountRow;
+            var row = dgvAccounts.Rows[e.RowIndex].DataBoundItem as AccountRow2;
             if (row == null) return;
 
             // Calculate zones similar to painting
@@ -143,8 +141,8 @@ namespace QLCafe.Presentation.Views.Admin
                     {
                         Username = row.UserName,
                         DisplayName = row.FullName,
-                        Role = ParseRole(row.Role),
-                        Status = row.Status
+                        Role = ParseRole(row.Role)
+                        // Bỏ Status
                     }, _currentUsername))
                     {
                         if (dialog.ShowDialog() == DialogResult.OK) LoadData();
@@ -203,26 +201,6 @@ namespace QLCafe.Presentation.Views.Admin
 
             if (e.RowIndex < 0) return;
 
-            // Custom paint for Status column as green pill
-            if (dgvAccounts.Columns[e.ColumnIndex].Name == "colStatus" && e.Value != null)
-            {
-                e.Handled = true;
-                e.PaintBackground(e.CellBounds, true);
-                e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                var rect = new Rectangle(e.CellBounds.X + 12, e.CellBounds.Y + 10, e.CellBounds.Width - 24, e.CellBounds.Height - 20);
-                using (GraphicsPath path = GetRoundRect(rect, 14))
-                using (SolidBrush bg = new SolidBrush(Color.FromArgb(214, 245, 222)))
-                using (SolidBrush fg = new SolidBrush(Color.FromArgb(24, 163, 78)))
-                {
-                    e.Graphics.FillPath(bg, path);
-                    var f = new Font("Segoe UI", 10.5f, FontStyle.Bold);
-                    var sf = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
-                    e.Graphics.DrawString(Convert.ToString(e.Value), f, fg, rect, sf);
-                }
-                e.Paint(e.ClipBounds, DataGridViewPaintParts.Border);
-                return;
-            }
-
             // Custom paint for Actions column: draw two links "Sửa" | "Xóa"
             if (dgvAccounts.Columns[e.ColumnIndex].Name == "colActions")
             {
@@ -273,5 +251,12 @@ namespace QLCafe.Presentation.Views.Admin
         {
             ApplyFilter();
         }
+    }
+
+    internal class AccountRow2
+    {
+        public string UserName { get; set; }
+        public string FullName { get; set; }
+        public string Role { get; set; }
     }
 }
