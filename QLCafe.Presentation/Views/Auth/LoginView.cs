@@ -120,7 +120,7 @@ namespace QLCafe.Presentation.Views.Auth
                 switch (userInfo.Role)
                 {
                     case RoleType.Admin:
-                        AdminMainView adminForm = new AdminMainView(userInfo.DisplayName, "Quản trị viên");
+                        AdminMainView adminForm = new AdminMainView(userInfo.DisplayName, "Quản trị viên", userInfo.Username);
 
                         adminForm.Show();
                         break;

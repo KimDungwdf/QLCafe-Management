@@ -18,6 +18,8 @@ namespace QLCafe.Presentation.Views.Admin
         private OrganizationForm organizationForm;
         private SalesReportForm salesReportForm;
         private StockReportForm stockReportForm;
+        private string _currentUsername; // Lưu username đang đăng nhập
+
         public AdminMainView()
         {
             InitializeComponent();
@@ -33,10 +35,21 @@ namespace QLCafe.Presentation.Views.Admin
             ShowAccountManagement();
         }
 
+        public AdminMainView(string userName, string shift, string username)
+        {
+            InitializeComponent();
+            _currentUsername = username; // Lưu username
+            InitializeForms();
+
+            lblUserName.Text = userName;
+            lblShift.Text = shift;
+            ShowAccountManagement();
+        }
+
         private void InitializeForms()
         {
             // Khởi tạo các form con
-            accountManagementForm = new AccountManagementForm2();
+            accountManagementForm = new AccountManagementForm2(_currentUsername);
             menuManagementForm = new MenuManagementForm();
             organizationForm = new OrganizationForm();
             salesReportForm = new SalesReportForm();

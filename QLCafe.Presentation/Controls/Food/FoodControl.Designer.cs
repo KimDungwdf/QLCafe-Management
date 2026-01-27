@@ -44,11 +44,10 @@
             this.panelMain.Controls.Add(this.lbPrice);
             this.panelMain.Controls.Add(this.lbFoodName);
             this.panelMain.Controls.Add(this.lbCategoryName);
-            this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMain.Location = new System.Drawing.Point(0, 0);
-            this.panelMain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelMain.Location = new System.Drawing.Point(0, 4);
+            this.panelMain.Margin = new System.Windows.Forms.Padding(4);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(522, 89);
+            this.panelMain.Size = new System.Drawing.Size(442, 85);
             this.panelMain.TabIndex = 0;
             this.panelMain.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMain_Paint);
             // 
@@ -59,7 +58,7 @@
             this.lblDeleteProduct.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblDeleteProduct.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
             this.lblDeleteProduct.ForeColor = System.Drawing.Color.White;
-            this.lblDeleteProduct.Location = new System.Drawing.Point(439, 10);
+            this.lblDeleteProduct.Location = new System.Drawing.Point(207, 10);
             this.lblDeleteProduct.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDeleteProduct.Name = "lblDeleteProduct";
             this.lblDeleteProduct.Size = new System.Drawing.Size(73, 30);
@@ -72,12 +71,13 @@
             this.lbPrice.AutoSize = true;
             this.lbPrice.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.lbPrice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(110)))), ((int)(((byte)(235)))));
-            this.lbPrice.Location = new System.Drawing.Point(358, 55);
+            this.lbPrice.Location = new System.Drawing.Point(207, 54);
             this.lbPrice.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbPrice.Name = "lbPrice";
             this.lbPrice.Size = new System.Drawing.Size(31, 20);
             this.lbPrice.TabIndex = 3;
             this.lbPrice.Text = "0 đ";
+            this.lbPrice.Click += new System.EventHandler(this.lbPrice_Click);
             // 
             // lbFoodName
             // 
@@ -107,9 +107,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panelMain);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FoodControl";
-            this.Size = new System.Drawing.Size(522, 89);
+            this.Size = new System.Drawing.Size(449, 91);
             this.panelMain.ResumeLayout(false);
             this.panelMain.PerformLayout();
             this.ResumeLayout(false);
