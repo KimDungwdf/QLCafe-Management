@@ -35,7 +35,7 @@ namespace QLCafe.Application.Services
                 {
                     conn.Open();
 
-                    // Gọi Stored Procedure
+                    // Gọi Stored Procedure sp_Login
                     SqlCommand cmd = new SqlCommand("sp_Login", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -55,13 +55,30 @@ namespace QLCafe.Application.Services
                                 IsSuccess = true,
                                 Username = request.Username,
                                 DisplayName = displayName,
-                                Role = MapRole(roleId) // Gọi hàm chuyển đổi ID -> Enum
+                                Role = MapRole(roleId)
                             };
+                        }
+                        else
+                        {
+                            // DEBUG: Log chi tiết
+                            System.Diagnostics.Debug.WriteLine($"sp_Login không trả về kết quả cho user: {request.Username}");
                         }
                     }
                 }
+                catch (SqlException sqlEx)
+                {
+                    // DEBUG: Log lỗi SQL
+                    System.Diagnostics.Debug.WriteLine($"SQL Error: {sqlEx.Message}");
+                    return new LoginResponse
+                    {
+                        IsSuccess = false,
+                        ErrorMessage = "Lỗi kết nối database: " + sqlEx.Message
+                    };
+                }
                 catch (Exception ex)
                 {
+                    // DEBUG: Log lỗi chung
+                    System.Diagnostics.Debug.WriteLine($"General Error: {ex.Message}");
                     return new LoginResponse
                     {
                         IsSuccess = false,
