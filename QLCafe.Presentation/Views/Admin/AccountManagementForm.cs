@@ -19,8 +19,14 @@ namespace QLCafe.Presentation.Views.Admin
         private BindingList<AccountRow> _rows;
         private List<AccountRow> _allRows;
         private AccountService _accountService;
+        private string _currentUsername; // Lưu username đang đăng nhập
 
         public AccountManagementForm() { InitializeComponent(); }
+
+        public AccountManagementForm(string currentUsername) : this()
+        {
+            _currentUsername = currentUsername;
+        }
 
         private void AccountManagementForm_Load(object sender, EventArgs e)
         {
@@ -62,7 +68,7 @@ namespace QLCafe.Presentation.Views.Admin
 
         private void btnAddAccount_Click(object sender, EventArgs e)
         {
-            using (var f = new AccountEditDialog(_accountService))
+            using (var f = new AccountEditDialog(_accountService, null, _currentUsername))
                 if (f.ShowDialog() == DialogResult.OK) LoadData();
         }
 
@@ -128,12 +134,23 @@ namespace QLCafe.Presentation.Views.Admin
                 if (regions.Edit.Contains(mouse))
                 {
                     var row = _rows[e.RowIndex];
-                    using (var f = new AccountEditDialog(_accountService, new AccountDto { Username = row.UserName, DisplayName = row.FullName, Status = row.Status, Role = ParseRole(row.Role) }))
+                    using (var f = new AccountEditDialog(_accountService, new AccountDto { Username = row.UserName, DisplayName = row.FullName, Status = row.Status, Role = ParseRole(row.Role) }, _currentUsername))
                         if (f.ShowDialog() == DialogResult.OK) LoadData();
                 }
                 else if (regions.Delete.Contains(mouse))
                 {
                     var row = _rows[e.RowIndex];
+                    
+                    // Kiểm tra nếu đang cố xóa tài khoản admin đang đăng nhập
+                    if (!string.IsNullOrEmpty(_currentUsername) && 
+                        row.UserName.Equals(_currentUsername, StringComparison.OrdinalIgnoreCase) &&
+                        ParseRole(row.Role) == RoleType.Admin)
+                    {
+                        MessageBox.Show("Không được phép xóa tài khoản quản trị viên đang đăng nhập!", 
+                            "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
                     if (MessageBox.Show("Xóa tài khoản?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     { _accountService.Delete(row.UserName); LoadData(); }
                 }

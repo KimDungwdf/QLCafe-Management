@@ -65,5 +65,10 @@ namespace QLCafe.Presentation.Controls.Table
         {
 
         }
+
+        private void lbPrice_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

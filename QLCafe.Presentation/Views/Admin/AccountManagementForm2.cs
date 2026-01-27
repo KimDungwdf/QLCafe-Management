@@ -16,6 +16,7 @@ namespace QLCafe.Presentation.Views.Admin
         private AccountService _accountService;
         private BindingList<AccountRow> _rows;
         private System.Collections.Generic.List<AccountRow> _allRows;
+        private string _currentUsername; // Lưu username đang đăng nhập
 
         public AccountManagementForm2()
         {
@@ -33,6 +34,11 @@ namespace QLCafe.Presentation.Views.Admin
 
             // Style tweak
             dgvAccounts.ColumnHeadersHeight = 56;
+        }
+
+        public AccountManagementForm2(string currentUsername) : this()
+        {
+            _currentUsername = currentUsername;
         }
 
         private void AccountManagementForm2_Load(object sender, EventArgs e)
@@ -102,7 +108,7 @@ namespace QLCafe.Presentation.Views.Admin
 
         private void btnAddAccount_Click(object sender, EventArgs e)
         {
-            using (var f = new AccountEditDialog(_accountService))
+            using (var f = new AccountEditDialog(_accountService, null, _currentUsername))
             {
                 if (f.ShowDialog() == DialogResult.OK) LoadData();
             }
@@ -139,13 +145,23 @@ namespace QLCafe.Presentation.Views.Admin
                         DisplayName = row.FullName,
                         Role = ParseRole(row.Role),
                         Status = row.Status
-                    }))
+                    }, _currentUsername))
                     {
                         if (dialog.ShowDialog() == DialogResult.OK) LoadData();
                     }
                 }
                 else if (deleteRect.Contains(clickPoint))
                 {
+                    // Kiểm tra nếu đang cố xóa tài khoản admin đang đăng nhập
+                    if (!string.IsNullOrEmpty(_currentUsername) && 
+                        row.UserName.Equals(_currentUsername, StringComparison.OrdinalIgnoreCase) &&
+                        ParseRole(row.Role) == RoleType.Admin)
+                    {
+                        MessageBox.Show("Không được phép xóa tài khoản quản trị viên đang đăng nhập!", 
+                            "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
                     if (MessageBox.Show($"Xóa tài khoản '{row.UserName}'?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         _accountService.Delete(row.UserName);

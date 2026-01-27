@@ -42,6 +42,35 @@ namespace QLCafe.Infrastructure.Repositories
             return list;
         }
 
+        public Account GetByUsername(string username)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                using (var cmd = new SqlCommand("SELECT TenDangNhap, TenHienThi, MatKhau, IDVaiTro FROM TaiKhoan WHERE TenDangNhap=@un", connection))
+                {
+                    cmd.Parameters.AddWithValue("@un", username);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new Account
+                            {
+                                Id = 0,
+                                Username = reader["TenDangNhap"].ToString(),
+                                DisplayName = reader["TenHienThi"].ToString(),
+                                Password = reader["MatKhau"].ToString(),
+                                Role = (RoleType)Convert.ToInt32(reader["IDVaiTro"]),
+                                Phone = string.Empty,
+                                Status = "Hoạt động"
+                            };
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
         public void Create(Account account)
         {
             using (var connection = new SqlConnection(_connectionString))

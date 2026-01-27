@@ -56,6 +56,12 @@ namespace QLCafe.Application.Services
             return _repo.UsernameExists(username);
         }
 
+        public AccountDto GetByUsername(string username)
+        {
+            var account = _repo.GetByUsername(username);
+            return account != null ? MapToDto(account) : null;
+        }
+
         private AccountDto MapToDto(Account a)
         {
             return new AccountDto

@@ -375,6 +375,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="QLCafe.Presentation\Session\" />
     <Folder Include="Services\" />
     <Folder Include="ViewModels\Auth\" />
   </ItemGroup>

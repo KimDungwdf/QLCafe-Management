@@ -11,15 +11,18 @@ namespace QLCafe.Presentation.Views.Admin
     {
         private readonly AccountService _service;
         private readonly AccountDto _editing;
+        private readonly string _currentUsername; // Lưu username đang đăng nhập
         private TextBox txtUsername; private TextBox txtDisplayName; private ComboBox cboRole; private ComboBox cboStatus; private TextBox txtPassword; private Button btnSave; private Button btnCancel;
 
         public AccountEditDialog(AccountService service, AccountDto editing = null)
         {
-
-
-
             this.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             _service = service; _editing = editing; Init();
+        }
+
+        public AccountEditDialog(AccountService service, AccountDto editing, string currentUsername) : this(service, editing)
+        {
+            _currentUsername = currentUsername;
         }
 
         private void Init()
@@ -50,7 +53,18 @@ namespace QLCafe.Presentation.Views.Admin
 
             if (_editing != null)
             {
-                txtUsername.Text = _editing.Username; txtUsername.Enabled = false; txtDisplayName.Text = _editing.DisplayName; cboRole.SelectedIndex = RoleToIndex(_editing.Role); cboStatus.SelectedItem = string.IsNullOrEmpty(_editing.Status) ? "Hoạt động" : _editing.Status; txtPassword.Enabled = false; txtPassword.Text = string.Empty; // Not editing password
+                txtUsername.Text = _editing.Username; txtUsername.Enabled = false; txtDisplayName.Text = _editing.DisplayName;
+                cboRole.SelectedIndex = RoleToIndex(_editing.Role);
+                
+                // Nếu đang sửa tài khoản hiện tại đang đăng nhập và là Admin, không cho đổi quyền
+                if (!string.IsNullOrEmpty(_currentUsername) && 
+                    _editing.Username.Equals(_currentUsername, StringComparison.OrdinalIgnoreCase) &&
+                    _editing.Role == RoleType.Admin)
+                {
+                    cboRole.Enabled = false; // Khóa không cho đổi quyền
+                }
+                
+                cboStatus.SelectedItem = string.IsNullOrEmpty(_editing.Status) ? "Hoạt động" : _editing.Status; txtPassword.Enabled = false; txtPassword.Text = string.Empty; // Not editing password
             }
             else
             {
@@ -77,6 +91,18 @@ namespace QLCafe.Presentation.Views.Admin
             { MessageBox.Show("Vui lòng nhập đầy đủ", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning); this.DialogResult = DialogResult.None; return; }
             if (_editing == null && _service.UsernameExists(txtUsername.Text))
             { MessageBox.Show("Tên đăng nhập đã tồn tại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning); this.DialogResult = DialogResult.None; return; }
+
+            // Kiểm tra nếu đang sửa tài khoản admin hiện tại và cố đổi quyền
+            if (_editing != null && 
+                !string.IsNullOrEmpty(_currentUsername) &&
+                _editing.Username.Equals(_currentUsername, StringComparison.OrdinalIgnoreCase) &&
+                _editing.Role == RoleType.Admin &&
+                IndexToRole(cboRole.SelectedIndex) != RoleType.Admin)
+            {
+                MessageBox.Show("Không được phép thay đổi quyền của tài khoản quản trị viên đang đăng nhập!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.DialogResult = DialogResult.None;
+                return;
+            }
 
             if (_editing == null)
             {
