@@ -4,6 +4,7 @@ using QLCafe.Application.Services;
 using QLCafe.Domain.Enums;
 using QLCafe.Presentation.Views.Cashier;
 using QLCafe.Presentation.Views.Admin;
+using QLCafe.Presentation.Views.Inventory;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -133,9 +134,8 @@ namespace QLCafe.Presentation.Views.Auth
                         break;
 
                     case RoleType.InventoryManager:  // Sửa thành InventoryManager thay vì ThuKho
-                        MessageBox.Show("Chức năng Thủ kho đang phát triển", "Thông báo",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.Show();
+                        InventoryMainView inventoryForm = new InventoryMainView(userInfo.DisplayName, "Thủ kho");
+                        inventoryForm.Show();
                         break;
 
                     default:
