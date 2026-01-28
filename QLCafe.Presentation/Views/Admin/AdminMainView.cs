@@ -78,10 +78,6 @@ namespace QLCafe.Presentation.Views.Admin
         {
         }
 
-        private void label5_Click(object sender, EventArgs e)
-        {
-            label5.Text = DateTime.Now.ToString("hh:mm tt");
-        }
 
         private void bttUserAccount_Click(object sender, EventArgs e)
         {

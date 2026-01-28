@@ -36,8 +36,6 @@
             this.bttSaleReport = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
             this.btnTable = new System.Windows.Forms.Button();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.lblShift = new System.Windows.Forms.Label();
             this.lblUserName = new System.Windows.Forms.Label();
@@ -53,7 +51,6 @@
             this.lblFunctionName = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panelLeft.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelRight.SuspendLayout();
@@ -71,8 +68,6 @@
             this.panelLeft.Controls.Add(this.bttSaleReport);
             this.panelLeft.Controls.Add(this.btnLogout);
             this.panelLeft.Controls.Add(this.btnTable);
-            this.panelLeft.Controls.Add(this.pictureBox3);
-            this.panelLeft.Controls.Add(this.label5);
             this.panelLeft.Controls.Add(this.pictureBox2);
             this.panelLeft.Controls.Add(this.lblShift);
             this.panelLeft.Controls.Add(this.lblUserName);
@@ -83,7 +78,7 @@
             this.panelLeft.Location = new System.Drawing.Point(0, 0);
             this.panelLeft.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelLeft.Name = "panelLeft";
-            this.panelLeft.Size = new System.Drawing.Size(299, 682);
+            this.panelLeft.Size = new System.Drawing.Size(299, 705);
             this.panelLeft.TabIndex = 1;
             // 
             // btnStock
@@ -96,7 +91,7 @@
             this.btnStock.Image = global::QLCafe.Presentation.Properties.Resources.Screenshot_2025_12_11_161459_removebg_preview;
             this.btnStock.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnStock.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnStock.Location = new System.Drawing.Point(12, 558);
+            this.btnStock.Location = new System.Drawing.Point(12, 475);
             this.btnStock.Name = "btnStock";
             this.btnStock.Size = new System.Drawing.Size(270, 58);
             this.btnStock.TabIndex = 15;
@@ -114,7 +109,7 @@
             this.bttUserAccount.Image = global::QLCafe.Presentation.Properties.Resources.Screenshot_2025_12_11_161759_removebg_preview;
             this.bttUserAccount.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.bttUserAccount.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.bttUserAccount.Location = new System.Drawing.Point(12, 300);
+            this.bttUserAccount.Location = new System.Drawing.Point(12, 217);
             this.bttUserAccount.Name = "bttUserAccount";
             this.bttUserAccount.Size = new System.Drawing.Size(352, 72);
             this.bttUserAccount.TabIndex = 12;
@@ -132,7 +127,7 @@
             this.btnMenu.Image = global::QLCafe.Presentation.Properties.Resources.Screenshot_2025_12_11_161711_removebg_preview;
             this.btnMenu.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnMenu.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnMenu.Location = new System.Drawing.Point(12, 378);
+            this.btnMenu.Location = new System.Drawing.Point(12, 295);
             this.btnMenu.Name = "btnMenu";
             this.btnMenu.Size = new System.Drawing.Size(305, 72);
             this.btnMenu.TabIndex = 13;
@@ -150,7 +145,7 @@
             this.bttSaleReport.Image = global::QLCafe.Presentation.Properties.Resources.Screenshot_2025_12_11_161545_removebg_preview;
             this.bttSaleReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.bttSaleReport.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.bttSaleReport.Location = new System.Drawing.Point(12, 634);
+            this.bttSaleReport.Location = new System.Drawing.Point(12, 551);
             this.bttSaleReport.Name = "bttSaleReport";
             this.bttSaleReport.Size = new System.Drawing.Size(352, 58);
             this.bttSaleReport.TabIndex = 18;
@@ -166,7 +161,7 @@
             this.btnLogout.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnLogout.ForeColor = System.Drawing.Color.White;
             this.btnLogout.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnLogout.Location = new System.Drawing.Point(0, 636);
+            this.btnLogout.Location = new System.Drawing.Point(0, 659);
             this.btnLogout.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(299, 46);
@@ -185,7 +180,7 @@
             this.btnTable.Image = global::QLCafe.Presentation.Properties.Resources.Screenshot_2025_12_11_151852_removebg_preview1;
             this.btnTable.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnTable.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnTable.Location = new System.Drawing.Point(12, 461);
+            this.btnTable.Location = new System.Drawing.Point(12, 378);
             this.btnTable.Name = "btnTable";
             this.btnTable.Size = new System.Drawing.Size(275, 72);
             this.btnTable.TabIndex = 14;
@@ -193,35 +188,12 @@
             this.btnTable.UseVisualStyleBackColor = false;
             this.btnTable.Click += new System.EventHandler(this.btnTable_Click);
             // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = global::QLCafe.Presentation.Properties.Resources.Time;
-            this.pictureBox3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.pictureBox3.Location = new System.Drawing.Point(26, 208);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(38, 45);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 10;
-            this.pictureBox3.TabStop = false;
-            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
-            // 
-            // label5
-            // 
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(211)))), ((int)(((byte)(77)))));
-            this.label5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label5.Location = new System.Drawing.Point(61, 176);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(167, 25);
-            this.label5.TabIndex = 9;
-            this.label5.Click += new System.EventHandler(this.label5_Click);
-            // 
             // pictureBox2
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(64)))), ((int)(((byte)(14)))));
             this.pictureBox2.Image = global::QLCafe.Presentation.Properties.Resources.avartar;
             this.pictureBox2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.pictureBox2.Location = new System.Drawing.Point(26, 120);
+            this.pictureBox2.Location = new System.Drawing.Point(23, 127);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(64, 62);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -235,7 +207,7 @@
             this.lblShift.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.lblShift.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(211)))), ((int)(((byte)(77)))));
             this.lblShift.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblShift.Location = new System.Drawing.Point(85, 124);
+            this.lblShift.Location = new System.Drawing.Point(96, 155);
             this.lblShift.Name = "lblShift";
             this.lblShift.Size = new System.Drawing.Size(99, 20);
             this.lblShift.TabIndex = 7;
@@ -248,7 +220,7 @@
             this.lblUserName.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.lblUserName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(250)))), ((int)(((byte)(251)))));
             this.lblUserName.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblUserName.Location = new System.Drawing.Point(85, 103);
+            this.lblUserName.Location = new System.Drawing.Point(96, 134);
             this.lblUserName.Name = "lblUserName";
             this.lblUserName.Size = new System.Drawing.Size(56, 20);
             this.lblUserName.TabIndex = 6;
@@ -258,7 +230,7 @@
             // 
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(64)))), ((int)(((byte)(14)))));
             this.label2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label2.Location = new System.Drawing.Point(19, 96);
+            this.label2.Location = new System.Drawing.Point(30, 127);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(252, 59);
             this.label2.TabIndex = 5;
@@ -268,7 +240,7 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label1.Location = new System.Drawing.Point(68, 22);
+            this.label1.Location = new System.Drawing.Point(93, 34);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(183, 38);
             this.label1.TabIndex = 1;
@@ -294,17 +266,17 @@
             this.panelRight.Location = new System.Drawing.Point(299, 0);
             this.panelRight.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelRight.Name = "panelRight";
-            this.panelRight.Size = new System.Drawing.Size(1193, 682);
+            this.panelRight.Size = new System.Drawing.Size(1193, 705);
             this.panelRight.TabIndex = 2;
             // 
             // panelContent
             // 
             this.panelContent.BackColor = System.Drawing.Color.White;
             this.panelContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelContent.Location = new System.Drawing.Point(0, 42);
+            this.panelContent.Location = new System.Drawing.Point(0, 49);
             this.panelContent.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelContent.Name = "panelContent";
-            this.panelContent.Size = new System.Drawing.Size(1193, 640);
+            this.panelContent.Size = new System.Drawing.Size(1193, 656);
             this.panelContent.TabIndex = 2;
             // 
             // panelHeader
@@ -319,7 +291,7 @@
             this.panelHeader.Location = new System.Drawing.Point(0, 0);
             this.panelHeader.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(1193, 42);
+            this.panelHeader.Size = new System.Drawing.Size(1193, 49);
             this.panelHeader.TabIndex = 1;
             // 
             // pictureBox5
@@ -348,7 +320,7 @@
             // 
             this.txtSearch.Location = new System.Drawing.Point(458, 15);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(190, 26);
+            this.txtSearch.Size = new System.Drawing.Size(190, 22);
             this.txtSearch.TabIndex = 1;
             // 
             // lblFunctionName
@@ -368,7 +340,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1492, 682);
+            this.ClientSize = new System.Drawing.Size(1492, 705);
             this.Controls.Add(this.panelRight);
             this.Controls.Add(this.panelLeft);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -377,7 +349,6 @@
             this.Text = "AdminMainView";
             this.panelLeft.ResumeLayout(false);
             this.panelLeft.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelRight.ResumeLayout(false);
@@ -398,8 +369,6 @@
         private System.Windows.Forms.Button btnStock;
         private System.Windows.Forms.Button btnTable;
         private System.Windows.Forms.Button btnMenu;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label lblShift;
         private System.Windows.Forms.Label lblUserName;
