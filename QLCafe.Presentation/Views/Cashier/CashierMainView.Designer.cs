@@ -33,9 +33,6 @@
             this.panelRight = new System.Windows.Forms.Panel();
             this.panelContent = new System.Windows.Forms.Panel();
             this.panelHeader = new System.Windows.Forms.Panel();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.txtSearch = new System.Windows.Forms.TextBox();
             this.lblFunctionName = new System.Windows.Forms.Label();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -54,8 +51,6 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelRight.SuspendLayout();
             this.panelHeader.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.panelLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -77,51 +72,21 @@
             // 
             this.panelContent.BackColor = System.Drawing.Color.White;
             this.panelContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelContent.Location = new System.Drawing.Point(0, 52);
+            this.panelContent.Location = new System.Drawing.Point(0, 35);
             this.panelContent.Name = "panelContent";
-            this.panelContent.Size = new System.Drawing.Size(959, 750);
+            this.panelContent.Size = new System.Drawing.Size(959, 767);
             this.panelContent.TabIndex = 2;
             // 
             // panelHeader
             // 
             this.panelHeader.AutoSize = true;
             this.panelHeader.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.panelHeader.Controls.Add(this.pictureBox5);
-            this.panelHeader.Controls.Add(this.pictureBox4);
-            this.panelHeader.Controls.Add(this.txtSearch);
             this.panelHeader.Controls.Add(this.lblFunctionName);
             this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelHeader.Location = new System.Drawing.Point(0, 0);
             this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(959, 52);
+            this.panelHeader.Size = new System.Drawing.Size(959, 35);
             this.panelHeader.TabIndex = 1;
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Image = global::QLCafe.Presentation.Properties.Resources.chuongthongbao;
-            this.pictureBox5.Location = new System.Drawing.Point(813, 9);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(43, 37);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox5.TabIndex = 3;
-            this.pictureBox5.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = global::QLCafe.Presentation.Properties.Resources.Kinhluo;
-            this.pictureBox4.Location = new System.Drawing.Point(412, 12);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(40, 37);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 2;
-            this.pictureBox4.TabStop = false;
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.Location = new System.Drawing.Point(458, 16);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(190, 26);
-            this.txtSearch.TabIndex = 1;
             // 
             // lblFunctionName
             // 
@@ -338,9 +303,6 @@
             this.panelRight.ResumeLayout(false);
             this.panelRight.PerformLayout();
             this.panelHeader.ResumeLayout(false);
-            this.panelHeader.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.panelLeft.ResumeLayout(false);
             this.panelLeft.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -369,9 +331,6 @@
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.Panel panelHeader;
         private System.Windows.Forms.Label lblFunctionName;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.TextBox txtSearch;
-        private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.Panel panelContent;
     }
 }

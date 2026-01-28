@@ -44,19 +44,14 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelRight = new System.Windows.Forms.Panel();
             this.panelContent = new System.Windows.Forms.Panel();
-            this.panelHeader = new System.Windows.Forms.Panel();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.txtSearch = new System.Windows.Forms.TextBox();
-            this.lblFunctionName = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.lblFunctionName = new System.Windows.Forms.Label();
+            this.panelHeader = new System.Windows.Forms.Panel();
             this.panelLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelRight.SuspendLayout();
             this.panelHeader.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.SuspendLayout();
             // 
             // panelLeft
@@ -78,7 +73,7 @@
             this.panelLeft.Location = new System.Drawing.Point(0, 0);
             this.panelLeft.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelLeft.Name = "panelLeft";
-            this.panelLeft.Size = new System.Drawing.Size(299, 705);
+            this.panelLeft.Size = new System.Drawing.Size(336, 881);
             this.panelLeft.TabIndex = 1;
             // 
             // btnStock
@@ -91,9 +86,10 @@
             this.btnStock.Image = global::QLCafe.Presentation.Properties.Resources.Screenshot_2025_12_11_161459_removebg_preview;
             this.btnStock.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnStock.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnStock.Location = new System.Drawing.Point(12, 475);
+            this.btnStock.Location = new System.Drawing.Point(14, 594);
+            this.btnStock.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnStock.Name = "btnStock";
-            this.btnStock.Size = new System.Drawing.Size(270, 58);
+            this.btnStock.Size = new System.Drawing.Size(304, 72);
             this.btnStock.TabIndex = 15;
             this.btnStock.Text = "Lịch sử bàn";
             this.btnStock.UseVisualStyleBackColor = false;
@@ -109,9 +105,10 @@
             this.bttUserAccount.Image = global::QLCafe.Presentation.Properties.Resources.Screenshot_2025_12_11_161759_removebg_preview;
             this.bttUserAccount.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.bttUserAccount.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.bttUserAccount.Location = new System.Drawing.Point(12, 217);
+            this.bttUserAccount.Location = new System.Drawing.Point(14, 271);
+            this.bttUserAccount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bttUserAccount.Name = "bttUserAccount";
-            this.bttUserAccount.Size = new System.Drawing.Size(352, 72);
+            this.bttUserAccount.Size = new System.Drawing.Size(396, 90);
             this.bttUserAccount.TabIndex = 12;
             this.bttUserAccount.Text = "Quản lý Tài Khoản";
             this.bttUserAccount.UseVisualStyleBackColor = false;
@@ -127,9 +124,10 @@
             this.btnMenu.Image = global::QLCafe.Presentation.Properties.Resources.Screenshot_2025_12_11_161711_removebg_preview;
             this.btnMenu.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnMenu.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnMenu.Location = new System.Drawing.Point(12, 295);
+            this.btnMenu.Location = new System.Drawing.Point(14, 369);
+            this.btnMenu.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnMenu.Name = "btnMenu";
-            this.btnMenu.Size = new System.Drawing.Size(305, 72);
+            this.btnMenu.Size = new System.Drawing.Size(343, 90);
             this.btnMenu.TabIndex = 13;
             this.btnMenu.Text = "Quản lý Menu";
             this.btnMenu.UseVisualStyleBackColor = false;
@@ -145,9 +143,10 @@
             this.bttSaleReport.Image = global::QLCafe.Presentation.Properties.Resources.Screenshot_2025_12_11_161545_removebg_preview;
             this.bttSaleReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.bttSaleReport.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.bttSaleReport.Location = new System.Drawing.Point(12, 551);
+            this.bttSaleReport.Location = new System.Drawing.Point(14, 689);
+            this.bttSaleReport.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bttSaleReport.Name = "bttSaleReport";
-            this.bttSaleReport.Size = new System.Drawing.Size(352, 58);
+            this.bttSaleReport.Size = new System.Drawing.Size(396, 72);
             this.bttSaleReport.TabIndex = 18;
             this.bttSaleReport.Text = "Báo cáo doanh thu";
             this.bttSaleReport.UseVisualStyleBackColor = false;
@@ -161,10 +160,10 @@
             this.btnLogout.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnLogout.ForeColor = System.Drawing.Color.White;
             this.btnLogout.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnLogout.Location = new System.Drawing.Point(0, 659);
+            this.btnLogout.Location = new System.Drawing.Point(0, 823);
             this.btnLogout.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(299, 46);
+            this.btnLogout.Size = new System.Drawing.Size(336, 58);
             this.btnLogout.TabIndex = 16;
             this.btnLogout.Text = "-> Đăng xuất";
             this.btnLogout.UseVisualStyleBackColor = false;
@@ -180,9 +179,10 @@
             this.btnTable.Image = global::QLCafe.Presentation.Properties.Resources.Screenshot_2025_12_11_151852_removebg_preview1;
             this.btnTable.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnTable.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnTable.Location = new System.Drawing.Point(12, 378);
+            this.btnTable.Location = new System.Drawing.Point(14, 472);
+            this.btnTable.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnTable.Name = "btnTable";
-            this.btnTable.Size = new System.Drawing.Size(275, 72);
+            this.btnTable.Size = new System.Drawing.Size(309, 90);
             this.btnTable.TabIndex = 14;
             this.btnTable.Text = "Quản lý Bàn";
             this.btnTable.UseVisualStyleBackColor = false;
@@ -193,9 +193,10 @@
             this.pictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(64)))), ((int)(((byte)(14)))));
             this.pictureBox2.Image = global::QLCafe.Presentation.Properties.Resources.avartar;
             this.pictureBox2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.pictureBox2.Location = new System.Drawing.Point(23, 127);
+            this.pictureBox2.Location = new System.Drawing.Point(26, 159);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(64, 62);
+            this.pictureBox2.Size = new System.Drawing.Size(72, 78);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 8;
             this.pictureBox2.TabStop = false;
@@ -207,9 +208,9 @@
             this.lblShift.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.lblShift.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(211)))), ((int)(((byte)(77)))));
             this.lblShift.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblShift.Location = new System.Drawing.Point(96, 155);
+            this.lblShift.Location = new System.Drawing.Point(108, 194);
             this.lblShift.Name = "lblShift";
-            this.lblShift.Size = new System.Drawing.Size(99, 20);
+            this.lblShift.Size = new System.Drawing.Size(123, 25);
             this.lblShift.TabIndex = 7;
             this.lblShift.Text = "Quản trị viên";
             // 
@@ -220,9 +221,9 @@
             this.lblUserName.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.lblUserName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(250)))), ((int)(((byte)(251)))));
             this.lblUserName.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblUserName.Location = new System.Drawing.Point(96, 134);
+            this.lblUserName.Location = new System.Drawing.Point(108, 168);
             this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(56, 20);
+            this.lblUserName.Size = new System.Drawing.Size(68, 25);
             this.lblUserName.TabIndex = 6;
             this.lblUserName.Text = "Admin";
             // 
@@ -230,9 +231,9 @@
             // 
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(64)))), ((int)(((byte)(14)))));
             this.label2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label2.Location = new System.Drawing.Point(30, 127);
+            this.label2.Location = new System.Drawing.Point(34, 159);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(252, 59);
+            this.label2.Size = new System.Drawing.Size(284, 74);
             this.label2.TabIndex = 5;
             // 
             // label1
@@ -240,9 +241,9 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label1.Location = new System.Drawing.Point(93, 34);
+            this.label1.Location = new System.Drawing.Point(105, 42);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(183, 38);
+            this.label1.Size = new System.Drawing.Size(206, 48);
             this.label1.TabIndex = 1;
             this.label1.Text = "QL Cafe Pro";
             // 
@@ -250,9 +251,10 @@
             // 
             this.pictureBox1.Image = global::QLCafe.Presentation.Properties.Resources.main_logo;
             this.pictureBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(3, 15);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(87, 82);
+            this.pictureBox1.Size = new System.Drawing.Size(98, 102);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -263,84 +265,52 @@
             this.panelRight.Controls.Add(this.panelContent);
             this.panelRight.Controls.Add(this.panelHeader);
             this.panelRight.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelRight.Location = new System.Drawing.Point(299, 0);
+            this.panelRight.Location = new System.Drawing.Point(336, 0);
             this.panelRight.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelRight.Name = "panelRight";
-            this.panelRight.Size = new System.Drawing.Size(1193, 705);
+            this.panelRight.Size = new System.Drawing.Size(1342, 881);
             this.panelRight.TabIndex = 2;
             // 
             // panelContent
             // 
             this.panelContent.BackColor = System.Drawing.Color.White;
             this.panelContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelContent.Location = new System.Drawing.Point(0, 49);
+            this.panelContent.Location = new System.Drawing.Point(0, 61);
             this.panelContent.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelContent.Name = "panelContent";
-            this.panelContent.Size = new System.Drawing.Size(1193, 656);
+            this.panelContent.Size = new System.Drawing.Size(1342, 820);
             this.panelContent.TabIndex = 2;
-            // 
-            // panelHeader
-            // 
-            this.panelHeader.AutoSize = true;
-            this.panelHeader.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.panelHeader.Controls.Add(this.pictureBox5);
-            this.panelHeader.Controls.Add(this.pictureBox4);
-            this.panelHeader.Controls.Add(this.txtSearch);
-            this.panelHeader.Controls.Add(this.lblFunctionName);
-            this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelHeader.Location = new System.Drawing.Point(0, 0);
-            this.panelHeader.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(1193, 49);
-            this.panelHeader.TabIndex = 1;
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Image = global::QLCafe.Presentation.Properties.Resources.chuongthongbao;
-            this.pictureBox5.Location = new System.Drawing.Point(723, 7);
-            this.pictureBox5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(39, 30);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox5.TabIndex = 3;
-            this.pictureBox5.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = global::QLCafe.Presentation.Properties.Resources.Kinhluo;
-            this.pictureBox4.Location = new System.Drawing.Point(366, 10);
-            this.pictureBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(36, 30);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 2;
-            this.pictureBox4.TabStop = false;
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.Location = new System.Drawing.Point(458, 15);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(190, 22);
-            this.txtSearch.TabIndex = 1;
-            // 
-            // lblFunctionName
-            // 
-            this.lblFunctionName.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFunctionName.Location = new System.Drawing.Point(44, 12);
-            this.lblFunctionName.Name = "lblFunctionName";
-            this.lblFunctionName.Size = new System.Drawing.Size(532, 37);
-            this.lblFunctionName.TabIndex = 0;
-            this.lblFunctionName.Text = "Quản Lý Tài Khoản";
             // 
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // lblFunctionName
+            // 
+            this.lblFunctionName.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFunctionName.Location = new System.Drawing.Point(50, 15);
+            this.lblFunctionName.Name = "lblFunctionName";
+            this.lblFunctionName.Size = new System.Drawing.Size(598, 46);
+            this.lblFunctionName.TabIndex = 0;
+            this.lblFunctionName.Text = "Quản Lý Tài Khoản";
+            // 
+            // panelHeader
+            // 
+            this.panelHeader.AutoSize = true;
+            this.panelHeader.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.panelHeader.Controls.Add(this.lblFunctionName);
+            this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelHeader.Location = new System.Drawing.Point(0, 0);
+            this.panelHeader.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelHeader.Name = "panelHeader";
+            this.panelHeader.Size = new System.Drawing.Size(1342, 61);
+            this.panelHeader.TabIndex = 1;
+            // 
             // AdminMainView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1492, 705);
+            this.ClientSize = new System.Drawing.Size(1678, 881);
             this.Controls.Add(this.panelRight);
             this.Controls.Add(this.panelLeft);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -354,9 +324,6 @@
             this.panelRight.ResumeLayout(false);
             this.panelRight.PerformLayout();
             this.panelHeader.ResumeLayout(false);
-            this.panelHeader.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -377,12 +344,9 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panelRight;
         private System.Windows.Forms.Panel panelContent;
-        private System.Windows.Forms.Panel panelHeader;
-        private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.TextBox txtSearch;
-        private System.Windows.Forms.Label lblFunctionName;
         private System.Windows.Forms.Button bttSaleReport;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Panel panelHeader;
+        private System.Windows.Forms.Label lblFunctionName;
     }
 }

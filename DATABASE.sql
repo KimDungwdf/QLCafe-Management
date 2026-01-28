@@ -895,3 +895,388 @@ EXEC @kqThuKho = sp_Admin_InsertAccount
 -- BƯỚC 5: KIỂM TRA KẾT QUẢ
 SELECT 'KetQua_Admin' = @kqAdmin, 'KetQua_ThuNgan' = @kqThuNgan, 'KetQua_ThuKho' = @kqThuKho;
 SELECT * FROM TaiKhoan;
+CREATE OR ALTER PROCEDURE sp_GetInventoryReport
+    @TuNgay DATETIME,
+    @DenNgay DATETIME
+AS
+BEGIN
+    SELECT 
+        nl.TenNguyenLieu,
+        dvt.TenDVT,
+        nl.SoLuongTon,
+        ISNULL(SUM(ctpn.SoLuongNhap), 0) AS TongNhapTrongKy,
+        ISNULL(SUM(ctpn.SoLuongNhap * ctpn.DonGiaNhap), 0) AS TongGiaTriNhap
+    FROM NguyenLieu nl
+    JOIN DonViTinh dvt ON nl.IDDonViTinh = dvt.IDDonViTinh
+    LEFT JOIN ChiTietPhieuNhap ctpn ON nl.IDNguyenLieu = ctpn.IDNguyenLieu
+    LEFT JOIN PhieuNhap pn ON ctpn.IDPhieuNhap = pn.IDPhieuNhap
+    WHERE pn.NgayNhap BETWEEN @TuNgay AND @DenNgay OR pn.NgayNhap IS NULL
+    GROUP BY nl.TenNguyenLieu, dvt.TenDVT, nl.SoLuongTon
+END
+GO
+
+USE QLCafe
+GO
+
+CREATE OR ALTER PROCEDURE sp_GetInventoryDashboard
+AS
+BEGIN
+    -- 1. Lấy số liệu thống kê cho 4 cái thẻ trên cùng
+    SELECT 
+        (SELECT COUNT(*) FROM NguyenLieu) AS TongNguyenLieu,
+        (SELECT COUNT(*) FROM NguyenLieu WHERE SoLuongTon <= TonKhoToiThieu) AS CanNhapGap,
+        (SELECT COUNT(*) FROM NguyenLieu WHERE SoLuongTon > TonKhoToiThieu AND SoLuongTon <= TonKhoToiThieu * 1.5) AS SapHet,
+        (SELECT COUNT(*) FROM NguyenLieu WHERE SoLuongTon > TonKhoToiThieu * 1.5) AS OnDinh
+
+    -- 2. Lấy danh sách chi tiết cho bảng
+    SELECT 
+        nl.TenNguyenLieu,
+        dvt.TenDVT,
+        nl.SoLuongTon,
+        nl.TonKhoToiThieu,
+        -- Tính % Tồn kho (để vẽ thanh Progress bar)
+        CASE 
+            WHEN nl.TonKhoToiThieu = 0 THEN 100
+            ELSE (nl.SoLuongTon / (nl.TonKhoToiThieu * 2)) * 100 -- Quy ước: Tồn gấp đôi tối thiểu là 100% thanh
+        END AS PhanTramTon,
+        -- Xác định trạng thái
+        CASE 
+            WHEN nl.SoLuongTon <= nl.TonKhoToiThieu THEN N'Cần nhập gấp'
+            WHEN nl.SoLuongTon <= nl.TonKhoToiThieu * 1.5 THEN N'Sắp hết'
+            ELSE N'Ổn định'
+        END AS TrangThaiText,
+        -- Mã màu (1: Đỏ, 2: Vàng, 3: Xanh)
+        CASE 
+            WHEN nl.SoLuongTon <= nl.TonKhoToiThieu THEN 1
+            WHEN nl.SoLuongTon <= nl.TonKhoToiThieu * 1.5 THEN 2
+            ELSE 3
+        END AS TrangThaiColor
+    FROM NguyenLieu nl
+    JOIN DonViTinh dvt ON nl.IDDonViTinh = dvt.IDDonViTinh
+    ORDER BY TrangThaiColor ASC -- Ưu tiên hiển thị cái cần nhập trước
+END
+GO
+SELECT*FROM NguyenLieu
+SELECT @@SERVERNAME
+
+-- Đảm bảo đang dùng đúng Database
+USE QLCafe
+GO
+
+-- Xóa SP cũ nếu lỗi
+DROP PROCEDURE IF EXISTS sp_GetInventoryDashboard
+GO
+
+-- Tạo lại SP chuẩn
+CREATE PROCEDURE sp_GetInventoryDashboard
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- 1. Trả về Dashboard (Bảng 1)
+    SELECT 
+        (SELECT COUNT(*) FROM NguyenLieu) AS TongNguyenLieu,
+        (SELECT COUNT(*) FROM NguyenLieu WHERE SoLuongTon <= TonKhoToiThieu) AS CanNhapGap,
+        (SELECT COUNT(*) FROM NguyenLieu WHERE SoLuongTon > TonKhoToiThieu AND SoLuongTon <= TonKhoToiThieu * 1.5) AS SapHet,
+        (SELECT COUNT(*) FROM NguyenLieu WHERE SoLuongTon > TonKhoToiThieu * 1.5) AS OnDinh;
+
+    -- 2. Trả về Danh sách (Bảng 2)
+    -- Lưu ý: Phải LEFT JOIN DonViTinh để lấy tên ĐVT
+    SELECT 
+        nl.TenNguyenLieu,
+        dvt.TenDVT,
+        nl.SoLuongTon,
+        nl.TonKhoToiThieu,
+        CASE 
+            WHEN nl.SoLuongTon <= nl.TonKhoToiThieu THEN N'Cần nhập gấp'
+            WHEN nl.SoLuongTon <= nl.TonKhoToiThieu * 1.5 THEN N'Sắp hết'
+            ELSE N'Ổn định'
+        END AS TrangThaiText,
+        CASE 
+            WHEN nl.SoLuongTon <= nl.TonKhoToiThieu THEN 1 -- Đỏ
+            WHEN nl.SoLuongTon <= nl.TonKhoToiThieu * 1.5 THEN 2 -- Vàng
+            ELSE 3 -- Xanh
+        END AS TrangThaiColor,
+        -- Tính phần trăm để vẽ thanh bar (tránh chia cho 0)
+        CASE 
+            WHEN nl.TonKhoToiThieu = 0 THEN 100 
+            ELSE (nl.SoLuongTon / (nl.TonKhoToiThieu * 2)) * 100 
+        END AS PhanTramTon
+    FROM NguyenLieu nl
+    LEFT JOIN DonViTinh dvt ON nl.IDDonViTinh = dvt.IDDonViTinh
+    ORDER BY TrangThaiColor ASC;
+END
+GO
+
+USE QLCafe
+GO
+
+-- 1. Thêm Danh Mục Món Mới
+INSERT INTO DanhMucMon (TenDanhMuc) VALUES (N'Trà sữa & Topping')
+GO
+
+-- 2. Thêm Sản Phẩm Mới (Lấy ID danh mục vừa tạo, thường là 4)
+DECLARE @IdDmTraSua INT = (SELECT IDDanhMuc FROM DanhMucMon WHERE TenDanhMuc = N'Trà sữa & Topping')
+
+INSERT INTO SanPham (TenSanPham, IDDanhMuc, DonGia) VALUES
+(N'Sữa tươi trân châu đường đen', @IdDmTraSua, 40000),
+(N'Trà sữa Thái Xanh', @IdDmTraSua, 35000),
+(N'Trà sữa Full Topping', @IdDmTraSua, 50000)
+GO
+
+-- 3. Thêm Nguyên Liệu Mới (Cài đặt số liệu để Test các màu trạng thái)
+
+-- >>>> TRẠNG THÁI: SẮP HẾT (Màu Vàng) 
+-- (Quy tắc: Tồn > Tối thiểu VÀ Tồn <= Tối thiểu * 1.5)
+INSERT INTO NguyenLieu (TenNguyenLieu, IDDonViTinh, SoLuongTon, TonKhoToiThieu) VALUES
+(N'Trân châu đen', 1, 6, 5),        -- Min 5, Tồn 6 (Trong vùng 5->7.5) -> SẮP HẾT
+(N'Sữa tươi Vinamilk', 3, 28, 20),  -- Min 20, Tồn 28 (Trong vùng 20->30) -> SẮP HẾT
+(N'Bột béo B-One', 1, 7, 5)         -- Min 5, Tồn 7 (Trong vùng 5->7.5) -> SẮP HẾT
+GO
+
+-- >>>> TRẠNG THÁI: ỔN ĐỊNH (Màu Xanh)
+-- (Quy tắc: Tồn > Tối thiểu * 1.5)
+INSERT INTO NguyenLieu (TenNguyenLieu, IDDonViTinh, SoLuongTon, TonKhoToiThieu) VALUES
+(N'Đường đen Hàn Quốc', 1, 20, 5),  -- Min 5, Tồn 20 (Lớn hơn 7.5) -> ỔN ĐỊNH
+(N'Bột trà Thái Xanh', 1, 10, 2),   -- Min 2, Tồn 10 (Lớn hơn 3) -> ỔN ĐỊNH
+(N'Thạch rau câu', 1, 15, 3),       -- Min 3, Tồn 15 (Lớn hơn 4.5) -> ỔN ĐỊNH
+(N'Ly nhựa 500ml', 5, 500, 50)      -- Min 50, Tồn 500 -> ỔN ĐỊNH
+GO
+
+-- 4. Thêm Định Lượng (Công thức pha chế) để liên kết món và nguyên liệu
+-- Lưu ý: IDNguyenLieu và IDSanPham có thể khác trên máy bạn do tự tăng, 
+-- đây là giả định bạn chạy tiếp theo dữ liệu cũ.
+
+-- Lấy ID các món vừa thêm
+DECLARE @IdMon_SuaTuoiTC INT = (SELECT IDSanPham FROM SanPham WHERE TenSanPham = N'Sữa tươi trân châu đường đen')
+DECLARE @IdMon_ThaiXanh INT = (SELECT IDSanPham FROM SanPham WHERE TenSanPham = N'Trà sữa Thái Xanh')
+
+-- Lấy ID nguyên liệu vừa thêm
+DECLARE @IdNL_TranChau INT = (SELECT IDNguyenLieu FROM NguyenLieu WHERE TenNguyenLieu = N'Trân châu đen')
+DECLARE @IdNL_SuaTuoi INT = (SELECT IDNguyenLieu FROM NguyenLieu WHERE TenNguyenLieu = N'Sữa tươi Vinamilk')
+DECLARE @IdNL_DuongDen INT = (SELECT IDNguyenLieu FROM NguyenLieu WHERE TenNguyenLieu = N'Đường đen Hàn Quốc')
+DECLARE @IdNL_BotThai INT = (SELECT IDNguyenLieu FROM NguyenLieu WHERE TenNguyenLieu = N'Bột trà Thái Xanh')
+DECLARE @IdNL_BotBeo INT = (SELECT IDNguyenLieu FROM NguyenLieu WHERE TenNguyenLieu = N'Bột béo B-One')
+
+-- Công thức: Sữa tươi TC đường đen = Sữa tươi + Trân châu + Đường đen
+INSERT INTO DinhLuong (IDSanPham, IDNguyenLieu, SoLuongCan) VALUES
+(@IdMon_SuaTuoiTC, @IdNL_SuaTuoi, 0.2), -- 200ml sữa
+(@IdMon_SuaTuoiTC, @IdNL_TranChau, 0.05), -- 50g trân châu
+(@IdMon_SuaTuoiTC, @IdNL_DuongDen, 0.03) -- 30g đường đen
+
+-- Công thức: Trà sữa Thái = Bột Thái + Bột Béo + Sữa đặc (lấy ID cũ = 2)
+INSERT INTO DinhLuong (IDSanPham, IDNguyenLieu, SoLuongCan) VALUES
+(@IdMon_ThaiXanh, @IdNL_BotThai, 0.02),
+(@IdMon_ThaiXanh, @IdNL_BotBeo, 0.03),
+(@IdMon_ThaiXanh, 2, 30) -- 30ml Sữa đặc ông thọ (nguyên liệu cũ)
+GO
+
+-- 5. Xem kết quả Dashboard ngay lập tức để kiểm tra
+EXEC sp_GetInventoryDashboard
+GO
+USE QLCafe
+GO
+
+-- 1. SP Tạo Phiếu Nhập
+CREATE OR ALTER PROCEDURE sp_CreateStockIn
+    @IDNhaCungCap INT,
+    @TenDangNhap NVARCHAR(100)
+AS
+BEGIN
+    INSERT INTO PhieuNhap (IDNhaCungCap, TenDangNhap, NgayNhap, TongTienNhap)
+    VALUES (@IDNhaCungCap, @TenDangNhap, GETDATE(), 0);
+
+    SELECT SCOPE_IDENTITY() AS IDPhieuNhapMoi; 
+END
+GO
+
+-- 2. SP Thêm Chi Tiết Phiếu Nhập
+CREATE OR ALTER PROCEDURE sp_AddStockInDetail
+    @IDPhieuNhap INT,
+    @IDNguyenLieu INT,
+    @SoLuongNhap DECIMAL(18, 2),
+    @DonGiaNhap DECIMAL(18, 0)
+AS
+BEGIN
+    INSERT INTO ChiTietPhieuNhap (IDPhieuNhap, IDNguyenLieu, SoLuongNhap, DonGiaNhap)
+    VALUES (@IDPhieuNhap, @IDNguyenLieu, @SoLuongNhap, @DonGiaNhap);
+    -- Trigger trong DB của bạn sẽ tự động cộng kho và tính tổng tiền
+END
+GO
+
+USE QLCafe
+GO
+
+-- Kiểm tra và thêm cột PhuongThuc nếu chưa có
+IF NOT EXISTS (SELECT * FROM sys.columns 
+               WHERE Name = 'PhuongThuc' AND Object_ID = OBJECT_ID('HoaDon'))
+BEGIN
+    ALTER TABLE HoaDon ADD PhuongThuc NVARCHAR(50) DEFAULT N'Tiền mặt'
+END
+GO
+
+-- Cập nhật Procedure thanh toán (Dùng CREATE OR ALTER để chạy lại thoải mái)
+CREATE OR ALTER PROCEDURE sp_Checkout
+    @IDBan INT,
+    @GiamGia DECIMAL(18, 0),
+    @PhuongThuc NVARCHAR(50)
+AS
+BEGIN
+    UPDATE HoaDon
+    SET TrangThai = 1, 
+        GiamGia = @GiamGia, 
+        PhuongThuc = @PhuongThuc, 
+        NgayLap = GETDATE()
+    WHERE IDBan = @IDBan AND TrangThai = 0;
+END
+GO
+
+USE QLCafe
+GO
+
+-- Sửa lại Procedure để nhận thêm tên phương thức thanh toán
+CREATE OR ALTER PROCEDURE sp_Checkout
+    @IDBan INT,
+    @GiamGia DECIMAL(18, 0),
+    @PhuongThuc NVARCHAR(50) -- <--- THÊM DÒNG NÀY
+AS
+BEGIN
+    UPDATE HoaDon
+    SET 
+        TrangThai = 1, -- Đã thanh toán
+        GiamGia = @GiamGia,
+        PhuongThuc = @PhuongThuc, -- <--- LƯU VÀO CỘT NÀY
+        NgayLap = GETDATE()
+    WHERE IDBan = @IDBan AND TrangThai = 0;
+END
+GO
+USE QLCafe
+GO
+
+USE QLCafe
+GO
+
+-- Dùng CREATE OR ALTER để ghi đè lên Procedure cũ của bạn
+CREATE OR ALTER PROCEDURE sp_Checkout
+    @IDBan INT,
+    @GiamGia DECIMAL(18, 0),
+    @PhuongThuc NVARCHAR(50) -- Thêm tham số này để nhận dữ liệu từ C# gửi xuống
+AS
+BEGIN
+    UPDATE HoaDon
+    SET 
+        TrangThai = 1,              -- Đổi trạng thái thành "Đã thanh toán"
+        GiamGia = @GiamGia,          -- Lưu số tiền giảm
+        PhuongThuc = @PhuongThuc,    -- Lưu "Tiền mặt", "Momo" hoặc "Thẻ" vào đây
+        NgayLap = GETDATE()          -- Cập nhật giờ thanh toán thực tế
+    WHERE IDBan = @IDBan AND TrangThai = 0; -- Chỉ thanh toán hóa đơn đang mở của bàn đó
+END
+GO
+
+DECLARE @kq INT;
+
+EXEC @kq = sp_Admin_InsertAccount
+    @TenDangNhap = 'thungan2',
+    @TenHienThi  = N'Thu Ngân Ca Chiều',
+    @MatKhau     = 'Staff@12345',
+    @IDVaiTro    = 2;  -- 2 = Thu ngân
+
+SELECT 'KetQua' = @kq;
+USE QLCafe
+GO
+
+-- 1. SP LẤY 4 CHỈ SỐ THỐNG KÊ (Cho 4 cái thẻ trên cùng)
+CREATE OR ALTER PROCEDURE sp_Report_GetOverview
+    @TuNgay DATETIME,
+    @DenNgay DATETIME,
+    @NguoiLap NVARCHAR(100) = NULL -- Nếu chọn "Tất cả" thì truyền NULL
+AS
+BEGIN
+    -- Tính toán các chỉ số trong khoảng thời gian
+    SELECT 
+        ISNULL(SUM(TongTien), 0) AS TongDoanhThu,
+        COUNT(IDHoaDon) AS SoHoaDon,
+        ISNULL(SUM(GiamGia), 0) AS TongGiamGia,
+        CASE 
+            WHEN COUNT(IDHoaDon) > 0 THEN ISNULL(SUM(TongTien), 0) / COUNT(IDHoaDon)
+            ELSE 0 
+        END AS TrungBinhDon
+    FROM HoaDon
+    WHERE TrangThai = 1 -- Chỉ lấy đơn đã thanh toán
+      AND NgayLap BETWEEN @TuNgay AND @DenNgay
+      AND (@NguoiLap IS NULL OR TenDangNhap = @NguoiLap)
+END
+GO
+
+-- 2. SP LẤY DANH SÁCH CHI TIẾT HÓA ĐƠN (Cho bảng ở giữa)
+CREATE OR ALTER PROCEDURE sp_Report_GetBillList
+    @TuNgay DATETIME,
+    @DenNgay DATETIME,
+    @NguoiLap NVARCHAR(100) = NULL
+AS
+BEGIN
+    SELECT 
+        hd.IDHoaDon AS MaHD,
+        hd.NgayLap AS ThoiGian,
+        b.TenBan AS Ban,
+        (hd.TongTien + hd.GiamGia) AS TongTienGoc, -- Tổng tiền trước giảm
+        hd.GiamGia,
+        hd.TongTien AS ThanhTien, -- Thực thu
+        ISNULL(hd.PhuongThuc, N'Tiền mặt') AS PhuongThuc,
+        N'Đã thanh toán' AS TrangThai
+    FROM HoaDon hd
+    JOIN Ban b ON hd.IDBan = b.IDBan
+    WHERE hd.TrangThai = 1
+      AND hd.NgayLap BETWEEN @TuNgay AND @DenNgay
+      AND (@NguoiLap IS NULL OR hd.TenDangNhap = @NguoiLap)
+    ORDER BY hd.NgayLap DESC
+END
+GO
+
+-- 3. SP LẤY TOP SẢN PHẨM BÁN CHẠY (Cho bảng dưới cùng)
+CREATE OR ALTER PROCEDURE sp_Report_GetTopProducts
+    @TuNgay DATETIME,
+    @DenNgay DATETIME
+AS
+BEGIN
+    SELECT TOP 5
+        sp.TenSanPham,
+        dm.TenDanhMuc,
+        SUM(ct.SoLuong) AS SoLuongBan,
+        sp.DonGia,
+        SUM(ct.SoLuong * ct.DonGiaTaiThoiDiem) AS DoanhThu
+    FROM ChiTietHoaDon ct
+    JOIN HoaDon hd ON ct.IDHoaDon = hd.IDHoaDon
+    JOIN SanPham sp ON ct.IDSanPham = sp.IDSanPham
+    JOIN DanhMucMon dm ON sp.IDDanhMuc = dm.IDDanhMuc
+    WHERE hd.TrangThai = 1
+      AND hd.NgayLap BETWEEN @TuNgay AND @DenNgay
+    GROUP BY sp.TenSanPham, dm.TenDanhMuc, sp.DonGia
+    ORDER BY SoLuongBan DESC -- Sắp xếp theo số lượng bán giảm dần
+END
+GO
+CREATE OR ALTER PROCEDURE sp_Report_GetBillList
+    @TuNgay DATETIME,
+    @DenNgay DATETIME,
+    @NguoiLap NVARCHAR(100) = NULL
+AS
+BEGIN
+    SELECT 
+        -- SỬA DÒNG NÀY: Ghép chuỗi '#HD' với IDHoaDon
+        '#HD' + RIGHT('000' + CAST(hd.IDHoaDon AS VARCHAR(10)), 3) AS MaHD,
+        
+        hd.NgayLap AS ThoiGian,
+        b.TenBan AS Ban,
+        (hd.TongTien + hd.GiamGia) AS TongTienGoc,
+        hd.GiamGia,
+        hd.TongTien AS ThanhTien,
+        ISNULL(hd.PhuongThuc, N'Tiền mặt') AS PhuongThuc,
+        N'Đã thanh toán' AS TrangThai
+    FROM HoaDon hd
+    JOIN Ban b ON hd.IDBan = b.IDBan
+    WHERE hd.TrangThai = 1
+      AND hd.NgayLap BETWEEN @TuNgay AND @DenNgay
+      AND (@NguoiLap IS NULL OR hd.TenDangNhap = @NguoiLap)
+    ORDER BY hd.NgayLap DESC
+END
+GO

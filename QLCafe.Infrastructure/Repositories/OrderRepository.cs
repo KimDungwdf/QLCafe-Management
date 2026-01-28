@@ -122,8 +122,10 @@ namespace QLCafe.Infrastructure.Repositories
             }
         }
 
-        // THÊM METHOD MỚI - Xử lý thanh toán
-        public bool ProcessPayment(int tableId, decimal discountAmount, string userName)
+        // =========================================================
+        // PHẦN ĐÃ SỬA: CẬP NHẬT HÀM CHECKOUT
+        // =========================================================
+        public bool Checkout(int tableId, decimal discount, string paymentMethod, string userName)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -131,7 +133,12 @@ namespace QLCafe.Infrastructure.Repositories
                 {
                     connection.Execute(
                         "sp_Checkout",
-                        new { IDBan = tableId, GiamGia = discountAmount },
+                        new
+                        {
+                            IDBan = tableId,
+                            GiamGia = discount,
+                            PhuongThuc = paymentMethod // <--- QUAN TRỌNG: Truyền phương thức thanh toán xuống SQL
+                        },
                         commandType: CommandType.StoredProcedure
                     );
 
@@ -139,8 +146,28 @@ namespace QLCafe.Infrastructure.Repositories
                 }
                 catch (SqlException ex)
                 {
+                    // Ghi log lỗi nếu cần thiết
                     throw new Exception($"Lỗi khi thanh toán: {ex.Message}");
                 }
+            }
+        }
+
+        public string CheckStock(int productId, int quantity)
+        {
+            using (var conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+                // Gọi SP kiểm tra
+                var result = conn.QueryFirstOrDefault("sp_CheckStockAvailability",
+                    new { IDSanPham = productId, SoLuongOrder = quantity },
+                    commandType: CommandType.StoredProcedure);
+
+                if (result != null)
+                {
+                    // Trả về tên nguyên liệu bị thiếu
+                    return result.TenNguyenLieu;
+                }
+                return null; // Đủ hàng
             }
         }
     }

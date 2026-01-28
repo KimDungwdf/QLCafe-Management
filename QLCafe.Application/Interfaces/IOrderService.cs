@@ -12,6 +12,8 @@ namespace QLCafe.Application.Interfaces
 
         // THÊM PHƯƠNG THỨC THANH TOÁN
         bool Checkout(int tableId, decimal discount, string paymentMethod, string userName);
+        string CheckStockAvailability(int productId, int quantity);
         decimal CalculateChange(decimal totalAmount, decimal customerPayment);
     }
+
 }
