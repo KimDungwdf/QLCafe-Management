@@ -119,6 +119,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="QLCafe.Application\Interfaces\ISalesReportService.cs" />
+    <Compile Include="QLCafe.Application\Services\SalesReportService.cs" />
+    <Compile Include="QLCafe.Domain\DTOs\DailyRevenueDto.cs" />
+    <Compile Include="QLCafe.Domain\DTOs\EmployeeRevenueDto.cs" />
+    <Compile Include="QLCafe.Domain\DTOs\SalesReportDto.cs" />
+    <Compile Include="QLCafe.Domain\DTOs\TopProductDto.cs" />
+    <Compile Include="QLCafe.Infrastructure\Repositories\SalesReportRepository.cs" />
     <Compile Include="QLCafeDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -308,6 +315,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Admin\OrganizationForm.resx">
       <DependentUpon>OrganizationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Admin\SalesReportForm.resx">
+      <DependentUpon>SalesReportForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Admin\StockReportForm.resx">
       <DependentUpon>StockReportForm.cs</DependentUpon>

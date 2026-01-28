@@ -41,7 +41,7 @@
             this.btnAddCategory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddCategory.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
             this.btnAddCategory.ForeColor = System.Drawing.Color.White;
-            this.btnAddCategory.Location = new System.Drawing.Point(499, 30);
+            this.btnAddCategory.Location = new System.Drawing.Point(597, 26);
             this.btnAddCategory.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddCategory.Name = "btnAddCategory";
             this.btnAddCategory.Size = new System.Drawing.Size(178, 61);
@@ -58,7 +58,7 @@
             this.btnAddProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddProduct.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
             this.btnAddProduct.ForeColor = System.Drawing.Color.White;
-            this.btnAddProduct.Location = new System.Drawing.Point(270, 30);
+            this.btnAddProduct.Location = new System.Drawing.Point(368, 26);
             this.btnAddProduct.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddProduct.Name = "btnAddProduct";
             this.btnAddProduct.Size = new System.Drawing.Size(178, 61);
@@ -74,10 +74,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(114, 176);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(98, 115);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(624, 390);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(677, 513);
             this.flowLayoutPanel1.TabIndex = 4;
             this.flowLayoutPanel1.WrapContents = false;
             // 
