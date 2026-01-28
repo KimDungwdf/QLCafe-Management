@@ -1280,3 +1280,173 @@ BEGIN
     ORDER BY hd.NgayLap DESC
 END
 GO
+
+USE QLCafe
+GO
+
+CREATE OR ALTER PROCEDURE sp_Report_GetBillList
+    @TuNgay DATETIME,
+    @DenNgay DATETIME,
+    @NguoiLap NVARCHAR(100) = NULL
+AS
+BEGIN
+    SELECT 
+        -- SỬA LẠI DÒNG NÀY: Thêm nhiều số 0 và lấy 6 ký tự bên phải
+        '#HD' + RIGHT('000000' + CAST(hd.IDHoaDon AS VARCHAR(20)), 6) AS MaHD,
+        
+        hd.NgayLap AS ThoiGian,
+        b.TenBan AS Ban,
+        (hd.TongTien + hd.GiamGia) AS TongTienGoc,
+        hd.GiamGia,
+        hd.TongTien AS ThanhTien,
+        ISNULL(hd.PhuongThuc, N'Tiền mặt') AS PhuongThuc,
+        N'Đã thanh toán' AS TrangThai
+    FROM HoaDon hd
+    JOIN Ban b ON hd.IDBan = b.IDBan
+    WHERE hd.TrangThai = 1
+      AND hd.NgayLap BETWEEN @TuNgay AND @DenNgay
+      AND (@NguoiLap IS NULL OR hd.TenDangNhap = @NguoiLap)
+    ORDER BY hd.NgayLap DESC
+END
+GO
+
+USE QLCafe
+GO
+
+CREATE OR ALTER PROCEDURE sp_CheckStockAvailability
+    @IDSanPham INT,
+    @SoLuongOrder INT
+AS
+BEGIN
+    -- Tìm nguyên liệu nào bị thiếu
+    -- Logic: Lấy (Tồn kho hiện tại) - (Định lượng 1 món * Số lượng khách gọi)
+    -- Nếu kết quả < 0 tức là thiếu
+    SELECT TOP 1 
+        nl.TenNguyenLieu,
+        nl.SoLuongTon,
+        (dl.SoLuongCan * @SoLuongOrder) AS CanDung
+    FROM DinhLuong dl
+    JOIN NguyenLieu nl ON dl.IDNguyenLieu = nl.IDNguyenLieu
+    WHERE dl.IDSanPham = @IDSanPham
+      AND nl.SoLuongTon < (dl.SoLuongCan * @SoLuongOrder)
+END
+GO
+
+USE QLCafe
+GO
+
+CREATE OR ALTER PROCEDURE sp_GetOrderHistory
+    @TuNgay DATE,
+    @DenNgay DATE,
+    @TenBan NVARCHAR(50) = NULL
+AS
+BEGIN
+    SELECT 
+        -- Mã HĐ đẹp
+        '#HD' + RIGHT('000' + CAST(hd.IDHoaDon AS VARCHAR(10)), 3) AS MaHD,
+        hd.IDHoaDon,
+        hd.NgayLap,
+        b.TenBan,
+        tk.TenHienThi AS ThuNgan,
+        ISNULL(hd.PhuongThuc, N'Tiền mặt') AS PhuongThuc,
+        (hd.TongTien + hd.GiamGia) AS TamTinh,
+        hd.GiamGia,
+        hd.TongTien AS TongCong,
+        CASE WHEN hd.TrangThai = 1 THEN N'Đã thanh toán' ELSE N'Chưa thanh toán' END AS TrangThai
+    FROM HoaDon hd
+    JOIN Ban b ON hd.IDBan = b.IDBan
+    JOIN TaiKhoan tk ON hd.TenDangNhap = tk.TenDangNhap
+    WHERE hd.TrangThai = 1 -- Chỉ lấy đơn đã thanh toán
+      AND CONVERT(DATE, hd.NgayLap) BETWEEN @TuNgay AND @DenNgay
+      AND (@TenBan IS NULL OR @TenBan = 'All' OR b.TenBan = @TenBan)
+    ORDER BY hd.NgayLap DESC
+END
+GO
+
+-- Procedure lấy chi tiết món của 1 hóa đơn (để hiển thị vào giữa cái thẻ)
+CREATE OR ALTER PROCEDURE sp_GetOrderHistoryDetails
+    @IDHoaDon INT
+AS
+BEGIN
+    SELECT 
+        sp.TenSanPham,
+        ct.SoLuong,
+        ct.DonGiaTaiThoiDiem AS DonGia,
+        (ct.SoLuong * ct.DonGiaTaiThoiDiem) AS ThanhTien
+    FROM ChiTietHoaDon ct
+    JOIN SanPham sp ON ct.IDSanPham = sp.IDSanPham
+    WHERE ct.IDHoaDon = @IDHoaDon
+END
+GO
+USE QLCafe
+GO
+
+-- 1. Lấy danh sách các hóa đơn theo bộ lọc
+CREATE OR ALTER PROCEDURE sp_GetOrderHistory
+    @TuNgay DATE,
+    @DenNgay DATE,
+    @TenBan NVARCHAR(50) = NULL,    -- Lọc theo bàn (VD: 'Bàn 1' hoặc 'All')
+    @TrangThai INT = -1             -- -1: Tất cả, 1: Đã thanh toán, 2: Đã hủy (nếu có)
+AS
+BEGIN
+    SELECT 
+        -- Format Mã HĐ: #HD000123
+        '#HD' + RIGHT('000' + CAST(hd.IDHoaDon AS VARCHAR(10)), 3) AS MaHD,
+        hd.IDHoaDon,
+        hd.NgayLap,
+        b.TenBan,
+        tk.TenHienThi AS ThuNgan,
+        ISNULL(hd.PhuongThuc, N'Tiền mặt') AS PhuongThuc,
+        
+        -- Tính toán tiền
+        (hd.TongTien + hd.GiamGia) AS TamTinh, -- Tổng tiền gốc trước giảm
+        hd.GiamGia,
+        hd.TongTien AS TongCong,               -- Tiền thực thu
+        
+        hd.TrangThai
+    FROM HoaDon hd
+    JOIN Ban b ON hd.IDBan = b.IDBan
+    JOIN TaiKhoan tk ON hd.TenDangNhap = tk.TenDangNhap
+    WHERE 
+        -- 1. Lọc theo ngày (Chuyển về DATE để so sánh chính xác)
+        CONVERT(DATE, hd.NgayLap) BETWEEN @TuNgay AND @DenNgay
+        
+        -- 2. Lọc theo bàn (Nếu @TenBan là NULL hoặc 'All' thì lấy hết)
+        AND (@TenBan IS NULL OR @TenBan = 'All' OR @TenBan = N'Tất cả bàn' OR b.TenBan = @TenBan)
+        
+        -- 3. Lọc theo trạng thái (Nếu @TrangThai = -1 thì lấy hết)
+        AND (@TrangThai = -1 OR hd.TrangThai = @TrangThai)
+        
+    ORDER BY hd.NgayLap DESC -- Mới nhất lên đầu
+END
+GO
+
+-- 2. Lấy chi tiết món ăn của 1 hóa đơn (Để hiển thị vào giữa cái Card)
+CREATE OR ALTER PROCEDURE sp_GetOrderHistoryDetails
+    @IDHoaDon INT
+AS
+BEGIN
+    SELECT 
+        sp.TenSanPham,
+        ct.SoLuong,
+        ct.DonGiaTaiThoiDiem AS DonGia,
+        (ct.SoLuong * ct.DonGiaTaiThoiDiem) AS ThanhTien
+    FROM ChiTietHoaDon ct
+    JOIN SanPham sp ON ct.IDSanPham = sp.IDSanPham
+    WHERE ct.IDHoaDon = @IDHoaDon
+END
+GO
+USE QLCafe
+GO
+
+SELECT 
+    SP.TenSanPham AS [Tên Món],
+    NL.TenNguyenLieu AS [Nguyên Liệu Thiếu],
+    NL.SoLuongTon AS [Tồn Kho Hiện Tại],
+    DL.SoLuongCan AS [Cần Dùng Cho 1 Món],
+    (DL.SoLuongCan - NL.SoLuongTon) AS [Số Lượng Thiếu]
+FROM SanPham SP
+JOIN DinhLuong DL ON SP.IDSanPham = DL.IDSanPham
+JOIN NguyenLieu NL ON DL.IDNguyenLieu = NL.IDNguyenLieu
+WHERE NL.SoLuongTon < DL.SoLuongCan
+ORDER BY SP.TenSanPham
