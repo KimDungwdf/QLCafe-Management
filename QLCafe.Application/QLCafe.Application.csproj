@@ -44,6 +44,7 @@
     <Compile Include="DTOs\Account\AccountDto.cs" />
     <Compile Include="DTOs\Auth\LoginRequest.cs" />
     <Compile Include="DTOs\Auth\LoginResponse.cs" />
+    <Compile Include="DTOs\Bill\BillHistoryDto.cs" />
     <Compile Include="DTOs\Category\CategoryDto.cs" />
     <Compile Include="DTOs\Order\OrderDto.cs" />
     <Compile Include="DTOs\Order\ProductDto.cs" />
@@ -83,7 +84,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DTOs\Bill\" />
     <Folder Include="Validators\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

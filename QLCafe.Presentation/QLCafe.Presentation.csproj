@@ -309,6 +309,9 @@
     <EmbeddedResource Include="Views\Admin\OrganizationForm.resx">
       <DependentUpon>OrganizationForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Admin\StockReportForm.resx">
+      <DependentUpon>StockReportForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Auth\LoginView.resx">
       <DependentUpon>LoginView.cs</DependentUpon>
     </EmbeddedResource>

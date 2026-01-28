@@ -40,18 +40,18 @@ namespace QLCafe.Presentation.Views.Admin
             // Set default dates
             dtpFromDate.Value = DateTime.Now.AddDays(-7);
             dtpToDate.Value = DateTime.Now;
-            
+
             // Load table names into combo box
             LoadTableNames();
-            
+
             // Set default combo box selections
             cboTable.SelectedIndex = 0;
             cboStatus.SelectedIndex = 0;
-            
+
             // Setup DataGridView
             dgvTableHistory.AutoGenerateColumns = false;
             dgvTableHistory.CellPainting += DgvTableHistory_CellPainting;
-            
+
             // Load initial data
             LoadBillHistory();
         }
@@ -62,18 +62,18 @@ namespace QLCafe.Presentation.Views.Admin
             {
                 cboTable.Items.Clear();
                 cboTable.Items.Add("Tất cả");
-                
+
                 var tableNames = _billService.GetAllTableNames();
                 foreach (var tableName in tableNames)
                 {
                     cboTable.Items.Add(tableName);
                 }
-                
+
                 cboTable.SelectedIndex = 0;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi khi tải danh sách bàn: {ex.Message}", "Lỗi", 
+                MessageBox.Show($"Lỗi khi tải danh sách bàn: {ex.Message}", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -136,7 +136,7 @@ namespace QLCafe.Presentation.Views.Admin
 
                 // Load data from database
                 _allBills = _billService.GetBillHistory(fromDate, toDate, tableId, statusFilter);
-                
+
                 // Apply table name filter if needed
                 if (!string.IsNullOrEmpty(selectedTable) && selectedTable != "Tất cả")
                 {
@@ -205,11 +205,11 @@ namespace QLCafe.Presentation.Views.Admin
                 {
                     StringFormat sf = new StringFormat
                     {
-                        Alignment = StringAlignment.Near,
+                        Alignment = StringAlignment.Center,
                         LineAlignment = StringAlignment.Center
                     };
-                    Rectangle textRect = new Rectangle(e.CellBounds.X + 15, e.CellBounds.Y,
-                        e.CellBounds.Width - 20, e.CellBounds.Height);
+                    Rectangle textRect = new Rectangle(e.CellBounds.X, e.CellBounds.Y,
+                        e.CellBounds.Width, e.CellBounds.Height);
                     e.Graphics.DrawString(headerText, headerFont, textBrush, textRect, sf);
                 }
                 return;
@@ -289,6 +289,61 @@ namespace QLCafe.Presentation.Views.Admin
 
             path.CloseFigure();
             return path;
+        }
+
+        private void lblFromDate_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtpFromDate_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblToDate_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtpToDate_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblTable_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cboTable_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblStatus_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cboStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnFilter_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnlFilter_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pnlData_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
