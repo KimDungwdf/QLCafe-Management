@@ -80,8 +80,8 @@ namespace QLCafe.Presentation.Views.Admin
             // 
             // pnlData
             // 
-            this.pnlData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.pnlData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlData.BackColor = System.Drawing.Color.White;
             this.pnlData.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(180)))), ((int)(((byte)(140)))));
@@ -150,7 +150,7 @@ namespace QLCafe.Presentation.Views.Admin
             this.colOrderId.MinimumWidth = 6;
             this.colOrderId.Name = "colOrderId";
             this.colOrderId.ReadOnly = true;
-            this.colOrderId.Width = 125;
+            this.colOrderId.Width = 80;
             // 
             // colTableName
             // 
@@ -158,15 +158,15 @@ namespace QLCafe.Presentation.Views.Admin
             this.colTableName.MinimumWidth = 6;
             this.colTableName.Name = "colTableName";
             this.colTableName.ReadOnly = true;
-            this.colTableName.Width = 120;
+            this.colTableName.Width = 90;
             // 
             // colOrderDate
             // 
-            this.colOrderDate.HeaderText = "Ngày lập hóa đơn";
+            this.colOrderDate.HeaderText = "Ngày lập";
             this.colOrderDate.MinimumWidth = 6;
             this.colOrderDate.Name = "colOrderDate";
             this.colOrderDate.ReadOnly = true;
-            this.colOrderDate.Width = 200;
+            this.colOrderDate.Width = 160;
             // 
             // colTotalAmount
             // 
@@ -174,7 +174,7 @@ namespace QLCafe.Presentation.Views.Admin
             this.colTotalAmount.MinimumWidth = 6;
             this.colTotalAmount.Name = "colTotalAmount";
             this.colTotalAmount.ReadOnly = true;
-            this.colTotalAmount.Width = 150;
+            this.colTotalAmount.Width = 120;
             // 
             // colEmployee
             // 
@@ -182,13 +182,13 @@ namespace QLCafe.Presentation.Views.Admin
             this.colEmployee.MinimumWidth = 6;
             this.colEmployee.Name = "colEmployee";
             this.colEmployee.ReadOnly = true;
-            this.colEmployee.Width = 180;
+            this.colEmployee.Width = 140;
             // 
             // colStatus
             // 
             this.colStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colStatus.HeaderText = "Trạng thái";
-            this.colStatus.MinimumWidth = 150;
+            this.colStatus.MinimumWidth = 120;
             this.colStatus.Name = "colStatus";
             this.colStatus.ReadOnly = true;
             // 

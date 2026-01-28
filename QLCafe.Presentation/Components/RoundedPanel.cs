@@ -37,6 +37,8 @@ namespace QLCafe.Presentation.Components
         public RoundedPanel()
         {
             DoubleBuffered = true;
+            SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | 
+                     ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw, true);
             BackColor = Color.White;
         }
 
@@ -48,6 +50,8 @@ namespace QLCafe.Presentation.Components
 
         private void UpdateRegion()
         {
+            if (Width <= 0 || Height <= 0) return;
+            
             using (GraphicsPath path = GetRoundRectanglePath(ClientRectangle, _cornerRadius))
             {
                 Region = new Region(path);
@@ -57,32 +61,55 @@ namespace QLCafe.Presentation.Components
         protected override void OnPaint(PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+            
+            // V? background
             using (GraphicsPath path = GetRoundRectanglePath(ClientRectangle, _cornerRadius))
             using (SolidBrush brush = new SolidBrush(BackColor))
             {
                 e.Graphics.FillPath(brush, path);
+            }
 
-                if (_borderThickness > 0 && _borderColor.A > 0)
+            // V? border n?u có
+            if (_borderThickness > 0 && _borderColor.A > 0)
+            {
+                // ?i?u ch?nh rectangle ?? border v? chính xác
+                Rectangle borderRect = new Rectangle(
+                    _borderThickness / 2,
+                    _borderThickness / 2,
+                    Width - _borderThickness,
+                    Height - _borderThickness
+                );
+
+                using (GraphicsPath borderPath = GetRoundRectanglePath(borderRect, _cornerRadius))
+                using (Pen pen = new Pen(_borderColor, _borderThickness))
                 {
-                    using (Pen pen = new Pen(_borderColor, _borderThickness))
-                    {
-                        e.Graphics.DrawPath(pen, path);
-                    }
+                    pen.Alignment = PenAlignment.Inset;
+                    e.Graphics.DrawPath(pen, borderPath);
                 }
             }
-            base.OnPaint(e);
+            
+            // G?I base.OnPaint nh?ng không v? l?i border
+            base.OnPaintBackground(e);
+        }
+
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            // Không làm gì - ?? OnPaint x? lý background
         }
 
         private static GraphicsPath GetRoundRectanglePath(Rectangle bounds, int radius)
         {
             GraphicsPath path = new GraphicsPath();
-            if (radius <= 0)
+            if (radius <= 0 || bounds.Width <= 0 || bounds.Height <= 0)
             {
                 path.AddRectangle(bounds);
                 return path;
             }
-            int d = radius * 2;
+            
+            int d = Math.Min(radius * 2, Math.Min(bounds.Width, bounds.Height));
             Rectangle arc = new Rectangle(bounds.Location, new Size(d, d));
+            
             // top-left
             path.AddArc(arc, 180, 90);
             // top-right
