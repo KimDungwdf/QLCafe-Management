@@ -1,6 +1,6 @@
-﻿namespace QLCafe.Presentation.Views.InventoryMainView
+﻿namespace QLCafe.Presentation.Views.Inventory
 {
-    partial class InventoryMainView
+    partial class InventoryReportForm
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "InventoryMainView";
+            this.Text = "InventoryReportForm";
         }
 
         #endregion
