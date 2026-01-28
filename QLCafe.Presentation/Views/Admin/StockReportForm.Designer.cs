@@ -1,4 +1,8 @@
-﻿namespace QLCafe.Presentation.Views.Admin
+﻿using QLCafe.Presentation.Components;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace QLCafe.Presentation.Views.Admin
 {
     partial class StockReportForm
     {
@@ -6,6 +10,26 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        
+        private DateTimePicker dtpFromDate;
+        private DateTimePicker dtpToDate;
+        private ComboBox cboTable;
+        private ComboBox cboStatus;
+        private RoundButton btnFilter;
+        private DataGridView dgvTableHistory;
+        private Label lblFromDate;
+        private Label lblToDate;
+        private Label lblTable;
+        private Label lblStatus;
+        private RoundedPanel pnlFilter;
+        private RoundedPanel pnlData;
+        
+        private DataGridViewTextBoxColumn colOrderId;
+        private DataGridViewTextBoxColumn colTableName;
+        private DataGridViewTextBoxColumn colOrderDate;
+        private DataGridViewTextBoxColumn colTotalAmount;
+        private DataGridViewTextBoxColumn colEmployee;
+        private DataGridViewTextBoxColumn colStatus;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -28,10 +52,303 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            
+            this.pnlFilter = new QLCafe.Presentation.Components.RoundedPanel();
+            this.lblFromDate = new System.Windows.Forms.Label();
+            this.dtpFromDate = new System.Windows.Forms.DateTimePicker();
+            this.lblToDate = new System.Windows.Forms.Label();
+            this.dtpToDate = new System.Windows.Forms.DateTimePicker();
+            this.lblTable = new System.Windows.Forms.Label();
+            this.cboTable = new System.Windows.Forms.ComboBox();
+            this.lblStatus = new System.Windows.Forms.Label();
+            this.cboStatus = new System.Windows.Forms.ComboBox();
+            this.btnFilter = new QLCafe.Presentation.Components.RoundButton();
+            this.pnlData = new QLCafe.Presentation.Components.RoundedPanel();
+            this.dgvTableHistory = new System.Windows.Forms.DataGridView();
+            this.colOrderId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTableName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEmployee = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            
+            this.pnlFilter.SuspendLayout();
+            this.pnlData.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTableHistory)).BeginInit();
+            this.SuspendLayout();
+            
+            // 
+            // pnlFilter
+            // 
+            this.pnlFilter.BackColor = System.Drawing.Color.White;
+            this.pnlFilter.BorderColor = System.Drawing.Color.Gainsboro;
+            this.pnlFilter.BorderThickness = 1;
+            this.pnlFilter.Controls.Add(this.lblFromDate);
+            this.pnlFilter.Controls.Add(this.dtpFromDate);
+            this.pnlFilter.Controls.Add(this.lblToDate);
+            this.pnlFilter.Controls.Add(this.dtpToDate);
+            this.pnlFilter.Controls.Add(this.lblTable);
+            this.pnlFilter.Controls.Add(this.cboTable);
+            this.pnlFilter.Controls.Add(this.lblStatus);
+            this.pnlFilter.Controls.Add(this.cboStatus);
+            this.pnlFilter.Controls.Add(this.btnFilter);
+            this.pnlFilter.CornerRadius = 15;
+            this.pnlFilter.Location = new System.Drawing.Point(36, 30);
+            this.pnlFilter.Name = "pnlFilter";
+            this.pnlFilter.Size = new System.Drawing.Size(1295, 90);
+            this.pnlFilter.TabIndex = 0;
+            
+            // 
+            // lblFromDate
+            // 
+            this.lblFromDate.AutoSize = true;
+            this.lblFromDate.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblFromDate.Location = new System.Drawing.Point(25, 20);
+            this.lblFromDate.Name = "lblFromDate";
+            this.lblFromDate.Size = new System.Drawing.Size(60, 23);
+            this.lblFromDate.TabIndex = 0;
+            this.lblFromDate.Text = "Từ ngày";
+            
+            // 
+            // dtpFromDate
+            // 
+            this.dtpFromDate.CalendarFont = new System.Drawing.Font("Segoe UI", 10F);
+            this.dtpFromDate.CustomFormat = "dd/MM/yyyy";
+            this.dtpFromDate.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.dtpFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFromDate.Location = new System.Drawing.Point(25, 46);
+            this.dtpFromDate.Name = "dtpFromDate";
+            this.dtpFromDate.Size = new System.Drawing.Size(180, 32);
+            this.dtpFromDate.TabIndex = 1;
+            
+            // 
+            // lblToDate
+            // 
+            this.lblToDate.AutoSize = true;
+            this.lblToDate.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblToDate.Location = new System.Drawing.Point(230, 20);
+            this.lblToDate.Name = "lblToDate";
+            this.lblToDate.Size = new System.Drawing.Size(74, 23);
+            this.lblToDate.TabIndex = 2;
+            this.lblToDate.Text = "Đến ngày";
+            
+            // 
+            // dtpToDate
+            // 
+            this.dtpToDate.CalendarFont = new System.Drawing.Font("Segoe UI", 10F);
+            this.dtpToDate.CustomFormat = "dd/MM/yyyy";
+            this.dtpToDate.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.dtpToDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpToDate.Location = new System.Drawing.Point(230, 46);
+            this.dtpToDate.Name = "dtpToDate";
+            this.dtpToDate.Size = new System.Drawing.Size(180, 32);
+            this.dtpToDate.TabIndex = 3;
+            
+            // 
+            // lblTable
+            // 
+            this.lblTable.AutoSize = true;
+            this.lblTable.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblTable.Location = new System.Drawing.Point(440, 20);
+            this.lblTable.Name = "lblTable";
+            this.lblTable.Size = new System.Drawing.Size(37, 23);
+            this.lblTable.TabIndex = 4;
+            this.lblTable.Text = "Bàn";
+            
+            // 
+            // cboTable
+            // 
+            this.cboTable.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTable.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.cboTable.FormattingEnabled = true;
+            this.cboTable.Items.AddRange(new object[] { "Tất cả" });
+            this.cboTable.Location = new System.Drawing.Point(440, 46);
+            this.cboTable.Name = "cboTable";
+            this.cboTable.Size = new System.Drawing.Size(180, 33);
+            this.cboTable.TabIndex = 5;
+            
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblStatus.Location = new System.Drawing.Point(650, 20);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(81, 23);
+            this.lblStatus.TabIndex = 6;
+            this.lblStatus.Text = "Trạng thái";
+            
+            // 
+            // cboStatus
+            // 
+            this.cboStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboStatus.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.cboStatus.FormattingEnabled = true;
+            this.cboStatus.Items.AddRange(new object[] { "Tất cả", "Hoàn thành", "Hủy", "Đang sử dụng" });
+            this.cboStatus.Location = new System.Drawing.Point(650, 46);
+            this.cboStatus.Name = "cboStatus";
+            this.cboStatus.Size = new System.Drawing.Size(180, 33);
+            this.cboStatus.TabIndex = 7;
+            
+            // 
+            // btnFilter
+            // 
+            this.btnFilter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
+            this.btnFilter.BorderRadius = 10;
+            this.btnFilter.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFilter.FlatAppearance.BorderSize = 0;
+            this.btnFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFilter.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
+            this.btnFilter.ForeColor = System.Drawing.Color.White;
+            this.btnFilter.Location = new System.Drawing.Point(860, 38);
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Size = new System.Drawing.Size(120, 45);
+            this.btnFilter.TabIndex = 8;
+            this.btnFilter.Text = "Lọc";
+            this.btnFilter.UseVisualStyleBackColor = false;
+            
+            // 
+            // pnlData
+            // 
+            this.pnlData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlData.BackColor = System.Drawing.Color.White;
+            this.pnlData.BorderColor = System.Drawing.Color.Gainsboro;
+            this.pnlData.BorderThickness = 1;
+            this.pnlData.Controls.Add(this.dgvTableHistory);
+            this.pnlData.CornerRadius = 15;
+            this.pnlData.Location = new System.Drawing.Point(36, 140);
+            this.pnlData.Name = "pnlData";
+            this.pnlData.Padding = new System.Windows.Forms.Padding(15);
+            this.pnlData.Size = new System.Drawing.Size(1295, 490);
+            this.pnlData.TabIndex = 1;
+            
+            // 
+            // dgvTableHistory
+            // 
+            this.dgvTableHistory.AllowUserToAddRows = false;
+            this.dgvTableHistory.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(247)))), ((int)(((byte)(240)))));
+            this.dgvTableHistory.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvTableHistory.BackgroundColor = System.Drawing.Color.White;
+            this.dgvTableHistory.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvTableHistory.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dgvTableHistory.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTableHistory.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvTableHistory.ColumnHeadersHeight = 46;
+            this.dgvTableHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvTableHistory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colOrderId,
+            this.colTableName,
+            this.colOrderDate,
+            this.colTotalAmount,
+            this.colEmployee,
+            this.colStatus});
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(243)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvTableHistory.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvTableHistory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvTableHistory.EnableHeadersVisualStyles = false;
+            this.dgvTableHistory.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(225)))), ((int)(((byte)(220)))));
+            this.dgvTableHistory.Location = new System.Drawing.Point(15, 15);
+            this.dgvTableHistory.MultiSelect = false;
+            this.dgvTableHistory.Name = "dgvTableHistory";
+            this.dgvTableHistory.ReadOnly = true;
+            this.dgvTableHistory.RowHeadersVisible = false;
+            this.dgvTableHistory.RowHeadersWidth = 51;
+            this.dgvTableHistory.RowTemplate.Height = 50;
+            this.dgvTableHistory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvTableHistory.Size = new System.Drawing.Size(1265, 460);
+            this.dgvTableHistory.TabIndex = 0;
+            
+            // 
+            // colOrderId
+            // 
+            this.colOrderId.HeaderText = "Mã đơn";
+            this.colOrderId.MinimumWidth = 6;
+            this.colOrderId.Name = "colOrderId";
+            this.colOrderId.ReadOnly = true;
+            this.colOrderId.Width = 120;
+            
+            // 
+            // colTableName
+            // 
+            this.colTableName.HeaderText = "Bàn";
+            this.colTableName.MinimumWidth = 6;
+            this.colTableName.Name = "colTableName";
+            this.colTableName.ReadOnly = true;
+            this.colTableName.Width = 150;
+            
+            // 
+            // colOrderDate
+            // 
+            this.colOrderDate.HeaderText = "Ngày lập hóa đơn";
+            this.colOrderDate.MinimumWidth = 6;
+            this.colOrderDate.Name = "colOrderDate";
+            this.colOrderDate.ReadOnly = true;
+            this.colOrderDate.Width = 250;
+            
+            // 
+            // colTotalAmount
+            // 
+            this.colTotalAmount.HeaderText = "Tổng tiền";
+            this.colTotalAmount.MinimumWidth = 6;
+            this.colTotalAmount.Name = "colTotalAmount";
+            this.colTotalAmount.ReadOnly = true;
+            this.colTotalAmount.Width = 200;
+            
+            // 
+            // colEmployee
+            // 
+            this.colEmployee.HeaderText = "Nhân viên";
+            this.colEmployee.MinimumWidth = 6;
+            this.colEmployee.Name = "colEmployee";
+            this.colEmployee.ReadOnly = true;
+            this.colEmployee.Width = 200;
+            
+            // 
+            // colStatus
+            // 
+            this.colStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colStatus.HeaderText = "Trạng thái";
+            this.colStatus.MinimumWidth = 6;
+            this.colStatus.Name = "colStatus";
+            this.colStatus.ReadOnly = true;
+            
+            // 
+            // StockReportForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "StockReportForm";
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(249)))), ((int)(((byte)(236)))));
+            this.ClientSize = new System.Drawing.Size(1365, 660);
+            this.Controls.Add(this.pnlData);
+            this.Controls.Add(this.pnlFilter);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "StockReportForm";
+            this.Text = "Lịch sử bàn";
+            this.pnlFilter.ResumeLayout(false);
+            this.pnlFilter.PerformLayout();
+            this.pnlData.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTableHistory)).EndInit();
+            this.ResumeLayout(false);
+
         }
 
         #endregion
