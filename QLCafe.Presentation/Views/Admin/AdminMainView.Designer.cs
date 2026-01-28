@@ -81,8 +81,9 @@
             this.panelLeft.Controls.Add(this.pictureBox1);
             this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelLeft.Location = new System.Drawing.Point(0, 0);
+            this.panelLeft.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelLeft.Name = "panelLeft";
-            this.panelLeft.Size = new System.Drawing.Size(336, 802);
+            this.panelLeft.Size = new System.Drawing.Size(299, 682);
             this.panelLeft.TabIndex = 1;
             // 
             // btnStock
@@ -165,9 +166,10 @@
             this.btnLogout.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnLogout.ForeColor = System.Drawing.Color.White;
             this.btnLogout.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnLogout.Location = new System.Drawing.Point(0, 744);
+            this.btnLogout.Location = new System.Drawing.Point(0, 636);
+            this.btnLogout.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(336, 58);
+            this.btnLogout.Size = new System.Drawing.Size(299, 46);
             this.btnLogout.TabIndex = 16;
             this.btnLogout.Text = "-> Đăng xuất";
             this.btnLogout.UseVisualStyleBackColor = false;
@@ -208,9 +210,9 @@
             this.label5.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(211)))), ((int)(((byte)(77)))));
             this.label5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label5.Location = new System.Drawing.Point(69, 220);
+            this.label5.Location = new System.Drawing.Point(61, 176);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(188, 31);
+            this.label5.Size = new System.Drawing.Size(167, 25);
             this.label5.TabIndex = 9;
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
@@ -233,9 +235,9 @@
             this.lblShift.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.lblShift.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(211)))), ((int)(((byte)(77)))));
             this.lblShift.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblShift.Location = new System.Drawing.Point(96, 155);
+            this.lblShift.Location = new System.Drawing.Point(85, 124);
             this.lblShift.Name = "lblShift";
-            this.lblShift.Size = new System.Drawing.Size(123, 25);
+            this.lblShift.Size = new System.Drawing.Size(99, 20);
             this.lblShift.TabIndex = 7;
             this.lblShift.Text = "Quản trị viên";
             // 
@@ -246,9 +248,9 @@
             this.lblUserName.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.lblUserName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(250)))), ((int)(((byte)(251)))));
             this.lblUserName.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblUserName.Location = new System.Drawing.Point(96, 129);
+            this.lblUserName.Location = new System.Drawing.Point(85, 103);
             this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(68, 25);
+            this.lblUserName.Size = new System.Drawing.Size(56, 20);
             this.lblUserName.TabIndex = 6;
             this.lblUserName.Text = "Admin";
             // 
@@ -256,9 +258,9 @@
             // 
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(64)))), ((int)(((byte)(14)))));
             this.label2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label2.Location = new System.Drawing.Point(21, 120);
+            this.label2.Location = new System.Drawing.Point(19, 96);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(284, 74);
+            this.label2.Size = new System.Drawing.Size(252, 59);
             this.label2.TabIndex = 5;
             // 
             // label1
@@ -266,9 +268,9 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label1.Location = new System.Drawing.Point(76, 28);
+            this.label1.Location = new System.Drawing.Point(68, 22);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(206, 48);
+            this.label1.Size = new System.Drawing.Size(183, 38);
             this.label1.TabIndex = 1;
             this.label1.Text = "QL Cafe Pro";
             // 
@@ -289,18 +291,20 @@
             this.panelRight.Controls.Add(this.panelContent);
             this.panelRight.Controls.Add(this.panelHeader);
             this.panelRight.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelRight.Location = new System.Drawing.Point(336, 0);
+            this.panelRight.Location = new System.Drawing.Point(299, 0);
+            this.panelRight.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelRight.Name = "panelRight";
-            this.panelRight.Size = new System.Drawing.Size(1252, 802);
+            this.panelRight.Size = new System.Drawing.Size(1193, 682);
             this.panelRight.TabIndex = 2;
             // 
             // panelContent
             // 
             this.panelContent.BackColor = System.Drawing.Color.White;
             this.panelContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelContent.Location = new System.Drawing.Point(0, 52);
+            this.panelContent.Location = new System.Drawing.Point(0, 42);
+            this.panelContent.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelContent.Name = "panelContent";
-            this.panelContent.Size = new System.Drawing.Size(1252, 750);
+            this.panelContent.Size = new System.Drawing.Size(1193, 640);
             this.panelContent.TabIndex = 2;
             // 
             // panelHeader
@@ -313,16 +317,18 @@
             this.panelHeader.Controls.Add(this.lblFunctionName);
             this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelHeader.Location = new System.Drawing.Point(0, 0);
+            this.panelHeader.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(1252, 52);
+            this.panelHeader.Size = new System.Drawing.Size(1193, 42);
             this.panelHeader.TabIndex = 1;
             // 
             // pictureBox5
             // 
             this.pictureBox5.Image = global::QLCafe.Presentation.Properties.Resources.chuongthongbao;
-            this.pictureBox5.Location = new System.Drawing.Point(813, 9);
+            this.pictureBox5.Location = new System.Drawing.Point(723, 7);
+            this.pictureBox5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(44, 37);
+            this.pictureBox5.Size = new System.Drawing.Size(39, 30);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox5.TabIndex = 3;
             this.pictureBox5.TabStop = false;
@@ -330,9 +336,10 @@
             // pictureBox4
             // 
             this.pictureBox4.Image = global::QLCafe.Presentation.Properties.Resources.Kinhluo;
-            this.pictureBox4.Location = new System.Drawing.Point(412, 12);
+            this.pictureBox4.Location = new System.Drawing.Point(366, 10);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(40, 37);
+            this.pictureBox4.Size = new System.Drawing.Size(36, 30);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox4.TabIndex = 2;
             this.pictureBox4.TabStop = false;
@@ -359,11 +366,12 @@
             // 
             // AdminMainView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1588, 802);
+            this.ClientSize = new System.Drawing.Size(1492, 682);
             this.Controls.Add(this.panelRight);
             this.Controls.Add(this.panelLeft);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "AdminMainView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AdminMainView";

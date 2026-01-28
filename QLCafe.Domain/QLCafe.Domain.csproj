@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTOs\BillHistoryDto.cs" />
     <Compile Include="DTOs\InventoryDashboardDto.cs" />
     <Compile Include="DTOs\InventoryDto.cs" />
     <Compile Include="Entities\Account.cs" />
