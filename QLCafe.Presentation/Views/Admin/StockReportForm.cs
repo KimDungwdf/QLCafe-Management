@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -170,6 +171,9 @@ namespace QLCafe.Presentation.Views.Admin
             {
                 string orderDate = bill.OrderDate.ToString("dd/MM/yyyy HH:mm");
                 string totalAmount = bill.TotalAmount.ToString("N0") + " đ";
+                
+                // Get status text from StatusCode to ensure correct Vietnamese display
+                string statusDisplay = GetStatusText(bill.StatusCode);
 
                 dgvTableHistory.Rows.Add(
                     bill.BillCode,
@@ -177,8 +181,55 @@ namespace QLCafe.Presentation.Views.Admin
                     orderDate,
                     totalAmount,
                     bill.EmployeeName,
-                    bill.Status
+                    statusDisplay
                 );
+            }
+        }
+
+        private string GetStatusText(int statusCode)
+        {
+            switch (statusCode)
+            {
+                case 0:
+                    return "Đang sử dụng";
+                case 1:
+                    return "Hoàn thành";
+                case -1:
+                    return "Hủy";
+                default:
+                    return "Không xác định";
+            }
+        }
+
+        private string NormalizeStatus(string status)
+        {
+            if (string.IsNullOrEmpty(status))
+                return status;
+
+            // Normalize common variations or corrupted text
+            string normalized = status.Trim();
+            
+            // Map based on StatusCode if status text is corrupted
+            if (normalized.Contains("?") || normalized.Length < 3)
+            {
+                // Return default based on common patterns
+                return normalized;
+            }
+
+            // Ensure proper Vietnamese text
+            switch (normalized)
+            {
+                case "Hoàn thành":
+                case "Hoan thanh":
+                    return "Hoàn thành";
+                case "Đang sử dụng":
+                case "Dang su dung":
+                    return "Đang sử dụng";
+                case "Hủy":
+                case "Huy":
+                    return "Hủy";
+                default:
+                    return normalized;
             }
         }
 
@@ -200,6 +251,7 @@ namespace QLCafe.Presentation.Views.Admin
                 }
 
                 string headerText = Convert.ToString(e.FormattedValue);
+                e.Graphics.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
                 using (Font headerFont = new Font("Segoe UI", 11f, FontStyle.Bold))
                 using (SolidBrush textBrush = new SolidBrush(Color.White))
                 {
@@ -252,6 +304,8 @@ namespace QLCafe.Presentation.Views.Admin
                 );
 
                 e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                e.Graphics.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+                
                 using (GraphicsPath path = GetRoundedRectangle(pillRect, 12))
                 using (SolidBrush bgBrush = new SolidBrush(bgColor))
                 using (SolidBrush textBrush = new SolidBrush(textColor))
