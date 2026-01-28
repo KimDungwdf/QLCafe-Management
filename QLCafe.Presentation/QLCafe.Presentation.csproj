@@ -260,11 +260,35 @@
     <Compile Include="Views\Cashier\TableManagementForm.Designer.cs">
       <DependentUpon>TableManagementForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\InventoryMainView\InventoryMainView.cs">
+    <Compile Include="Views\Inventory\InventoryMainView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\InventoryMainView\InventoryMainView.Designer.cs">
+    <Compile Include="Views\Inventory\InventoryMainView.Designer.cs">
       <DependentUpon>InventoryMainView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inventory\InventoryReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inventory\InventoryReportForm.Designer.cs">
+      <DependentUpon>InventoryReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inventory\InventoryViewForm .cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inventory\InventoryViewForm .Designer.cs">
+      <DependentUpon>InventoryViewForm .cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inventory\StockInForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inventory\StockInForm.Designer.cs">
+      <DependentUpon>StockInForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inventory\StockInHistoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inventory\StockInHistoryForm.Designer.cs">
+      <DependentUpon>StockInHistoryForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Controls\Food\FoodControl.resx">
       <DependentUpon>FoodControl.cs</DependentUpon>
@@ -352,8 +376,17 @@
     <EmbeddedResource Include="Views\Cashier\TableManagementForm.resx">
       <DependentUpon>TableManagementForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\InventoryMainView\InventoryMainView.resx">
+    <EmbeddedResource Include="Views\Inventory\InventoryMainView.resx">
       <DependentUpon>InventoryMainView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inventory\InventoryViewForm .resx">
+      <DependentUpon>InventoryViewForm .cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inventory\StockInForm.resx">
+      <DependentUpon>StockInForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inventory\StockInHistoryForm.resx">
+      <DependentUpon>StockInHistoryForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -546,6 +579,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Screenshot_2025-12-11_161759-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot_2026-01-28_043932-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot_2026-01-28_101153-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot_2026-01-28_111700-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot_2026-01-28_112919-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot_2026-01-28_125602-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot_2026-01-28_131333-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot_2026-01-28_131519-removebg-preview.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,6 +1,6 @@
-﻿namespace QLCafe.Presentation.Views.Admin
+﻿namespace QLCafe.Presentation.Views.Inventory
 {
-    partial class AdminMainView
+    partial class InventoryMainView
     {
         /// <summary>
         /// Required designer variable.
@@ -30,12 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panelLeft = new System.Windows.Forms.Panel();
-            this.btnStock = new System.Windows.Forms.Button();
-            this.bttUserAccount = new System.Windows.Forms.Button();
-            this.btnMenu = new System.Windows.Forms.Button();
-            this.bttSaleReport = new System.Windows.Forms.Button();
+            this.bttViewinventory = new System.Windows.Forms.Button();
+            this.btnStockin = new System.Windows.Forms.Button();
+            this.bttWarehousereport = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
-            this.btnTable = new System.Windows.Forms.Button();
+            this.btnEntryhistory = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -48,29 +47,27 @@
             this.panelContent = new System.Windows.Forms.Panel();
             this.panelHeader = new System.Windows.Forms.Panel();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.txtSearch = new System.Windows.Forms.TextBox();
             this.lblFunctionName = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.panel1 = new System.Windows.Forms.Panel();
             this.panelLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelRight.SuspendLayout();
+            this.panelContent.SuspendLayout();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.SuspendLayout();
             // 
             // panelLeft
             // 
             this.panelLeft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(53)))), ((int)(((byte)(15)))));
-            this.panelLeft.Controls.Add(this.btnStock);
-            this.panelLeft.Controls.Add(this.bttUserAccount);
-            this.panelLeft.Controls.Add(this.btnMenu);
-            this.panelLeft.Controls.Add(this.bttSaleReport);
+            this.panelLeft.Controls.Add(this.bttViewinventory);
+            this.panelLeft.Controls.Add(this.btnStockin);
+            this.panelLeft.Controls.Add(this.bttWarehousereport);
             this.panelLeft.Controls.Add(this.btnLogout);
-            this.panelLeft.Controls.Add(this.btnTable);
+            this.panelLeft.Controls.Add(this.btnEntryhistory);
             this.panelLeft.Controls.Add(this.pictureBox3);
             this.panelLeft.Controls.Add(this.label5);
             this.panelLeft.Controls.Add(this.pictureBox2);
@@ -81,82 +78,63 @@
             this.panelLeft.Controls.Add(this.pictureBox1);
             this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelLeft.Location = new System.Drawing.Point(0, 0);
-            this.panelLeft.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelLeft.Name = "panelLeft";
-            this.panelLeft.Size = new System.Drawing.Size(299, 682);
-            this.panelLeft.TabIndex = 1;
+            this.panelLeft.Size = new System.Drawing.Size(336, 802);
+            this.panelLeft.TabIndex = 2;
             // 
-            // btnStock
+            // bttViewinventory
             // 
-            this.btnStock.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(53)))), ((int)(((byte)(15)))));
-            this.btnStock.FlatAppearance.BorderSize = 0;
-            this.btnStock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStock.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStock.ForeColor = System.Drawing.Color.White;
-            this.btnStock.Image = global::QLCafe.Presentation.Properties.Resources.Screenshot_2025_12_11_161459_removebg_preview;
-            this.btnStock.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnStock.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnStock.Location = new System.Drawing.Point(12, 558);
-            this.btnStock.Name = "btnStock";
-            this.btnStock.Size = new System.Drawing.Size(270, 58);
-            this.btnStock.TabIndex = 15;
-            this.btnStock.Text = "Lịch sử bàn";
-            this.btnStock.UseVisualStyleBackColor = false;
-            this.btnStock.Click += new System.EventHandler(this.btnStock_Click);
+            this.bttViewinventory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(53)))), ((int)(((byte)(15)))));
+            this.bttViewinventory.FlatAppearance.BorderSize = 0;
+            this.bttViewinventory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bttViewinventory.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bttViewinventory.ForeColor = System.Drawing.Color.White;
+            this.bttViewinventory.Image = global::QLCafe.Presentation.Properties.Resources.Screenshot_2025_12_11_161759_removebg_preview;
+            this.bttViewinventory.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bttViewinventory.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.bttViewinventory.Location = new System.Drawing.Point(12, 300);
+            this.bttViewinventory.Name = "bttViewinventory";
+            this.bttViewinventory.Size = new System.Drawing.Size(270, 72);
+            this.bttViewinventory.TabIndex = 12;
+            this.bttViewinventory.Text = "Xem tồn kho";
+            this.bttViewinventory.UseVisualStyleBackColor = false;
+            this.bttViewinventory.Click += new System.EventHandler(this.bttViewinventory_Click);
             // 
-            // bttUserAccount
+            // btnStockin
             // 
-            this.bttUserAccount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(53)))), ((int)(((byte)(15)))));
-            this.bttUserAccount.FlatAppearance.BorderSize = 0;
-            this.bttUserAccount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bttUserAccount.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bttUserAccount.ForeColor = System.Drawing.Color.White;
-            this.bttUserAccount.Image = global::QLCafe.Presentation.Properties.Resources.Screenshot_2025_12_11_161759_removebg_preview;
-            this.bttUserAccount.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bttUserAccount.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.bttUserAccount.Location = new System.Drawing.Point(12, 300);
-            this.bttUserAccount.Name = "bttUserAccount";
-            this.bttUserAccount.Size = new System.Drawing.Size(352, 72);
-            this.bttUserAccount.TabIndex = 12;
-            this.bttUserAccount.Text = "Quản lý Tài Khoản";
-            this.bttUserAccount.UseVisualStyleBackColor = false;
-            this.bttUserAccount.Click += new System.EventHandler(this.bttUserAccount_Click);
+            this.btnStockin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(53)))), ((int)(((byte)(15)))));
+            this.btnStockin.FlatAppearance.BorderSize = 0;
+            this.btnStockin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStockin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStockin.ForeColor = System.Drawing.Color.White;
+            this.btnStockin.Image = global::QLCafe.Presentation.Properties.Resources.Screenshot_2025_12_11_161711_removebg_preview;
+            this.btnStockin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnStockin.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnStockin.Location = new System.Drawing.Point(12, 378);
+            this.btnStockin.Name = "btnStockin";
+            this.btnStockin.Size = new System.Drawing.Size(324, 72);
+            this.btnStockin.TabIndex = 13;
+            this.btnStockin.Text = "Quản lý Nhập kho";
+            this.btnStockin.UseVisualStyleBackColor = false;
+            this.btnStockin.Click += new System.EventHandler(this.btnStockin_Click);
             // 
-            // btnMenu
+            // bttWarehousereport
             // 
-            this.btnMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(53)))), ((int)(((byte)(15)))));
-            this.btnMenu.FlatAppearance.BorderSize = 0;
-            this.btnMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMenu.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMenu.ForeColor = System.Drawing.Color.White;
-            this.btnMenu.Image = global::QLCafe.Presentation.Properties.Resources.Screenshot_2025_12_11_161711_removebg_preview;
-            this.btnMenu.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMenu.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnMenu.Location = new System.Drawing.Point(12, 378);
-            this.btnMenu.Name = "btnMenu";
-            this.btnMenu.Size = new System.Drawing.Size(305, 72);
-            this.btnMenu.TabIndex = 13;
-            this.btnMenu.Text = "Quản lý Menu";
-            this.btnMenu.UseVisualStyleBackColor = false;
-            this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
-            // 
-            // bttSaleReport
-            // 
-            this.bttSaleReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(53)))), ((int)(((byte)(15)))));
-            this.bttSaleReport.FlatAppearance.BorderSize = 0;
-            this.bttSaleReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bttSaleReport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bttSaleReport.ForeColor = System.Drawing.Color.White;
-            this.bttSaleReport.Image = global::QLCafe.Presentation.Properties.Resources.Screenshot_2025_12_11_161545_removebg_preview;
-            this.bttSaleReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bttSaleReport.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.bttSaleReport.Location = new System.Drawing.Point(12, 634);
-            this.bttSaleReport.Name = "bttSaleReport";
-            this.bttSaleReport.Size = new System.Drawing.Size(352, 58);
-            this.bttSaleReport.TabIndex = 18;
-            this.bttSaleReport.Text = "Báo cáo doanh thu";
-            this.bttSaleReport.UseVisualStyleBackColor = false;
-            this.bttSaleReport.Click += new System.EventHandler(this.bttSaleReport_Click);
+            this.bttWarehousereport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(53)))), ((int)(((byte)(15)))));
+            this.bttWarehousereport.FlatAppearance.BorderSize = 0;
+            this.bttWarehousereport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bttWarehousereport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bttWarehousereport.ForeColor = System.Drawing.Color.White;
+            this.bttWarehousereport.Image = global::QLCafe.Presentation.Properties.Resources.Screenshot_2025_12_11_161545_removebg_preview;
+            this.bttWarehousereport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bttWarehousereport.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.bttWarehousereport.Location = new System.Drawing.Point(12, 539);
+            this.bttWarehousereport.Name = "bttWarehousereport";
+            this.bttWarehousereport.Size = new System.Drawing.Size(258, 58);
+            this.bttWarehousereport.TabIndex = 18;
+            this.bttWarehousereport.Text = "Báo cáo kho";
+            this.bttWarehousereport.UseVisualStyleBackColor = false;
+            this.bttWarehousereport.Click += new System.EventHandler(this.bttWarehousereport_Click);
             // 
             // btnLogout
             // 
@@ -166,32 +144,31 @@
             this.btnLogout.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnLogout.ForeColor = System.Drawing.Color.White;
             this.btnLogout.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnLogout.Location = new System.Drawing.Point(0, 636);
-            this.btnLogout.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnLogout.Location = new System.Drawing.Point(0, 744);
             this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(299, 46);
+            this.btnLogout.Size = new System.Drawing.Size(336, 58);
             this.btnLogout.TabIndex = 16;
             this.btnLogout.Text = "-> Đăng xuất";
             this.btnLogout.UseVisualStyleBackColor = false;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
-            // btnTable
+            // btnEntryhistory
             // 
-            this.btnTable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(53)))), ((int)(((byte)(15)))));
-            this.btnTable.FlatAppearance.BorderSize = 0;
-            this.btnTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTable.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTable.ForeColor = System.Drawing.Color.White;
-            this.btnTable.Image = global::QLCafe.Presentation.Properties.Resources.Screenshot_2025_12_11_151852_removebg_preview1;
-            this.btnTable.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTable.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnTable.Location = new System.Drawing.Point(12, 461);
-            this.btnTable.Name = "btnTable";
-            this.btnTable.Size = new System.Drawing.Size(275, 72);
-            this.btnTable.TabIndex = 14;
-            this.btnTable.Text = "Quản lý Bàn";
-            this.btnTable.UseVisualStyleBackColor = false;
-            this.btnTable.Click += new System.EventHandler(this.btnTable_Click);
+            this.btnEntryhistory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(53)))), ((int)(((byte)(15)))));
+            this.btnEntryhistory.FlatAppearance.BorderSize = 0;
+            this.btnEntryhistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEntryhistory.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEntryhistory.ForeColor = System.Drawing.Color.White;
+            this.btnEntryhistory.Image = global::QLCafe.Presentation.Properties.Resources.Screenshot_2025_12_11_151852_removebg_preview1;
+            this.btnEntryhistory.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEntryhistory.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnEntryhistory.Location = new System.Drawing.Point(12, 461);
+            this.btnEntryhistory.Name = "btnEntryhistory";
+            this.btnEntryhistory.Size = new System.Drawing.Size(318, 72);
+            this.btnEntryhistory.TabIndex = 14;
+            this.btnEntryhistory.Text = "Lịch sử nhập kho";
+            this.btnEntryhistory.UseVisualStyleBackColor = false;
+            this.btnEntryhistory.Click += new System.EventHandler(this.btnEntryhistory_Click);
             // 
             // pictureBox3
             // 
@@ -203,18 +180,16 @@
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 10;
             this.pictureBox3.TabStop = false;
-            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
             // 
             // label5
             // 
             this.label5.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(211)))), ((int)(((byte)(77)))));
             this.label5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label5.Location = new System.Drawing.Point(61, 176);
+            this.label5.Location = new System.Drawing.Point(69, 220);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(167, 25);
+            this.label5.Size = new System.Drawing.Size(188, 31);
             this.label5.TabIndex = 9;
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // pictureBox2
             // 
@@ -235,9 +210,9 @@
             this.lblShift.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.lblShift.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(211)))), ((int)(((byte)(77)))));
             this.lblShift.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblShift.Location = new System.Drawing.Point(85, 124);
+            this.lblShift.Location = new System.Drawing.Point(96, 155);
             this.lblShift.Name = "lblShift";
-            this.lblShift.Size = new System.Drawing.Size(99, 20);
+            this.lblShift.Size = new System.Drawing.Size(123, 25);
             this.lblShift.TabIndex = 7;
             this.lblShift.Text = "Quản trị viên";
             // 
@@ -248,9 +223,9 @@
             this.lblUserName.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.lblUserName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(250)))), ((int)(((byte)(251)))));
             this.lblUserName.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblUserName.Location = new System.Drawing.Point(85, 103);
+            this.lblUserName.Location = new System.Drawing.Point(96, 129);
             this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(56, 20);
+            this.lblUserName.Size = new System.Drawing.Size(68, 25);
             this.lblUserName.TabIndex = 6;
             this.lblUserName.Text = "Admin";
             // 
@@ -258,9 +233,9 @@
             // 
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(64)))), ((int)(((byte)(14)))));
             this.label2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label2.Location = new System.Drawing.Point(19, 96);
+            this.label2.Location = new System.Drawing.Point(21, 120);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(252, 59);
+            this.label2.Size = new System.Drawing.Size(284, 74);
             this.label2.TabIndex = 5;
             // 
             // label1
@@ -268,9 +243,9 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label1.Location = new System.Drawing.Point(68, 22);
+            this.label1.Location = new System.Drawing.Point(76, 28);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(183, 38);
+            this.label1.Size = new System.Drawing.Size(206, 48);
             this.label1.TabIndex = 1;
             this.label1.Text = "QL Cafe Pro";
             // 
@@ -291,20 +266,19 @@
             this.panelRight.Controls.Add(this.panelContent);
             this.panelRight.Controls.Add(this.panelHeader);
             this.panelRight.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelRight.Location = new System.Drawing.Point(299, 0);
-            this.panelRight.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelRight.Location = new System.Drawing.Point(336, 0);
             this.panelRight.Name = "panelRight";
-            this.panelRight.Size = new System.Drawing.Size(1193, 682);
-            this.panelRight.TabIndex = 2;
+            this.panelRight.Size = new System.Drawing.Size(1252, 802);
+            this.panelRight.TabIndex = 3;
             // 
             // panelContent
             // 
             this.panelContent.BackColor = System.Drawing.Color.White;
+            this.panelContent.Controls.Add(this.panel1);
             this.panelContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelContent.Location = new System.Drawing.Point(0, 42);
-            this.panelContent.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelContent.Location = new System.Drawing.Point(0, 49);
             this.panelContent.Name = "panelContent";
-            this.panelContent.Size = new System.Drawing.Size(1193, 640);
+            this.panelContent.Size = new System.Drawing.Size(1252, 753);
             this.panelContent.TabIndex = 2;
             // 
             // panelHeader
@@ -312,44 +286,22 @@
             this.panelHeader.AutoSize = true;
             this.panelHeader.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.panelHeader.Controls.Add(this.pictureBox5);
-            this.panelHeader.Controls.Add(this.pictureBox4);
-            this.panelHeader.Controls.Add(this.txtSearch);
             this.panelHeader.Controls.Add(this.lblFunctionName);
             this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelHeader.Location = new System.Drawing.Point(0, 0);
-            this.panelHeader.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(1193, 42);
+            this.panelHeader.Size = new System.Drawing.Size(1252, 49);
             this.panelHeader.TabIndex = 1;
             // 
             // pictureBox5
             // 
             this.pictureBox5.Image = global::QLCafe.Presentation.Properties.Resources.chuongthongbao;
-            this.pictureBox5.Location = new System.Drawing.Point(723, 7);
-            this.pictureBox5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pictureBox5.Location = new System.Drawing.Point(813, 9);
             this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(39, 30);
+            this.pictureBox5.Size = new System.Drawing.Size(44, 37);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox5.TabIndex = 3;
             this.pictureBox5.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = global::QLCafe.Presentation.Properties.Resources.Kinhluo;
-            this.pictureBox4.Location = new System.Drawing.Point(366, 10);
-            this.pictureBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(36, 30);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 2;
-            this.pictureBox4.TabStop = false;
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.Location = new System.Drawing.Point(458, 15);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(190, 26);
-            this.txtSearch.TabIndex = 1;
             // 
             // lblFunctionName
             // 
@@ -362,19 +314,27 @@
             // 
             // timer1
             // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // AdminMainView
+            // panel1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(211)))), ((int)(((byte)(77)))));
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(887, 10);
+            this.panel1.TabIndex = 0;
+            // 
+            // InventoryMainView
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1492, 682);
+            this.ClientSize = new System.Drawing.Size(1588, 802);
             this.Controls.Add(this.panelRight);
             this.Controls.Add(this.panelLeft);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "AdminMainView";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AdminMainView";
+            this.Name = "InventoryMainView";
+            this.Text = "InventoryMainView";
             this.panelLeft.ResumeLayout(false);
             this.panelLeft.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -382,10 +342,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelRight.ResumeLayout(false);
             this.panelRight.PerformLayout();
+            this.panelContent.ResumeLayout(false);
             this.panelHeader.ResumeLayout(false);
-            this.panelHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -393,11 +352,11 @@
         #endregion
 
         private System.Windows.Forms.Panel panelLeft;
-        private System.Windows.Forms.Button bttUserAccount;
+        private System.Windows.Forms.Button bttViewinventory;
+        private System.Windows.Forms.Button btnStockin;
+        private System.Windows.Forms.Button bttWarehousereport;
         private System.Windows.Forms.Button btnLogout;
-        private System.Windows.Forms.Button btnStock;
-        private System.Windows.Forms.Button btnTable;
-        private System.Windows.Forms.Button btnMenu;
+        private System.Windows.Forms.Button btnEntryhistory;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.PictureBox pictureBox2;
@@ -410,10 +369,8 @@
         private System.Windows.Forms.Panel panelContent;
         private System.Windows.Forms.Panel panelHeader;
         private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label lblFunctionName;
-        private System.Windows.Forms.Button bttSaleReport;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Panel panel1;
     }
 }

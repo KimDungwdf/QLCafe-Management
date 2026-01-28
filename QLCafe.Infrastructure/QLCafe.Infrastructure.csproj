@@ -62,6 +62,7 @@
     <Compile Include="Repositories\AuthRepository.cs" />
     <Compile Include="Repositories\BillRepository.cs" />
     <Compile Include="Repositories\CategoryRepository.cs" />
+    <Compile Include="Repositories\InventoryRepository.cs" />
     <Compile Include="Repositories\MenuProductRepository.cs" />
     <Compile Include="Repositories\OrderRepository.cs" />
     <Compile Include="Repositories\TableManagementRepository.cs" />

@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace QLCafe.Presentation.Views.InventoryMainView
+namespace QLCafe.Presentation.Views.Inventory
 {
-    public partial class InventoryMainView : Form
+    public partial class InventoryReportForm : Form
     {
-        public InventoryMainView()
+        public InventoryReportForm()
         {
             InitializeComponent();
         }
