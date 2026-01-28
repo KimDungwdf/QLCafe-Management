@@ -1,24 +1,27 @@
-﻿using QLCafe.Presentation.Controls.Table;
+﻿using QLCafe.Application.Interfaces;
+using QLCafe.Application.Services;
+using QLCafe.Infrastructure.Repositories;
+using QLCafe.Presentation.Controls.Table;
 using System;
 using System.Configuration;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Windows.Forms;
-using QLCafe.Application.Interfaces;
-using QLCafe.Application.Services;
-using QLCafe.Infrastructure.Repositories;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace QLCafe.Presentation.Views.Cashier
 {
     public partial class TableManagementForm : Form
     {
         private string connectionString;
-        private string currentUser = "thungan1";
+        private string currentUser;
         private ITableService _tableService;
         private IOrderService _orderService;
 
-        public TableManagementForm()
+        public TableManagementForm(string username)
         {
             InitializeComponent();
+            this.currentUser = username;
             connectionString = ConfigurationManager.ConnectionStrings["QLCafeConnection"].ConnectionString;
 
             var tableRepository = new TableRepository(connectionString);
@@ -194,25 +197,24 @@ namespace QLCafe.Presentation.Views.Cashier
         {
             try
             {
-                // 1. Lấy tên bàn
+                // 1. Lấy tên bàn từ ID
                 string tableName = GetTableNameById(tableId);
 
-                // 2. Mở Form Thanh Toán (CreateBillForm)
-                // Truyền đủ 4 tham số: ID Bàn, Tên Bàn, Người dùng, Service
-                var createBillForm = new CreateBillForm(tableId, tableName, currentUser, _orderService);
+                // 2. Mở Form mới (CreateBillForm2) thay vì Form cũ
+                var createBillForm = new CreateBillForm2(tableId, tableName, currentUser, _orderService);
 
                 var result = createBillForm.ShowDialog();
 
-                // 3. Nếu thanh toán thành công (Form trả về OK)
+                // 3. Nếu thanh toán thành công, load lại danh sách bàn
                 if (result == DialogResult.OK)
                 {
-                    // Tải lại danh sách bàn (để bàn vừa thanh toán chuyển sang màu Trống/Xanh)
                     RefreshTableStatus();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi khi mở form thanh toán: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Lỗi khi mở form thanh toán: {ex.Message}", "Lỗi",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

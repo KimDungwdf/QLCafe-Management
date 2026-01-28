@@ -78,6 +78,12 @@
     <Compile Include="Controls\Food\FoodControl.Designer.cs">
       <DependentUpon>FoodControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\History\OrderHistoryCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\History\OrderHistoryCard.Designer.cs">
+      <DependentUpon>OrderHistoryCard.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Table\BillItemRowControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -224,11 +230,11 @@
     <Compile Include="Views\Cashier\CashierMainViewNew.Designer.cs">
       <DependentUpon>CashierMainViewNew.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Cashier\CreateBillForm.cs">
+    <Compile Include="Views\Cashier\CreateBillForm2.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Cashier\CreateBillForm.Designer.cs">
-      <DependentUpon>CreateBillForm.cs</DependentUpon>
+    <Compile Include="Views\Cashier\CreateBillForm2.Designer.cs">
+      <DependentUpon>CreateBillForm2.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Cashier\OrderForm.cs">
       <SubType>Form</SubType>
@@ -292,6 +298,9 @@
     </Compile>
     <EmbeddedResource Include="Controls\Food\FoodControl.resx">
       <DependentUpon>FoodControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\History\OrderHistoryCard.resx">
+      <DependentUpon>OrderHistoryCard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Table\BillItemRowControl.resx">
       <DependentUpon>BillItemRowControl.cs</DependentUpon>
@@ -358,8 +367,8 @@
     <EmbeddedResource Include="Views\Cashier\CashierMainViewNew.resx">
       <DependentUpon>CashierMainViewNew.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Cashier\CreateBillForm.resx">
-      <DependentUpon>CreateBillForm.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Cashier\CreateBillForm2.resx">
+      <DependentUpon>CreateBillForm2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Cashier\OrderForm.resx">
       <DependentUpon>OrderForm.cs</DependentUpon>
@@ -600,6 +609,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Screenshot_2026-01-28_131519-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot_2026-01-29_005540-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot_2026-01-29_010211-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot_2026-01-29_010546-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot_2026-01-29_010702-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot_2026-01-29_034108-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot_2026-01-29_035111-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot_2026-01-29_035814-removebg-preview.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -35,27 +35,27 @@
             this.lblUserName = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.panelRight = new System.Windows.Forms.Panel();
+            this.panelContent = new System.Windows.Forms.Panel();
+            this.panelHeader = new System.Windows.Forms.Panel();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.lblFunctionName = new System.Windows.Forms.Label();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.btnTableManagement = new System.Windows.Forms.Button();
             this.btnShiftReport = new System.Windows.Forms.Button();
             this.btnOrderHistory = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.panelRight = new System.Windows.Forms.Panel();
-            this.panelContent = new System.Windows.Forms.Panel();
-            this.panelHeader = new System.Windows.Forms.Panel();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.txtSearch = new System.Windows.Forms.TextBox();
-            this.lblFunctionName = new System.Windows.Forms.Label();
             this.panelLeft.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelRight.SuspendLayout();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panelLeft
@@ -150,18 +150,88 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "QL Cafe Pro";
             // 
+            // panelRight
+            // 
+            this.panelRight.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panelRight.Controls.Add(this.panelContent);
+            this.panelRight.Controls.Add(this.panelHeader);
+            this.panelRight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelRight.Location = new System.Drawing.Point(323, 0);
+            this.panelRight.Name = "panelRight";
+            this.panelRight.Size = new System.Drawing.Size(959, 802);
+            this.panelRight.TabIndex = 2;
+            // 
+            // panelContent
+            // 
+            this.panelContent.BackColor = System.Drawing.Color.White;
+            this.panelContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelContent.Location = new System.Drawing.Point(0, 52);
+            this.panelContent.Name = "panelContent";
+            this.panelContent.Size = new System.Drawing.Size(959, 750);
+            this.panelContent.TabIndex = 2;
+            // 
+            // panelHeader
+            // 
+            this.panelHeader.AutoSize = true;
+            this.panelHeader.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.panelHeader.Controls.Add(this.pictureBox5);
+            this.panelHeader.Controls.Add(this.pictureBox4);
+            this.panelHeader.Controls.Add(this.txtSearch);
+            this.panelHeader.Controls.Add(this.lblFunctionName);
+            this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelHeader.Location = new System.Drawing.Point(0, 0);
+            this.panelHeader.Name = "panelHeader";
+            this.panelHeader.Size = new System.Drawing.Size(959, 52);
+            this.panelHeader.TabIndex = 1;
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(458, 16);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(190, 26);
+            this.txtSearch.TabIndex = 1;
+            // 
+            // lblFunctionName
+            // 
+            this.lblFunctionName.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFunctionName.Location = new System.Drawing.Point(44, 12);
+            this.lblFunctionName.Name = "lblFunctionName";
+            this.lblFunctionName.Size = new System.Drawing.Size(532, 23);
+            this.lblFunctionName.TabIndex = 0;
+            this.lblFunctionName.Text = "QUẢN LÝ BÀN";
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = global::QLCafe.Presentation.Properties.Resources.chuongthongbao;
+            this.pictureBox5.Location = new System.Drawing.Point(813, 9);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(43, 37);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox5.TabIndex = 3;
+            this.pictureBox5.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::QLCafe.Presentation.Properties.Resources.Kinhluo;
+            this.pictureBox4.Location = new System.Drawing.Point(412, 12);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(40, 37);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.TabIndex = 2;
+            this.pictureBox4.TabStop = false;
+            // 
             // btnTableManagement
             // 
-            this.btnTableManagement.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(53)))), ((int)(((byte)(15)))));
+            this.btnTableManagement.FlatAppearance.BorderSize = 0;
             this.btnTableManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTableManagement.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnTableManagement.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTableManagement.ForeColor = System.Drawing.Color.White;
-            this.btnTableManagement.Image = global::QLCafe.Presentation.Properties.Resources.Screenshot_2025_12_11_124943_removebg_preview;
+            this.btnTableManagement.Image = global::QLCafe.Presentation.Properties.Resources.Screenshot_2025_12_11_161759_removebg_preview;
             this.btnTableManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnTableManagement.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnTableManagement.Location = new System.Drawing.Point(21, 286);
+            this.btnTableManagement.Location = new System.Drawing.Point(12, 315);
             this.btnTableManagement.Name = "btnTableManagement";
-            this.btnTableManagement.Size = new System.Drawing.Size(283, 72);
+            this.btnTableManagement.Size = new System.Drawing.Size(262, 72);
             this.btnTableManagement.TabIndex = 12;
             this.btnTableManagement.Text = "Quản lý Bàn";
             this.btnTableManagement.UseVisualStyleBackColor = false;
@@ -169,15 +239,16 @@
             // btnShiftReport
             // 
             this.btnShiftReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(53)))), ((int)(((byte)(15)))));
+            this.btnShiftReport.FlatAppearance.BorderSize = 0;
             this.btnShiftReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnShiftReport.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnShiftReport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnShiftReport.ForeColor = System.Drawing.Color.White;
-            this.btnShiftReport.Image = global::QLCafe.Presentation.Properties.Resources.Screenshot_2025_12_11_125444_removebg_preview;
+            this.btnShiftReport.Image = global::QLCafe.Presentation.Properties.Resources.Screenshot_2025_12_11_151852_removebg_preview;
             this.btnShiftReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnShiftReport.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnShiftReport.Location = new System.Drawing.Point(21, 506);
+            this.btnShiftReport.Location = new System.Drawing.Point(3, 492);
             this.btnShiftReport.Name = "btnShiftReport";
-            this.btnShiftReport.Size = new System.Drawing.Size(283, 72);
+            this.btnShiftReport.Size = new System.Drawing.Size(271, 72);
             this.btnShiftReport.TabIndex = 15;
             this.btnShiftReport.Text = "Báo cáo ca";
             this.btnShiftReport.UseVisualStyleBackColor = false;
@@ -185,15 +256,16 @@
             // btnOrderHistory
             // 
             this.btnOrderHistory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(53)))), ((int)(((byte)(15)))));
+            this.btnOrderHistory.FlatAppearance.BorderSize = 0;
             this.btnOrderHistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOrderHistory.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnOrderHistory.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOrderHistory.ForeColor = System.Drawing.Color.White;
-            this.btnOrderHistory.Image = global::QLCafe.Presentation.Properties.Resources.Screenshot_2025_12_11_125233_removebg_preview;
+            this.btnOrderHistory.Image = global::QLCafe.Presentation.Properties.Resources.Screenshot_2025_12_11_150724_removebg_preview;
             this.btnOrderHistory.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnOrderHistory.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnOrderHistory.Location = new System.Drawing.Point(21, 396);
+            this.btnOrderHistory.Location = new System.Drawing.Point(3, 404);
             this.btnOrderHistory.Name = "btnOrderHistory";
-            this.btnOrderHistory.Size = new System.Drawing.Size(283, 72);
+            this.btnOrderHistory.Size = new System.Drawing.Size(305, 72);
             this.btnOrderHistory.TabIndex = 14;
             this.btnOrderHistory.Text = "Lịch sử Order";
             this.btnOrderHistory.UseVisualStyleBackColor = false;
@@ -232,76 +304,6 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // panelRight
-            // 
-            this.panelRight.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.panelRight.Controls.Add(this.panelContent);
-            this.panelRight.Controls.Add(this.panelHeader);
-            this.panelRight.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelRight.Location = new System.Drawing.Point(323, 0);
-            this.panelRight.Name = "panelRight";
-            this.panelRight.Size = new System.Drawing.Size(959, 802);
-            this.panelRight.TabIndex = 2;
-            // 
-            // panelContent
-            // 
-            this.panelContent.BackColor = System.Drawing.Color.White;
-            this.panelContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelContent.Location = new System.Drawing.Point(0, 52);
-            this.panelContent.Name = "panelContent";
-            this.panelContent.Size = new System.Drawing.Size(959, 750);
-            this.panelContent.TabIndex = 2;
-            // 
-            // panelHeader
-            // 
-            this.panelHeader.AutoSize = true;
-            this.panelHeader.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.panelHeader.Controls.Add(this.pictureBox5);
-            this.panelHeader.Controls.Add(this.pictureBox4);
-            this.panelHeader.Controls.Add(this.txtSearch);
-            this.panelHeader.Controls.Add(this.lblFunctionName);
-            this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelHeader.Location = new System.Drawing.Point(0, 0);
-            this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(959, 52);
-            this.panelHeader.TabIndex = 1;
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Image = global::QLCafe.Presentation.Properties.Resources.chuongthongbao;
-            this.pictureBox5.Location = new System.Drawing.Point(813, 9);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(43, 37);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox5.TabIndex = 3;
-            this.pictureBox5.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = global::QLCafe.Presentation.Properties.Resources.Kinhluo;
-            this.pictureBox4.Location = new System.Drawing.Point(412, 12);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(40, 37);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 2;
-            this.pictureBox4.TabStop = false;
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.Location = new System.Drawing.Point(458, 16);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(190, 26);
-            this.txtSearch.TabIndex = 1;
-            // 
-            // lblFunctionName
-            // 
-            this.lblFunctionName.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFunctionName.Location = new System.Drawing.Point(44, 12);
-            this.lblFunctionName.Name = "lblFunctionName";
-            this.lblFunctionName.Size = new System.Drawing.Size(532, 23);
-            this.lblFunctionName.TabIndex = 0;
-            this.lblFunctionName.Text = "QUẢN LÝ BÀN";
-            // 
             // CashierMainViewNew
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -313,15 +315,15 @@
             this.Text = "CashierMainViewNew";
             this.panelLeft.ResumeLayout(false);
             this.panelLeft.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelRight.ResumeLayout(false);
             this.panelRight.PerformLayout();
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -344,9 +346,9 @@
         private System.Windows.Forms.Panel panelRight;
         private System.Windows.Forms.Panel panelContent;
         private System.Windows.Forms.Panel panelHeader;
+        private System.Windows.Forms.Label lblFunctionName;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.TextBox txtSearch;
-        private System.Windows.Forms.Label lblFunctionName;
     }
 }

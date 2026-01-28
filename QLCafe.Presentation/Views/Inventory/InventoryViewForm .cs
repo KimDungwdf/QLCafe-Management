@@ -243,17 +243,41 @@ namespace QLCafe.Presentation.Views.Inventory
             cboState.SelectedIndex = 0;
         }
 
+        // Sửa lại hàm btnFilter_Click_1
         private void btnFilter_Click_1(object sender, EventArgs e)
         {
+            // BƯỚC 1: Tải lại dữ liệu mới nhất từ Database
+            // (Để đảm bảo nếu vừa nhập kho bên kia thì bên này sẽ thấy ngay)
+            LoadData();
+
+            // BƯỚC 2: Lấy điều kiện lọc
             if (_allInventory == null) return;
+
             string state = cboState.SelectedItem?.ToString() ?? "Tất cả";
             string unit = cboUnit.SelectedItem?.ToString() ?? "Tất cả";
 
+            // BƯỚC 3: Lọc dữ liệu
             var filtered = _allInventory.Where(x =>
                 (state == "Tất cả" || x.TrangThaiText == state) &&
                 (unit == "Tất cả" || x.TenDVT == unit)
             ).ToList();
+
+            // BƯỚC 4: Hiển thị
             DisplayInventory(filtered);
+
+            // (Tùy chọn) Thông báo nhỏ
+            // MessageBox.Show("Đã cập nhật số liệu mới nhất!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        protected override void OnVisibleChanged(EventArgs e)
+        {
+            base.OnVisibleChanged(e);
+
+            // Nếu form hiện lên -> Tự động tải lại dữ liệu
+            if (this.Visible && !this.Disposing)
+            {
+                LoadData();
+            }
         }
 
         private void btnExport_Click(object sender, EventArgs e)

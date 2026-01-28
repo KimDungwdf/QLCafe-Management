@@ -288,6 +288,7 @@ namespace QLCafe.Presentation.Views.Cashier
             }
         }
 
+        // Tìm đến hàm này trong AddDishForm.cs và sửa lại như sau:
         private void SaveAdditionalItemsToDatabase()
         {
             try
@@ -296,17 +297,32 @@ namespace QLCafe.Presentation.Views.Cashier
                 {
                     int originalQty = originalQuantities.ContainsKey(orderItem.ProductID) ?
                                     originalQuantities[orderItem.ProductID] : 0;
+
+                    // Số lượng khách gọi thêm (Ví dụ: bàn đang có 1, gọi thêm 2 -> check 2)
+                    // Hoặc nếu bạn muốn check tổng thì dùng orderItem.Quantity
                     int additionalQty = orderItem.Quantity - originalQty;
 
                     if (additionalQty > 0)
                     {
+                        // --- BẮT ĐẦU ĐOẠN CODE KIỂM TRA TỒN KHO ---
+                        // Kiểm tra xem có đủ nguyên liệu cho số lượng gọi thêm không
+                        string missingIngredient = _orderService.CheckStockAvailability(orderItem.ProductID, additionalQty);
+
+                        if (missingIngredient != null)
+                        {
+                            // Nếu thiếu, ném lỗi để dừng vòng lặp và báo cho thu ngân
+                            throw new Exception($"Không đủ nguyên liệu '{missingIngredient}' để làm món {orderItem.ProductName}!");
+                        }
+                        // --- KẾT THÚC ĐOẠN CODE KIỂM TRA ---
+
                         _orderService.AddItemToOrder(currentTableID, orderItem.ProductID, additionalQty, currentUser);
                     }
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception($"Lỗi khi lưu món thêm: {ex.Message}");
+                // Lỗi sẽ được bắt ở nút Lưu (bttSend_Click) và hiện MessageBox
+                throw new Exception(ex.Message);
             }
         }
 

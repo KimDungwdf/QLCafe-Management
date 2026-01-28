@@ -1,9 +1,10 @@
-﻿using System;
+﻿using QLCafe.Application.DTOs.Order;
+using QLCafe.Application.Interfaces;
+using QLCafe.Domain.Entities;
+using QLCafe.Domain.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using QLCafe.Application.DTOs.Order;
-using QLCafe.Application.Interfaces;
-using QLCafe.Domain.Interfaces;
 
 namespace QLCafe.Application.Services
 {
@@ -27,10 +28,12 @@ namespace QLCafe.Application.Services
             {
                 var currentOrder = _orderRepository.GetCurrentOrderByTable(tableId);
 
+                // TRƯỜNG HỢP 1: Bàn chưa có hóa đơn (Mới vào)
                 if (currentOrder == null)
                 {
                     return new OrderDto
                     {
+                        Id = 0, // <--- SỬA LỖI Ở ĐÂY: Chưa có thì ID là 0
                         TableId = tableId,
                         Items = new List<OrderItemDto>(),
                         SubTotal = 0,
@@ -38,8 +41,10 @@ namespace QLCafe.Application.Services
                     };
                 }
 
+                // TRƯỜNG HỢP 2: Đã có hóa đơn
                 return new OrderDto
                 {
+                    Id = currentOrder.Id, // <--- QUAN TRỌNG: Phải gán ID thật vào đây
                     TableId = tableId,
                     Items = currentOrder.OrderDetails.Select(item => new OrderItemDto
                     {
@@ -47,7 +52,9 @@ namespace QLCafe.Application.Services
                         ProductName = item.ProductName,
                         Quantity = item.Quantity,
                         UnitPrice = item.UnitPrice,
-                        Notes = item.Notes
+                        Notes = item.Notes,
+                        // Tính tổng tiền từng dòng (Thành tiền = Giá * SL)
+                        Total = item.UnitPrice * item.Quantity
                     }).ToList(),
                     SubTotal = currentOrder.OrderDetails.Sum(item => item.UnitPrice * item.Quantity),
                     Discount = 0
@@ -95,17 +102,18 @@ namespace QLCafe.Application.Services
             }
         }
 
+        // Hàm cũ (giữ lại để tránh lỗi Interface nếu chưa sửa Interface, nhưng throw Exception)
         public void Checkout(int tableId, decimal discount, string userName)
         {
-            throw new NotImplementedException("Chức năng thanh toán chưa được triển khai");
+            throw new NotImplementedException("Vui lòng sử dụng hàm Checkout có tham số PaymentMethod");
         }
 
-        // THÊM PHƯƠNG THỨC THANH TOÁN
+        // HÀM THANH TOÁN CHÍNH THỨC
         public bool Checkout(int tableId, decimal discount, string paymentMethod, string userName)
         {
             try
             {
-                return _orderRepository.ProcessPayment(tableId, discount, userName);
+                return _orderRepository.Checkout(tableId, discount, paymentMethod, userName);
             }
             catch (Exception ex)
             {
@@ -119,6 +127,11 @@ namespace QLCafe.Application.Services
                 throw new Exception("Số tiền khách đưa không đủ");
 
             return customerPayment - totalAmount;
+        }
+
+        public string CheckStockAvailability(int productId, int quantity)
+        {
+            return _orderRepository.CheckStock(productId, quantity);
         }
     }
 }

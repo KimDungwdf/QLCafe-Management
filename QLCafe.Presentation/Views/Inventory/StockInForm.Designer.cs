@@ -287,7 +287,7 @@
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.ForeColor = System.Drawing.Color.Red;
-            this.label23.Location = new System.Drawing.Point(162, 165);
+            this.label23.Location = new System.Drawing.Point(128, 165);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(20, 25);
             this.label23.TabIndex = 8;
@@ -312,7 +312,7 @@
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(355, 29);
             this.label25.TabIndex = 6;
-            this.label25.Text = "Số lượng (-)";
+            this.label25.Text = "Số lượng ";
             // 
             // cboNguyenLieu
             // 
